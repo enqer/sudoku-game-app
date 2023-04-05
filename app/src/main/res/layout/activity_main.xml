@@ -10,11 +10,21 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:background="#D4EAE9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/settings"
+            android:padding="10dp"
+            android:background="@android/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_settings"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -91,16 +101,19 @@
             android:baselineAligned="false">
 
             <LinearLayout
+                android:id="@+id/home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center"
+                android:minHeight="48dp"
                 android:orientation="vertical">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/imageButton"
-                    style="@style/home_menu_imagebutton"
-                    app:srcCompat="@drawable/ic_home"
+                    style="@style/home_menu_imageview"
+                    android:src="@drawable/ic_home"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <TextView
@@ -111,16 +124,19 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/stats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center"
+                android:minHeight="48dp"
                 android:orientation="vertical">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/imageButton3"
-                    style="@style/home_menu_imagebutton"
-                    app:srcCompat="@drawable/ic_stats"
+                    style="@style/home_menu_imageview"
+                    android:src="@drawable/ic_stats"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <TextView
