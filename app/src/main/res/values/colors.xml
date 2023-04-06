@@ -11,4 +11,9 @@
 
     <color name="newBlue">#2e85ec</color>
     <color name="newWhite">#fbfcff</color>
+    <color name="littleBlue">#e3ebf5</color>
+    <color name="pointedBtn">#b1dffd</color>
+    <color name="darkBlue">#315bae</color>
+    <color name="granat">#2a4a6c</color>
+    <color name="grey">#afb5c4</color>
 </resources>

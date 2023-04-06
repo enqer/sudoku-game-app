@@ -26,4 +26,58 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+
+<!--    GAME ACTIVITY -->
+    <style name="game_bar_button">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:padding">20dp</item>
+
+    </style>
+
+
+    <style name="game_table_button">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:text">B</item>
+        <item name="android:background">@drawable/border</item>
+    </style>
+
+    <style name="game_table_square">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/border_table</item>
+    </style>
+
+    <style name="game_modify_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="game_modify_textview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/newBlue</item>
+
+    </style>
+
+
+    <style name="game_numbers_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/newWhite</item>
+        <item name="android:background">@android:color/transparent</item>
+<!--        <item name="android:layout_margin">0dp</item>-->
+<!--        <item name="android:layout_weight">1</item>-->
+        <item name="android:textSize">48sp</item>
+<!--        <item name="android:minWidth">48dp</item>-->
+
+    </style>
+
+
+
 </resources>
