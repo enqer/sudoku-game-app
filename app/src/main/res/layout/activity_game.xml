@@ -47,18 +47,89 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
+        android:padding="10dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView10"
+                style="@style/game_stats_textview"
+                android:text="Trudność" />
+
+            <TextView
+                android:id="@+id/textView13"
+                style="@style/game_stats_textview"
+                android:textStyle="bold"
+                android:textColor="@color/darkBlue"
+                android:text="Łatwa" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView8"
+                style="@style/game_stats_textview"
+                android:text="Błędy" />
+
+            <TextView
+                android:id="@+id/textView14"
+                style="@style/game_stats_textview"
+                android:textStyle="bold"
+                android:textColor="@color/darkBlue"
+                android:text="0/3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView11"
+                style="@style/game_stats_textview"
+                android:text="Wynik" />
+
+            <TextView
+                android:id="@+id/textView15"
+                style="@style/game_stats_textview"
+                android:textStyle="bold"
+                android:textColor="@color/darkBlue"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView12"
+                style="@style/game_stats_textview"
+                android:text="Czas" />
+
+            <TextView
+                android:id="@+id/textView16"
+                style="@style/game_stats_textview"
+                android:textStyle="bold"
+                android:textColor="@color/darkBlue"
+                android:text="0:25" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <androidx.gridlayout.widget.GridLayout
@@ -80,39 +151,48 @@
 
             <Button
                 android:id="@+id/button12"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button13"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button14"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button15"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button160"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button170"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button180"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button190"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button200"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
         </androidx.gridlayout.widget.GridLayout>
 
         <androidx.gridlayout.widget.GridLayout
@@ -124,39 +204,49 @@
 
             <Button
                 android:id="@+id/button24"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button25"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button26"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button27"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button28"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button17"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button18"
-                style="@style/game_table_button"/>
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button19"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button16"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
         </androidx.gridlayout.widget.GridLayout>
 
         <androidx.gridlayout.widget.GridLayout
@@ -168,39 +258,54 @@
 
             <Button
                 android:id="@+id/button29"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button30"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button31"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button32"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button33"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button20"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button21"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button22"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button23"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
         </androidx.gridlayout.widget.GridLayout>
 
         <androidx.gridlayout.widget.GridLayout
@@ -212,39 +317,56 @@
 
             <Button
                 android:id="@+id/button34"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button35"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button36"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button37"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button38"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button39"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button40"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button41"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button42"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
         </androidx.gridlayout.widget.GridLayout>
 
         <androidx.gridlayout.widget.GridLayout
@@ -256,39 +378,52 @@
 
             <Button
                 android:id="@+id/button43"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button44"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button45"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button46"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button47"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button48"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button49"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button50"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button51"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
         </androidx.gridlayout.widget.GridLayout>
 
         <androidx.gridlayout.widget.GridLayout
@@ -300,39 +435,55 @@
 
             <Button
                 android:id="@+id/button52"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button53"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button54"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button55"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button56"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button57"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button58"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button59"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button60"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
         </androidx.gridlayout.widget.GridLayout>
 
         <androidx.gridlayout.widget.GridLayout
@@ -344,39 +495,54 @@
 
             <Button
                 android:id="@+id/button61"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button62"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button63"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button64"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button65"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button66"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button67"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button68"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button69"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
         </androidx.gridlayout.widget.GridLayout>
 
         <androidx.gridlayout.widget.GridLayout
@@ -388,39 +554,48 @@
 
             <Button
                 android:id="@+id/button70"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button71"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button72"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button73"
-                style="@style/game_table_button" />
-
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
             <Button
                 android:id="@+id/button74"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button75"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button76"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button77"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button78"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
         </androidx.gridlayout.widget.GridLayout>
 
         <androidx.gridlayout.widget.GridLayout
@@ -432,39 +607,49 @@
 
             <Button
                 android:id="@+id/button79"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button80"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/button81"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button82"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button83"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button84"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button85"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <Button
                 android:id="@+id/button86"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button87"
-                style="@style/game_table_button" />
+                style="@style/game_table_button"
+                tools:ignore="TouchTargetSizeCheck"/>
         </androidx.gridlayout.widget.GridLayout>
     </androidx.gridlayout.widget.GridLayout>
 
@@ -483,12 +668,12 @@
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_settings" />
+                app:srcCompat="@drawable/ic_back" />
 
             <TextView
                 android:id="@+id/textView5"
                 style="@style/game_modify_textview"
-                android:text="TextView" />
+                android:text="Cofnij" />
         </LinearLayout>
 
         <LinearLayout style="@style/game_modify_button">
@@ -497,12 +682,12 @@
                 android:id="@+id/imageView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_settings" />
+                app:srcCompat="@drawable/ic_eraser" />
 
             <TextView
                 android:id="@+id/textView7"
                 style="@style/game_modify_textview"
-                android:text="TextView" />
+                android:text="Wymaż" />
         </LinearLayout>
 
         <LinearLayout style="@style/game_modify_button">
@@ -511,12 +696,12 @@
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_settings" />
+                app:srcCompat="@drawable/ic_pencil" />
 
             <TextView
                 android:id="@+id/textView3"
                 style="@style/game_modify_textview"
-                android:text="TextView" />
+                android:text="Notatki" />
         </LinearLayout>
 
         <LinearLayout style="@style/game_modify_button">
@@ -525,12 +710,12 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_settings" />
+                app:srcCompat="@drawable/ic_light" />
 
             <TextView
                 android:id="@+id/textView4"
                 style="@style/game_modify_textview"
-                android:text="TextView" />
+                android:text="Wskazówka" />
 
         </LinearLayout>
     </LinearLayout>
@@ -554,10 +739,8 @@
 
         <Button
             android:id="@+id/button4"
-
             style="@style/game_numbers_button"
             android:text="2"
-            android:textColor="@color/darkBlue"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
