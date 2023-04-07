@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
 <!--    Theme.Sudoku // DarkActionBar-->
 <!--    Theme.MaterialComponents.DayNight.DarkActionBar-->
+<!--    Theme.AppCompat.Light.NoActionBar-->
     <style name="Theme.Sudoku" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>

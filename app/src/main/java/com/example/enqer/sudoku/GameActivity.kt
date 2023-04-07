@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.bundleOf
 
 
 class GameActivity : AppCompatActivity() {
@@ -120,17 +121,41 @@ class GameActivity : AppCompatActivity() {
 //        pointedBtn.text = btnNumber.text
     }
 
+
+    // Saving and restoring data
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        val b: Button = findViewById(R.id.a1)
-        outState.putString("data", b.text.toString())
+        var btn: Button
+        var id: Int
+        val data = ArrayList<String>()
+        Log.i("SAVE","WORKS")
+        for (i in "abcdefghi") {
+            for (j in 1..9) {
+                id = resources.getIdentifier("$i$j", "id", packageName)
+                btn = findViewById(id)
+                data.add(btn.text.toString())
+            }
+        }
+        outState.putStringArrayList("data",data)
 
     }
 
-    protected override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState);
-        val b: Button = findViewById(R.id.a1)
-        b.text=savedInstanceState.getString("data")
+        Log.i("RESTORE","WORKS")
+        val data = savedInstanceState.getStringArrayList("data") as ArrayList<String>
+        var btn: Button
+        var id: Int
+        Log.i("SAVE","WORKS")
+        var index = 0
+        for (i in "abcdefghi") {
+            for (j in 1..9) {
+                id = resources.getIdentifier("$i$j", "id", packageName)
+                btn = findViewById(id)
+                btn.text = data[index].toString()
+                index++
+            }
+        }
     }
 
 

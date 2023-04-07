@@ -6,6 +6,7 @@ package com.example.enqer.sudoku
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.View
@@ -14,12 +15,26 @@ import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // SheredPreference dark mode
+        val appSettingPref: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
+        val sharedPrefsEdit: SharedPreferences.Editor = appSettingPref.edit()
+        val isNightMode: Boolean = appSettingPref.getBoolean("NightMode", false)
+
+        if(isNightMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+
 
         // button home onclick changing layout
         val homeLayout = findViewById<View>(R.id.home) as LinearLayout
