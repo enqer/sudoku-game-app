@@ -31,12 +31,12 @@
             android:text="Sudoku"
             android:textColor="@color/granat"
             android:textSize="32sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton5"
+            app:layout_constraintEnd_toStartOf="@+id/changeMode"
             app:layout_constraintStart_toEndOf="@+id/imageButton4"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/changeMode"
             style="@style/game_bar_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

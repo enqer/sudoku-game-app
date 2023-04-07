@@ -2,9 +2,12 @@ package com.example.enqer.sudoku
 
 
 
+
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
+import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
@@ -23,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         homeLayout.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val b: Button = findViewById(R.id.button);
-                b.text="ewqeqw"
+                b.text = "ewqeqw"
             }
         })
 
@@ -32,35 +35,44 @@ class MainActivity : AppCompatActivity() {
         statsLayout.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val b: Button = findViewById(R.id.button2);
-                b.text="ewqeqw"
+                b.text = "ewqeqw"
             }
         })
 
         // button onclick starting new game
         val newGame: Button = findViewById(R.id.button);
-        newGame.setOnClickListener(object: View.OnClickListener {
-            override fun onClick(v: View?){
-                val popup = PopupMenu(this@MainActivity, newGame)
-                //Inflating the Popup using xml file
-                //Inflating the Popup using xml file
-                popup.menuInflater
-                    .inflate(R.menu.menu_game, popup.menu)
+        newGame.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
 
-                //registering popup with OnMenuItemClickListener
+                // style of popup menu to new game
+                val wrapper: Context = ContextThemeWrapper(this@MainActivity, R.style.Style_PopupMenu)
 
-                //registering popup with OnMenuItemClickListener
+                val popup = PopupMenu(wrapper, newGame)
+
+                popup.menuInflater.inflate(R.menu.menu_game, popup.menu)
+                var diff: String = "Łatwy"
                 popup.setOnMenuItemClickListener { item ->
-                    Toast.makeText(
-                        this@MainActivity,
-                        "You Clicked : " + item.getTitle(),
-                        Toast.LENGTH_SHORT
-                    ).show()
+//                    Toast.makeText(
+//                        this@MainActivity,
+//                        "You Clicked : " + item.getTitle(),
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+                    diff = when (item.title){
+                        "Łatwy"  -> "Łatwy"
+                        "Średni" -> "Średni"
+                        "Trudny" -> "Trudny"
+                        else -> "Łatwy"
+                    }
+                    // changing activity
+                    val intent: Intent = Intent(this@MainActivity, GameActivity::class.java)
+                    intent.putExtra("diff", diff)
+                    startActivity(intent)
+
                     true
                 }
                 popup.show()
 
-//                val intent: Intent = Intent(this@MainActivity, GameActivity::class.java)
-//                startActivity(intent)
+
             }
         })
 

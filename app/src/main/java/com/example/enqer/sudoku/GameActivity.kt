@@ -3,15 +3,21 @@ package com.example.enqer.sudoku
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 
 class GameActivity : AppCompatActivity() {
     companion object{
         @SuppressLint("StaticFieldLeak")
-        private lateinit var pointedBtn: Button
+        private lateinit var pointedBtn: Button // the button whose is selected
+        private var isDarkMode = false
+
     }
 
 
@@ -19,6 +25,25 @@ class GameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+
+        // passing data between activities
+        val intent = intent
+        Log.d("test", intent.getStringExtra("diff").toString())
+
+        // Dark/Light mode onclick
+
+        val changeMode: ImageButton = findViewById(R.id.changeMode)
+        changeMode.setOnClickListener{
+            Toast.makeText(this@GameActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
+            isDarkMode = if (isDarkMode){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                false
+            }else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                true
+            }
+
+        }
 
 
     }
@@ -71,7 +96,7 @@ class GameActivity : AppCompatActivity() {
             }
         }
         // set a color to pointed button
-        pointedBtn.setBackgroundColor(R.drawable.border_marked_one)
+        pointedBtn.setBackgroundResource(R.drawable.border_marked_one)
 
     }
 
@@ -83,3 +108,4 @@ class GameActivity : AppCompatActivity() {
 
 
 }
+
