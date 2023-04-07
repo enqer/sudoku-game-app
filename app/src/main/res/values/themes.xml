@@ -15,6 +15,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
         <!-- Customize your theme here. -->
+
+
+
+        // didnt work idk
         <item name="popupMenuBackground">@drawable/background_btn</item>
         <item name="android:popupBackground">@drawable/background_btn</item>
         <item name="popupMenuStyle">@style/menu</item>

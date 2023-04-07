@@ -2,21 +2,23 @@ package com.example.enqer.sudoku
 
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 
 
 class GameActivity : AppCompatActivity() {
     companion object{
+
         @SuppressLint("StaticFieldLeak")
-        private lateinit var pointedBtn: Button // the button whose is selected
-        private var isDarkMode = false
+        lateinit var pointedBtn: Button // the button whose is selected
+        val isPointedBtnInit get() = this::pointedBtn.isInitialized
+
 
     }
 
@@ -30,17 +32,27 @@ class GameActivity : AppCompatActivity() {
         val intent = intent
         Log.d("test", intent.getStringExtra("diff").toString())
 
-        // Dark/Light mode onclick
+        // SheredPreference dark mode
+        val appSettingPref: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
+        val sharedPrefsEdit: SharedPreferences.Editor = appSettingPref.edit()
+        val isNightMode: Boolean = appSettingPref.getBoolean("NightMode", false)
+
+        if(isNightMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
 
         val changeMode: ImageButton = findViewById(R.id.changeMode)
         changeMode.setOnClickListener{
-            Toast.makeText(this@GameActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
-            isDarkMode = if (isDarkMode){
+            if(isNightMode){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                false
+                sharedPrefsEdit.putBoolean("NightMode",false)
+                sharedPrefsEdit.apply()
             }else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                true
+                sharedPrefsEdit.putBoolean("NightMode",true)
+                sharedPrefsEdit.apply()
             }
 
         }
@@ -102,8 +114,25 @@ class GameActivity : AppCompatActivity() {
 
     fun selectNumber(view: View){
         val btnNumber: Button = findViewById(view.id);
-        pointedBtn.text = btnNumber.text
+        if (isPointedBtnInit){
+            pointedBtn.text = btnNumber.text
+        }
+//        pointedBtn.text = btnNumber.text
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val b: Button = findViewById(R.id.a1)
+        outState.putString("data", b.text.toString())
+
+    }
+
+    protected override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState);
+        val b: Button = findViewById(R.id.a1)
+        b.text=savedInstanceState.getString("data")
+    }
+
 
 
 
