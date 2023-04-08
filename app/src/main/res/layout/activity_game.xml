@@ -85,7 +85,7 @@
                 android:text="Błędy" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/mistakes"
                 style="@style/game_stats_textview"
                 android:textStyle="bold"
                 android:textColor="@color/darkBlue"
@@ -104,7 +104,7 @@
                 android:text="Punkty" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/points"
                 style="@style/game_stats_textview"
                 android:textStyle="bold"
                 android:textColor="@color/darkBlue"
@@ -752,19 +752,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridLayout">
 
-        <LinearLayout style="@style/game_modify_button">
+<!--        <LinearLayout style="@style/game_modify_button">-->
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_back" />
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView4"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:srcCompat="@drawable/ic_back" />-->
 
-            <TextView
-                android:id="@+id/textView5"
-                style="@style/game_modify_textview"
-                android:text="Cofnij" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/textView5"-->
+<!--                style="@style/game_modify_textview"-->
+<!--                android:text="Cofnij" />-->
+<!--        </LinearLayout>-->
 
         <LinearLayout style="@style/game_modify_button">
 

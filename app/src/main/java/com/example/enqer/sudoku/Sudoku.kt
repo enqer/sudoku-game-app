@@ -18,7 +18,12 @@ class Sudoku internal constructor(// number of columns/rows.
         // Fill remaining blocks
         fillRemaining(0, SRN)
 
-        fullMat = mat
+//        fullMat = mat.copyOf()
+        for (i in 0 until N) {
+            for (j in 0 until N) {
+               fullMat[i][j] = mat[i][j]
+            }
+        }
         // Remove Randomly K digits to make game
         removeKDigits()
     }
@@ -137,6 +142,7 @@ class Sudoku internal constructor(// number of columns/rows.
             }
         }
     }
+
 
     // Print sudoku
     fun printSudoku() {

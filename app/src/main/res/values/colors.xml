@@ -18,4 +18,6 @@
     <color name="grey">#3A3A3C</color>
     <color name="border">#605C5C</color>
     <color name="backgroundC">#D4EAE9</color>
+    <color name="mistake">#F35555</color>
+    <color name="littleBlack">#1B1A1A</color>
 </resources>

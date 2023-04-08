@@ -69,6 +69,7 @@
         <item name="android:background">@drawable/border</item>
         <item name="android:onClick">selectField</item>
         <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/littleBlack</item>
 
     </style>
 
@@ -91,6 +92,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/darkBlue</item>
+        <item name="android:textSize">16sp</item>
 
     </style>
 
@@ -98,7 +100,7 @@
     <style name="game_numbers_button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/darkBlue</item>
+        <item name="android:textColor">@color/granat</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:layout_margin">0dp</item>
         <item name="android:layout_weight">1</item>
