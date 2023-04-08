@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
@@ -20,6 +21,11 @@ class GameActivity : AppCompatActivity() {
         lateinit var pointedBtn: Button // the button whose is selected
         val isPointedBtnInit get() = this::pointedBtn.isInitialized
 
+        // Sudoku object and every data from board
+        lateinit var sudoku: Sudoku
+        const val sizeOfSudoku: Int = 9
+        lateinit var difficulty: String
+        var missingNumbers: Int = 40
 
     }
 
@@ -29,9 +35,6 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        // passing data between activities
-        val intent = intent
-        Log.d("test", intent.getStringExtra("diff").toString())
 
         // SheredPreference dark mode
         val appSettingPref: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
@@ -57,6 +60,26 @@ class GameActivity : AppCompatActivity() {
             }
 
         }
+
+        // passing data between activities
+        val intent = intent
+
+        difficulty = intent.getStringExtra("diff").toString()
+        if (difficulty.equals("Łatwy")){
+            missingNumbers = 40
+            difficulty = "Łatwa"
+        } else if (difficulty.equals("Średni")){
+            missingNumbers = 50
+            difficulty = "Średnia"
+        } else {
+            missingNumbers = 60
+            difficulty = "Trudna"
+        }
+        val difficultyBtn: TextView = findViewById(R.id.difficultyBtn)
+        difficultyBtn.text = difficulty
+
+        sudoku = Sudoku(sizeOfSudoku, missingNumbers)
+        printSudoku()
 
 
     }
@@ -121,6 +144,26 @@ class GameActivity : AppCompatActivity() {
 //        pointedBtn.text = btnNumber.text
     }
 
+    fun printSudoku(){
+        var id: Int
+        var btn: Button
+
+        var k = 0
+        // cleaning the board
+        for (i in "abcdefghi") {
+            for (j in 1..9) {
+                id = resources.getIdentifier("$i$j", "id", packageName)
+                btn = findViewById(id)
+                if (sudoku.mat[k][j-1].toString().equals("0")){
+                    btn.text = ""
+                }else{
+                    btn.text= sudoku.mat[k][j-1].toString()
+                }
+
+            }
+            k++
+        }
+    }
 
     // Saving and restoring data
     override fun onSaveInstanceState(outState: Bundle) {
