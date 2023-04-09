@@ -773,7 +773,7 @@
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 app:srcCompat="@drawable/ic_eraser" />
 
             <TextView
@@ -789,7 +789,7 @@
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 app:srcCompat="@drawable/ic_pencil" />
 
             <TextView
@@ -799,14 +799,15 @@
         </LinearLayout>
 
         <LinearLayout style="@style/game_modify_button"
-            android:id="@+id/tip"
+            android:id="@+id/hint"
             >
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/hintImg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_light" />
+                android:layout_height="30dp"
+                android:src="@drawable/ic_light_1"
+                />
 
             <TextView
                 android:id="@+id/textView4"

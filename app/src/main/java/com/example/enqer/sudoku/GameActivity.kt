@@ -1,16 +1,15 @@
 package com.example.enqer.sudoku
 
 
+
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -22,8 +21,10 @@ class GameActivity : AppCompatActivity() {
     companion object{
 
         @SuppressLint("StaticFieldLeak")
-        lateinit var pointedBtn: Button // the button whose is selected
+        lateinit var pointedBtn: Button // the button which is selected
         val isPointedBtnInit get() = this::pointedBtn.isInitialized
+        val coords = "abcdefghi" // coords of board (to lower)
+
 
         // Sudoku object and every data from board
         lateinit var sudoku: Sudoku
@@ -103,8 +104,34 @@ class GameActivity : AppCompatActivity() {
         // clearing the field
         val clear: LinearLayout = findViewById(R.id.clear)
         clear.setOnClickListener {
-            if (isPointedBtnInit and pointedBtn.isClickable) {
+            if (isPointedBtnInit) {
                 pointedBtn.text = ""
+                pointedBtn.isClickable = true
+            }
+        }
+
+        // getting hint
+        // TODO img z 1 po kliknieciu i pokazaniu hint zmienić src na img z 0 że 0 podpowiedzi już jest
+        val hint: LinearLayout = findViewById(R.id.hint)
+        hint.setOnClickListener {
+            if (isPointedBtnInit) {
+                val tag: String = pointedBtn.tag.toString()
+                val i = coords.indexOf(tag[0])
+                val j = tag[1].toString().toInt() - 1
+                pointedBtn.text = sudoku.fullMat[i][j].toString()
+                pointedBtn.isClickable = false
+                // changing border
+                pointedBtn.setBackgroundResource(R.drawable.border_marked_hint)
+                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+                sudoku.mat[i][j] = sudoku.fullMat[i][j]
+
+                //changing img of hint
+                val hintImg: ImageView = findViewById(R.id.hintImg)
+                hintImg.setImageResource(R.drawable.ic_light_0)
+
+                // only one hint so off the button
+                hint.isClickable = false
+
             }
         }
 
@@ -118,7 +145,7 @@ class GameActivity : AppCompatActivity() {
             var btn: Button
 
             // cleaning the board
-            for (i in "abcdefghi") {
+            for (i in coords) {
                 for (j in 1..9) {
                     id = resources.getIdentifier("$i$j", "id", packageName)
                     btn = findViewById(id)
@@ -132,7 +159,7 @@ class GameActivity : AppCompatActivity() {
                 btn = findViewById(id)
                 btn.setBackgroundResource(R.drawable.border_marked)
             }
-            for (i in "abcdefghi") {
+            for (i in coords) {
                 id = resources.getIdentifier("$i${tag[1]}", "id", packageName)
                 btn = findViewById(id)
                 btn.setBackgroundResource(R.drawable.border_marked)
@@ -163,7 +190,7 @@ class GameActivity : AppCompatActivity() {
 
 
     fun selectNumber(view: View){
-        val coords = "abcdefghi"
+
         val btnNumber: Button = findViewById(view.id);
         val tag: String
         if (isPointedBtnInit){
@@ -210,11 +237,11 @@ class GameActivity : AppCompatActivity() {
 
         var k = 0
         // cleaning the board
-        for (i in "abcdefghi") {
+        for (i in coords) {
             for (j in 1..9) {
                 id = resources.getIdentifier("$i$j", "id", packageName)
                 btn = findViewById(id)
-                if (sudoku.mat[k][j-1].toString().equals("0")){
+                if (sudoku.mat[k][j-1].toString() == "0"){
                     btn.text = ""
                 }else{
                     btn.text= sudoku.mat[k][j-1].toString()
@@ -234,7 +261,7 @@ class GameActivity : AppCompatActivity() {
         var id: Int
         val data = ArrayList<String>()
         Log.i("SAVE","WORKS")
-        for (i in "abcdefghi") {
+        for (i in coords) {
             for (j in 1..9) {
                 id = resources.getIdentifier("$i$j", "id", packageName)
                 btn = findViewById(id)
@@ -258,7 +285,7 @@ class GameActivity : AppCompatActivity() {
         var id: Int
         Log.i("SAVE","WORKS")
         var index = 0
-        for (i in "abcdefghi") {
+        for (i in coords) {
             for (j in 1..9) {
                 id = resources.getIdentifier("$i$j", "id", packageName)
                 btn = findViewById(id)

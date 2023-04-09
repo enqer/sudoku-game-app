@@ -6,6 +6,7 @@
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/background_btn.xml" value="0.2475" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/border.xml" value="0.215" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/border_marked.xml" value="0.135" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/border_marked_hint.xml" value="0.211" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/border_marked_mistake.xml" value="0.121" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/border_marked_one.xml" value="0.12" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/border_table.xml" value="0.269" />
@@ -13,9 +14,19 @@
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_back.xml" value="0.314" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_color.xml" value="0.1" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_eraser.xml" value="0.314" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_good.xml" value="0.186" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_hint_1.xml" value="0.2125" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_home.xml" value="0.2475" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_light.xml" value="0.1585" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_light_1.xml" value="0.174" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_pencil.xml" value="0.174" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_settings.xml" value="0.288" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_stats.xml" value="0.2475" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_test.xml" value="0.1" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_untitled.xml" value="0.1685" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_untitled__2_.xml" value="0.174" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_untitled__3_.xml" value="0.174" />
+        <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/drawable/ic_untitled__6_.xml" value="0.186" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/layout/activity_game.rng" value="0.23802083333333332" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/layout/activity_game.xml" value="0.33" />
         <entry key="..\:/Users/pawel/AndroidStudioProjects/Sudoku/app/src/main/res/layout/activity_main.xml" value="0.3625" />

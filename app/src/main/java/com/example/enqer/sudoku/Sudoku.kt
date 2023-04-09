@@ -113,6 +113,8 @@ class Sudoku internal constructor(// number of columns/rows.
         return false
     }
 
+
+
     // Remove the K no. of digits to
     // complete game
     fun removeKDigits() {
