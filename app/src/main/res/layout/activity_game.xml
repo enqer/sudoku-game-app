@@ -829,56 +829,56 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/num1"
             style="@style/game_numbers_button"
             android:text="1"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/num2"
             style="@style/game_numbers_button"
             android:text="2"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
 
-            android:id="@+id/button5"
+            android:id="@+id/num3"
             style="@style/game_numbers_button"
             android:text="3"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/num4"
             style="@style/game_numbers_button"
             android:text="4"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/num5"
             style="@style/game_numbers_button"
             android:text="5"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/num6"
             style="@style/game_numbers_button"
             android:text="6"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/num7"
             style="@style/game_numbers_button"
             android:text="7"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/num8"
             style="@style/game_numbers_button"
             android:text="8"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/num9"
             style="@style/game_numbers_button"
             android:text="9"
             tools:ignore="TouchTargetSizeCheck" />

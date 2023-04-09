@@ -23,7 +23,7 @@ class GameActivity : AppCompatActivity() {
         @SuppressLint("StaticFieldLeak")
         lateinit var pointedBtn: Button // the button which is selected
         val isPointedBtnInit get() = this::pointedBtn.isInitialized
-        val coords = "abcdefghi" // coords of board (to lower)
+        val coords = "abcdefghi" // coords of board (from top to bottom)
 
 
         // Sudoku object and every data from board
@@ -34,6 +34,7 @@ class GameActivity : AppCompatActivity() {
         var mistakes: Int = 0
         var points: Int = 0
         var iteratorPoints: Int = 1
+        val countNumbers = Array<Int>(9){0} // count which number is full on board
 
     }
 
@@ -90,21 +91,50 @@ class GameActivity : AppCompatActivity() {
         sudoku = Sudoku(sizeOfSudoku, missingNumbers)
         printSudoku()
 
+        for (i in 0 until sizeOfSudoku) {
+            for (j in 0 until sizeOfSudoku) {
+                var n = sudoku.mat[i][j]
+                if (n.toString() != "0"){
+                    countNumbers[n-1]++
+                    if (countNumbers[n-1] == 9){
+                        val id = resources.getIdentifier("num$n", "id", packageName)
+                        val btn: Button = findViewById(id)
+                        btn.text = ""
+                        btn.isClickable = false
+                    }
+                }
+            }
+        }
+
+        for(i in countNumbers){
+            Log.i("ARRAY/INDEX",  i.toString())
+        }
+
+
         // TODO zrobić liczenie czasu i wyświetlić go
         // TODO Notatki będzie problem
-        // TODO Wskazówka imo losowanie z tych które są wolne z mat i z fullmat dostać liczbe
         // TODO kliknięcie na np 5 podświetla wszystkie 5 imo git dla grania
         // TODO jeśli wszystkie np 5 są na boardzie to usunąć z dołu tą 5
         // TODO przycisk z wróceniem do poprzedniego activity finishActivity() na onclicku ale trzeba zapisać stan
         // TODO do powyższego zapisać stan w sharedpref i wtedy sprawdzać i chyba pobierać z db dane z ostatniej gry
         // TODO do powyższego albo w ssharedpref trzymać dane z gry + zmienna isGame i sprawdzać jak jest to jest btn i można wrócić
         // TODO baza danych tylko dla statystyk??? chyba ta
+        // TODO Zakończenie gry
 
 
         // clearing the field
         val clear: LinearLayout = findViewById(R.id.clear)
         clear.setOnClickListener {
             if (isPointedBtnInit) {
+                if (!pointedBtn.isClickable){
+                    val s: String = pointedBtn.text.toString()
+                    countNumbers[s.toInt()-1]--
+                    val id = resources.getIdentifier("num$s", "id", packageName)
+                    val btn: Button = findViewById(id)
+                    btn.text = s
+                    btn.isClickable = true
+
+                }
                 pointedBtn.text = ""
                 pointedBtn.isClickable = true
             }
@@ -137,7 +167,7 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    // zrobic zabezpieczenie przed kliknięciem numbers pierwsze
+    // selecting the fileds to set a colors
     fun selectField(view: View) {
             pointedBtn = findViewById(view.id);
             val tag: String = pointedBtn.tag.toString()
@@ -210,6 +240,16 @@ class GameActivity : AppCompatActivity() {
                 pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
                 sudoku.mat[i][j] = pointedBtn.text.toString().toInt()
 
+                // Checking if number is printed 9 times and then disappear
+                countNumbers[sudoku.mat[i][j]-1]++
+                Log.i("ARRAY",  countNumbers[sudoku.mat[i][j]-1].toString())
+                if (countNumbers[sudoku.mat[i][j]-1] == 9){
+                        btnNumber.text = ""
+                        btnNumber.isClickable = false
+                }
+
+
+
                 if (sudoku.fullMat contentEquals sudoku.mat){
                     Log.i("WINNER", "Smiga")
                     // TODO winner
@@ -217,6 +257,16 @@ class GameActivity : AppCompatActivity() {
                     // zapis do bazy danych żeby pamiętać wyniki i dla statystyk
                 }
             } else {
+                // secure by changing number with good num in good field
+                if (!pointedBtn.isClickable){
+                    val s: String = sudoku.fullMat[i][j].toString()
+                    countNumbers[s.toInt()-1]--
+                    val id = resources.getIdentifier("num$s", "id", packageName)
+                    val btn: Button = findViewById(id)
+                    btn.text = s
+                    btn.isClickable = true
+
+                }
                 pointedBtn.isClickable = true
                 mistakes++
                 val miss: TextView = findViewById(R.id.mistakes)
@@ -226,6 +276,7 @@ class GameActivity : AppCompatActivity() {
                 if (mistakes == 3){
                     //TODO przegrana koniec gry do zrobienia
                 }
+
             }
         }
 //        pointedBtn.text = btnNumber.text
