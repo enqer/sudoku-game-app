@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -89,20 +90,27 @@ class GameActivity : AppCompatActivity() {
         printSudoku()
 
         // TODO zrobić liczenie czasu i wyświetlić go
-        // TODO przycisk clear
         // TODO Notatki będzie problem
         // TODO Wskazówka imo losowanie z tych które są wolne z mat i z fullmat dostać liczbe
         // TODO kliknięcie na np 5 podświetla wszystkie 5 imo git dla grania
         // TODO jeśli wszystkie np 5 są na boardzie to usunąć z dołu tą 5
         // TODO przycisk z wróceniem do poprzedniego activity finishActivity() na onclicku ale trzeba zapisać stan
         // TODO do powyższego zapisać stan w sharedpref i wtedy sprawdzać i chyba pobierać z db dane z ostatniej gry
+        // TODO do powyższego albo w ssharedpref trzymać dane z gry + zmienna isGame i sprawdzać jak jest to jest btn i można wrócić
+        // TODO baza danych tylko dla statystyk??? chyba ta
 
 
+        // clearing the field
+        val clear: LinearLayout = findViewById(R.id.clear)
+        clear.setOnClickListener {
+            if (isPointedBtnInit and pointedBtn.isClickable) {
+                pointedBtn.text = ""
+            }
+        }
 
     }
 
     // zrobic zabezpieczenie przed kliknięciem numbers pierwsze
-//    @SuppressLint("ResourceAsColor")
     fun selectField(view: View) {
             pointedBtn = findViewById(view.id);
             val tag: String = pointedBtn.tag.toString()
@@ -153,7 +161,7 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("ResourceAsColor")
+
     fun selectNumber(view: View){
         val coords = "abcdefghi"
         val btnNumber: Button = findViewById(view.id);
@@ -173,6 +181,7 @@ class GameActivity : AppCompatActivity() {
                 val pointsView: TextView = findViewById(R.id.points)
                 pointsView.text = points.toString()
                 pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+                sudoku.mat[i][j] = pointedBtn.text.toString().toInt()
 
                 if (sudoku.fullMat contentEquals sudoku.mat){
                     Log.i("WINNER", "Smiga")
@@ -181,6 +190,7 @@ class GameActivity : AppCompatActivity() {
                     // zapis do bazy danych żeby pamiętać wyniki i dla statystyk
                 }
             } else {
+                pointedBtn.isClickable = true
                 mistakes++
                 val miss: TextView = findViewById(R.id.mistakes)
                 miss.text = "$mistakes/3"

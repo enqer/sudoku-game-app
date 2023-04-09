@@ -766,7 +766,9 @@
 <!--                android:text="Cofnij" />-->
 <!--        </LinearLayout>-->
 
-        <LinearLayout style="@style/game_modify_button">
+        <LinearLayout style="@style/game_modify_button"
+            android:id="@+id/clear"
+            >
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -780,7 +782,9 @@
                 android:text="Wymaż" />
         </LinearLayout>
 
-        <LinearLayout style="@style/game_modify_button">
+        <LinearLayout style="@style/game_modify_button"
+            android:id="@+id/notes"
+            >
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -794,7 +798,9 @@
                 android:text="Notatki" />
         </LinearLayout>
 
-        <LinearLayout style="@style/game_modify_button">
+        <LinearLayout style="@style/game_modify_button"
+            android:id="@+id/tip"
+            >
 
             <ImageView
                 android:id="@+id/imageView"
