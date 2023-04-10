@@ -213,100 +213,101 @@ class GameActivity : AppCompatActivity() {
         if (isPointedBtnInit){  // if button is initialized then we can do some things
             if (isNotesMode && sudoku.mat[x][y].toString() != pointedBtn.text.toString()){
                 // Only when the hasnt good value
-                //btn.isClicable
-//                if (sudoku.mat[x][y] != pointedBtn.text.toString().toInt()){
-//                    tag = btnNumber.text.toString()
-                    val notes = Array<String>(9){" "}
-
-                    // TODO jeśli wcześniej jest dobra wartość to wyłączy pole fix it
-                    var index = 0
-//                    val pointedText = pointedBtn.text.toString()
-                    for (i in "123456789"){
-                        if (i.toString() in pointedBtn.text.toString()){
-                            notes[index++] = i.toString()
-                        } else {
-                            notes[index++] = " "
-                        }
-//                        notes.forEach { Log.i("NOTES/" ,it) }
-//                        Log.i("NOTES/" ,"=============")
-                    }
-                    // adding new value to notes of field
-                    val addToNotes = btnNumber.text.toString()
-                    if (addToNotes == notes[addToNotes.toInt()-1]){
-                        notes[addToNotes.toInt()-1] = " "
+                val notes = Array<String>(9){" "}
+                var index = 0
+//                   val pointedText = pointedBtn.text.toString()
+                for (i in "123456789"){
+                    if (i.toString() in pointedBtn.text.toString()){
+                        notes[index++] = i.toString()
                     } else {
-                        notes[addToNotes.toInt()-1] = addToNotes
+                        notes[index++] = " "
                     }
-//                }
-                    // notes has a different styles
-                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
-                    pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11F)
+                }
+                // adding new value to notes of field
+                val addToNotes = btnNumber.text.toString()
+                if (addToNotes == notes[addToNotes.toInt()-1]){
+                    notes[addToNotes.toInt()-1] = " "
+                } else {
+                    notes[addToNotes.toInt()-1] = addToNotes
+                }
+//               }
+                // notes has a different styles
+                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+                pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11F)
 
-                    // 2 space between letter(number) and 2 space instead of letter(number)
-                    var notesBtn = ""
-                    // print the note in the field
-                    var counter = 0
-                    for (i in notes){
+                // 2 space between letter(number) and 2 space instead of letter(number)
+                //TODO dodać spacje między cyframi
+                var notesBtn = ""
+                // print the note in the field
+                var counter = 0
+                for (i in notes){
 //                    if (i == " "){
 //                        notesBtn += '\u00A0'
 //                    } else{
 //                        notesBtn += i
 //                    }
-                        notesBtn += i
-                        if (counter == 2 || counter == 5){
-                            notesBtn += "\n"
-                        }
-                        counter++
+                    notesBtn += i
+                    if (counter == 2 || counter == 5){
+                        notesBtn += "\n"
                     }
-                    pointedBtn.text = notesBtn
-//                }
-
+                    counter++
+                }
+                pointedBtn.text = notesBtn
+//               }
             } else {
-//                if (sudoku.mat[x][y] != pointedBtn.text.toString().toInt()) {
-////                    tag = pointedBtn.tag.toString()
-//                    pointedBtn.text = btnNumber.text
-//                    val i = coords.indexOf(tag[0])
-//                    val j = tag[1].toString().toInt() - 1
-//                    Log.i("Sudo", sudoku.fullMat[x][y].toString())
-//                    pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32F)
-                    if (sudoku.fullMat[x][y] == btnNumber.text.toString().toInt()) {
-//                        pointedBtn.isClickable = false
-                        pointedBtn.text = btnNumber.text
-                        points += (1..9).random() * iteratorPoints
-                        iteratorPoints += 2
-                        val pointsView: TextView = findViewById(R.id.points)
-                        pointsView.text = points.toString()
-                        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+                if (sudoku.fullMat[x][y] == btnNumber.text.toString().toInt()) {
+                    pointedBtn.text = btnNumber.text
+                    points += (1..9).random() * iteratorPoints
+                    iteratorPoints += 2
+                    val pointsView: TextView = findViewById(R.id.points)
+                    pointsView.text = points.toString()
+                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
 
-                        sudoku.mat[x][y] = pointedBtn.text.toString().toInt()
-
-                        // Checking if number is printed 9 times and then disappear
-                        countNumbers[sudoku.mat[x][y] - 1]++
-                        Log.i("ARRAY", countNumbers[sudoku.mat[x][y] - 1].toString())
-                        if (countNumbers[sudoku.mat[x][y] - 1] == 9) {
-                            btnNumber.text = ""
-                            btnNumber.isClickable = false
-                        }
-                        if (sudoku.fullMat contentEquals sudoku.mat) {
-                            Log.i("WINNER", "Smiga")
-                            // TODO winner
-                            // wtedy ma się coś zdażyć wygrana może popup a może komunikat i wyjście po czasie idk
-                            // zapis do bazy danych żeby pamiętać wyniki i dla statystyk
-                        }
-                    } else {
-                        if (sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
-                            pointedBtn.text = btnNumber.text
-                            mistakes++
-                            val miss: TextView = findViewById(R.id.mistakes)
-                            miss.text = "$mistakes/3"
-                            pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake))
-
-                            if (mistakes == 3) {
-                                //TODO przegrana koniec gry do zrobienia
+                    // adding colors to other same numbers of the actually put number
+                    var id: Int
+                    var btn: Button
+                    for (i in coords) {
+                        for (j in 1..9) {
+                            id = resources.getIdentifier("$i$j", "id", packageName)
+                            btn = findViewById(id)
+                            if (pointedBtn.text == btn.text && btn.text != ""){
+                                btn.setBackgroundResource(R.drawable.border_marked_same)
                             }
                         }
                     }
-//                }
+                    pointedBtn.setBackgroundResource(R.drawable.border_marked_one)
+
+
+                    sudoku.mat[x][y] = pointedBtn.text.toString().toInt()
+
+                    // Checking if number is printed 9 times and then disappear
+                    countNumbers[sudoku.mat[x][y] - 1]++
+                    Log.i("ARRAY", countNumbers[sudoku.mat[x][y] - 1].toString())
+                    if (countNumbers[sudoku.mat[x][y] - 1] == 9) {
+                        btnNumber.text = ""
+                        btnNumber.isClickable = false
+                    }
+
+                    if (sudoku.fullMat contentEquals sudoku.mat) {
+                        Log.i("WINNER", "Smiga")
+                    // TODO winner
+                    // wtedy ma się coś zdażyć wygrana może popup a może komunikat i wyjście po czasie idk
+                    // zapis do bazy danych żeby pamiętać wyniki i dla statystyk
+                    }
+                } else {
+                    if (sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
+                        pointedBtn.text = btnNumber.text
+                        mistakes++
+                        val miss: TextView = findViewById(R.id.mistakes)
+                        miss.text = "$mistakes/3"
+                        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake))
+
+                        if (mistakes == 3) {
+                            //TODO przegrana koniec gry do zrobienia
+                            Log.i("LOSER", "Smiga")
+                        }
+                    }
+                }
                 pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32F)
             }
         }
