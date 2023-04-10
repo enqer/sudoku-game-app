@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +35,8 @@ class GameActivity : AppCompatActivity() {
         var mistakes: Int = 0
         var points: Int = 0
         var iteratorPoints: Int = 1
-        val countNumbers = Array<Int>(9){0} // count which number is full on board
+        lateinit var  countNumbers : Array<Int> // count which number is full on board
+        var isNotesMode = false
 
     }
 
@@ -90,11 +92,12 @@ class GameActivity : AppCompatActivity() {
 
         sudoku = Sudoku(sizeOfSudoku, missingNumbers)
         printSudoku()
+        countNumbers = Array<Int>(9){0}
 
         for (i in 0 until sizeOfSudoku) {
             for (j in 0 until sizeOfSudoku) {
-                var n = sudoku.mat[i][j]
-                if (n.toString() != "0"){
+                val n = sudoku.mat[i][j]
+                if (n != 0){
                     countNumbers[n-1]++
                     if (countNumbers[n-1] == 9){
                         val id = resources.getIdentifier("num$n", "id", packageName)
@@ -112,14 +115,13 @@ class GameActivity : AppCompatActivity() {
 
 
         // TODO zrobić liczenie czasu i wyświetlić go
-        // TODO Notatki będzie problem
         // TODO kliknięcie na np 5 podświetla wszystkie 5 imo git dla grania
-        // TODO jeśli wszystkie np 5 są na boardzie to usunąć z dołu tą 5
         // TODO przycisk z wróceniem do poprzedniego activity finishActivity() na onclicku ale trzeba zapisać stan
         // TODO do powyższego zapisać stan w sharedpref i wtedy sprawdzać i chyba pobierać z db dane z ostatniej gry
         // TODO do powyższego albo w ssharedpref trzymać dane z gry + zmienna isGame i sprawdzać jak jest to jest btn i można wrócić
         // TODO baza danych tylko dla statystyk??? chyba ta
         // TODO Zakończenie gry
+        // TODO wyświetlic informacje że nie można już zmienić znaku który jest gites
 
 
         // clearing the field
@@ -138,6 +140,23 @@ class GameActivity : AppCompatActivity() {
                 pointedBtn.text = ""
                 pointedBtn.isClickable = true
             }
+        }
+
+        // setting notes
+        val notes: LinearLayout = findViewById(R.id.notes)
+        notes.setOnClickListener{
+            isNotesMode = !isNotesMode  // true - is in notes mode
+            for (i in 1..9){
+                val id = resources.getIdentifier("num$i", "id", packageName)
+                val btn: Button = findViewById(id)
+                if (isNotesMode){
+                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+                } else{
+                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.granat))
+
+                }
+            }
+
         }
 
         // getting hint
@@ -220,69 +239,117 @@ class GameActivity : AppCompatActivity() {
 
 
     fun selectNumber(view: View){
-
         val btnNumber: Button = findViewById(view.id);
-        val tag: String
-        if (isPointedBtnInit){
-            tag = pointedBtn.tag.toString()
-            pointedBtn.text = btnNumber.text
-            val i = coords.indexOf(tag[0])
-            val j = tag[1].toString().toInt()-1
-            Log.i("I", i.toString())
-            Log.i("J", j.toString())
-            Log.i("Sudo", sudoku.fullMat[i][j].toString())
-            if (sudoku.fullMat[i][j] == pointedBtn.text.toString().toInt()) {
-                pointedBtn.isClickable = false
-                points+= (1..9).random() * iteratorPoints
-                iteratorPoints+=2
-                val pointsView: TextView = findViewById(R.id.points)
-                pointsView.text = points.toString()
-                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
-                sudoku.mat[i][j] = pointedBtn.text.toString().toInt()
+        var tag: String
+        if (isPointedBtnInit){  // if button is initialized then we can do some things
+            if (isNotesMode){
+                // Only when the hasnt good value
+                if (pointedBtn.isClickable){
+                    tag = btnNumber.text.toString()
+                    val notes = Array<String>(9){" "}
 
-                // Checking if number is printed 9 times and then disappear
-                countNumbers[sudoku.mat[i][j]-1]++
-                Log.i("ARRAY",  countNumbers[sudoku.mat[i][j]-1].toString())
-                if (countNumbers[sudoku.mat[i][j]-1] == 9){
-                        btnNumber.text = ""
-                        btnNumber.isClickable = false
+                    // TODO jeśli wcześniej jest dobra wartość to wyłączy pole fix it
+                    var index = 0
+                    val pointedText = pointedBtn.text.toString()
+                    for (i in "123456789"){
+                        if (i in pointedText){
+                            notes[index++] = i.toString()
+                        } else {
+                            notes[index++] = " "
+                        }
+                        notes.forEach { Log.i("NOTES/" ,it) }
+                        Log.i("NOTES/" ,"=============")
+                    }
+                    val addToNotes = btnNumber.text.toString()
+                    if (addToNotes == notes[addToNotes.toInt()-1]){
+                        notes[addToNotes.toInt()-1] = " "
+                    } else {
+                        notes[addToNotes.toInt()-1] = addToNotes
+                    }
+//                }
+                    // notes has a different styles
+                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+                    pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11F)
+
+                    // 2 space between letter(number) and 2 space instead of letter(number)
+                    var notesBtn = ""
+                    // print the note in the field
+                    var counter = 0
+                    for (i in notes){
+//                    if (i == " "){
+//                        notesBtn += '\u00A0'
+//                    } else{
+//                        notesBtn += i
+//                    }
+                        notesBtn += i
+                        if (counter == 2 || counter == 5){
+                            notesBtn += "\n"
+                        }
+                        counter++
+                    }
+                    pointedBtn.text = notesBtn
                 }
 
-
-
-                if (sudoku.fullMat contentEquals sudoku.mat){
-                    Log.i("WINNER", "Smiga")
-                    // TODO winner
-                    // wtedy ma się coś zdażyć wygrana może popup a może komunikat i wyjście po czasie idk
-                    // zapis do bazy danych żeby pamiętać wyniki i dla statystyk
-                }
             } else {
-                // secure by changing number with good num in good field
-                if (!pointedBtn.isClickable){
-                    val s: String = sudoku.fullMat[i][j].toString()
-                    countNumbers[s.toInt()-1]--
-                    val id = resources.getIdentifier("num$s", "id", packageName)
-                    val btn: Button = findViewById(id)
-                    btn.text = s
-                    btn.isClickable = true
+                if (pointedBtn.isClickable) {
+                    tag = pointedBtn.tag.toString()
+                    pointedBtn.text = btnNumber.text
+                    val i = coords.indexOf(tag[0])
+                    val j = tag[1].toString().toInt() - 1
+                    Log.i("I", i.toString())
+                    Log.i("J", j.toString())
+                    Log.i("Sudo", sudoku.fullMat[i][j].toString())
+                    pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32F)
+                    if (sudoku.fullMat[i][j] == pointedBtn.text.toString().toInt()) {
+                        pointedBtn.isClickable = false
+                        points += (1..9).random() * iteratorPoints
+                        iteratorPoints += 2
+                        val pointsView: TextView = findViewById(R.id.points)
+                        pointsView.text = points.toString()
+                        pointedBtn.setTextColor(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.littleBlack
+                            )
+                        )
+                        sudoku.mat[i][j] = pointedBtn.text.toString().toInt()
 
+                        // Checking if number is printed 9 times and then disappear
+                        countNumbers[sudoku.mat[i][j] - 1]++
+                        Log.i("ARRAY", countNumbers[sudoku.mat[i][j] - 1].toString())
+                        if (countNumbers[sudoku.mat[i][j] - 1] == 9) {
+                            btnNumber.text = ""
+                            btnNumber.isClickable = false
+                        }
+                        if (sudoku.fullMat contentEquals sudoku.mat) {
+                            Log.i("WINNER", "Smiga")
+                            // TODO winner
+                            // wtedy ma się coś zdażyć wygrana może popup a może komunikat i wyjście po czasie idk
+                            // zapis do bazy danych żeby pamiętać wyniki i dla statystyk
+                        }
+                    } else {
+                        if (pointedBtn.isClickable) {
+                            mistakes++
+                            val miss: TextView = findViewById(R.id.mistakes)
+                            miss.text = "$mistakes/3"
+                            //                pointedBtn.setBackgroundResource(R.drawable.border_marked_mistake)
+                            pointedBtn.setTextColor(
+                                ContextCompat.getColor(
+                                    applicationContext,
+                                    R.color.mistake
+                                )
+                            )
+                            if (mistakes == 3) {
+                                //TODO przegrana koniec gry do zrobienia
+                            }
+                        }
+                    }
                 }
-                pointedBtn.isClickable = true
-                mistakes++
-                val miss: TextView = findViewById(R.id.mistakes)
-                miss.text = "$mistakes/3"
-//                pointedBtn.setBackgroundResource(R.drawable.border_marked_mistake)
-                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake))
-                if (mistakes == 3){
-                    //TODO przegrana koniec gry do zrobienia
-                }
-
             }
         }
-//        pointedBtn.text = btnNumber.text
     }
 
-    fun printSudoku(){
+    private fun printSudoku(){
         var id: Int
         var btn: Button
 

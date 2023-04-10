@@ -145,10 +145,7 @@
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/tab1"
             style="@style/game_table_square"
-            app:columnCount="3"
-            app:layout_columnWeight="0"
-            app:layout_rowWeight="0"
-            app:rowCount="3">
+            >
 
             <Button
                 android:id="@+id/a1"
@@ -208,10 +205,7 @@
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/tab2"
             style="@style/game_table_square"
-            app:columnCount="3"
-            app:layout_columnWeight="0"
-            app:layout_rowWeight="0"
-            app:rowCount="3">
+            >
 
             <Button
                 android:id="@+id/a4"
@@ -272,10 +266,7 @@
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/tab3"
             style="@style/game_table_square"
-            app:columnCount="3"
-            app:layout_columnWeight="0"
-            app:layout_rowWeight="0"
-            app:rowCount="3">
+            >
 
             <Button
                 android:id="@+id/a7"
@@ -341,10 +332,7 @@
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/tab4"
             style="@style/game_table_square"
-            app:columnCount="3"
-            app:layout_columnWeight="0"
-            app:layout_rowWeight="0"
-            app:rowCount="3">
+            >
 
             <Button
                 android:id="@+id/d1"
@@ -412,10 +400,7 @@
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/tab5"
             style="@style/game_table_square"
-            app:columnCount="3"
-            app:layout_columnWeight="0"
-            app:layout_rowWeight="0"
-            app:rowCount="3">
+            >
 
             <Button
                 android:id="@+id/d4"
@@ -479,10 +464,7 @@
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/tab6"
             style="@style/game_table_square"
-            app:columnCount="3"
-            app:layout_columnWeight="0"
-            app:layout_rowWeight="0"
-            app:rowCount="3">
+            >
 
             <Button
                 android:id="@+id/d7"
@@ -549,22 +531,22 @@
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/tab7"
             style="@style/game_table_square"
-            app:columnCount="3"
-            app:layout_columnWeight="0"
-            app:layout_rowWeight="0"
-            app:rowCount="3">
+            >
 
             <Button
                 android:id="@+id/g1"
                 android:tag="g1"
                 style="@style/game_table_button"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                />
 
             <Button
                 android:id="@+id/g2"
                 android:tag="g2"
                 style="@style/game_table_button"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+
+                />
 
             <Button
                 android:id="@+id/g3"
@@ -618,10 +600,7 @@
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/tab8"
             style="@style/game_table_square"
-            app:columnCount="3"
-            app:layout_columnWeight="0"
-            app:layout_rowWeight="0"
-            app:rowCount="3">
+            >
 
             <Button
                 android:id="@+id/g4"
@@ -681,10 +660,7 @@
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/tab9"
             style="@style/game_table_square"
-            app:columnCount="3"
-            app:layout_columnWeight="0"
-            app:layout_rowWeight="0"
-            app:rowCount="3">
+            >
 
             <Button
                 android:id="@+id/g7"
