@@ -92,7 +92,6 @@ class GameActivity : AppCompatActivity() {
 
 
         // TODO zrobić liczenie czasu i wyświetlić go
-        // TODO kliknięcie na np 5 podświetla wszystkie 5 imo git dla grania
         // TODO przycisk z wróceniem do poprzedniego activity finishActivity() na onclicku ale trzeba zapisać stan
         // TODO do powyższego zapisać stan w sharedpref i wtedy sprawdzać i chyba pobierać z db dane z ostatniej gry
         // TODO do powyższego albo w ssharedpref trzymać dane z gry + zmienna isGame i sprawdzać jak jest to jest btn i można wrócić
@@ -164,7 +163,11 @@ class GameActivity : AppCompatActivity() {
                 for (j in 1..9) {
                     id = resources.getIdentifier("$i$j", "id", packageName)
                     btn = findViewById(id)
-                    btn.setBackgroundResource(R.drawable.border)
+                    if (pointedBtn.text == btn.text && btn.text != ""){
+                        btn.setBackgroundResource(R.drawable.border_marked_same)
+                    }else{
+                        btn.setBackgroundResource(R.drawable.border)
+                    }
                 }
             }
 
