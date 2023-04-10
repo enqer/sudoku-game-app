@@ -1,7 +1,5 @@
 package com.example.enqer.sudoku
 
-
-
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -17,15 +15,16 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import org.w3c.dom.Text
 
-
 class GameActivity : AppCompatActivity() {
     companion object{
 
         @SuppressLint("StaticFieldLeak")
         lateinit var pointedBtn: Button // the button which is selected
+        // coords of pointedBtn
+        var x: Int = 0;
+        var y: Int = 0;
         val isPointedBtnInit get() = this::pointedBtn.isInitialized
-        val coords = "abcdefghi" // coords of board (from top to bottom)
-
+        const val coords = "abcdefghi" // coords of board (from top to bottom)
 
         // Sudoku object and every data from board
         lateinit var sudoku: Sudoku
@@ -40,12 +39,9 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-
 
         // SheredPreference dark mode
         val appSettingPref: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
@@ -69,12 +65,12 @@ class GameActivity : AppCompatActivity() {
                 sharedPrefsEdit.putBoolean("NightMode",true)
                 sharedPrefsEdit.apply()
             }
-
         }
 
         // passing data between activities
         val intent = intent
 
+        // setting difficulty of the game
         difficulty = intent.getStringExtra("diff").toString()
         if (difficulty.equals("Łatwy")){
             missingNumbers = 40
@@ -86,32 +82,13 @@ class GameActivity : AppCompatActivity() {
             missingNumbers = 60
             difficulty = "Trudna"
         }
-
         val difficultyBtn: TextView = findViewById(R.id.difficultyBtn)
         difficultyBtn.text = difficulty
 
+        // creating object of the game and small setup
         sudoku = Sudoku(sizeOfSudoku, missingNumbers)
-        printSudoku()
         countNumbers = Array<Int>(9){0}
-
-        for (i in 0 until sizeOfSudoku) {
-            for (j in 0 until sizeOfSudoku) {
-                val n = sudoku.mat[i][j]
-                if (n != 0){
-                    countNumbers[n-1]++
-                    if (countNumbers[n-1] == 9){
-                        val id = resources.getIdentifier("num$n", "id", packageName)
-                        val btn: Button = findViewById(id)
-                        btn.text = ""
-                        btn.isClickable = false
-                    }
-                }
-            }
-        }
-
-        for(i in countNumbers){
-            Log.i("ARRAY/INDEX",  i.toString())
-        }
+        printSudoku()
 
 
         // TODO zrobić liczenie czasu i wyświetlić go
@@ -121,27 +98,18 @@ class GameActivity : AppCompatActivity() {
         // TODO do powyższego albo w ssharedpref trzymać dane z gry + zmienna isGame i sprawdzać jak jest to jest btn i można wrócić
         // TODO baza danych tylko dla statystyk??? chyba ta
         // TODO Zakończenie gry
-        // TODO wyświetlic informacje że nie można już zmienić znaku który jest gites
+        // TODO wyświetlic informacje że nie można już zmienić znaku który jest gites przy wszystkich funkcjach lul
 
 
         // clearing the field
         val clear: LinearLayout = findViewById(R.id.clear)
         clear.setOnClickListener {
-            if (isPointedBtnInit) {
-                if (!pointedBtn.isClickable){
-                    val s: String = pointedBtn.text.toString()
-                    countNumbers[s.toInt()-1]--
-                    val id = resources.getIdentifier("num$s", "id", packageName)
-                    val btn: Button = findViewById(id)
-                    btn.text = s
-                    btn.isClickable = true
-
-                }
+            if (isPointedBtnInit && sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
                 pointedBtn.text = ""
-                pointedBtn.isClickable = true
             }
         }
 
+        //TODO przetestować czy jak klikniemy w notatki przy ostatnim numerze to zniknie cyz nie
         // setting notes
         val notes: LinearLayout = findViewById(R.id.notes)
         notes.setOnClickListener{
@@ -163,21 +131,17 @@ class GameActivity : AppCompatActivity() {
         // TODO img z 1 po kliknieciu i pokazaniu hint zmienić src na img z 0 że 0 podpowiedzi już jest
         val hint: LinearLayout = findViewById(R.id.hint)
         hint.setOnClickListener {
-            if (isPointedBtnInit) {
-                val tag: String = pointedBtn.tag.toString()
-                val i = coords.indexOf(tag[0])
-                val j = tag[1].toString().toInt() - 1
-                pointedBtn.text = sudoku.fullMat[i][j].toString()
-                pointedBtn.isClickable = false
+            if (isPointedBtnInit && sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
+                pointedBtn.text = sudoku.fullMat[x][y].toString()
                 // changing border
                 pointedBtn.setBackgroundResource(R.drawable.border_marked_hint)
                 pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
-                sudoku.mat[i][j] = sudoku.fullMat[i][j]
+                pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32F)
+                sudoku.mat[x][y] = sudoku.fullMat[x][y]
 
                 //changing img of hint
                 val hintImg: ImageView = findViewById(R.id.hintImg)
                 hintImg.setImageResource(R.drawable.ic_light_0)
-
                 // only one hint so off the button
                 hint.isClickable = false
 
@@ -190,6 +154,8 @@ class GameActivity : AppCompatActivity() {
     fun selectField(view: View) {
             pointedBtn = findViewById(view.id);
             val tag: String = pointedBtn.tag.toString()
+            x = coords.indexOf(tag[0])
+            y = tag[1].toString().toInt() - 1
             var id: Int
             var btn: Button
 
@@ -240,26 +206,28 @@ class GameActivity : AppCompatActivity() {
 
     fun selectNumber(view: View){
         val btnNumber: Button = findViewById(view.id);
-        var tag: String
+//        var tag: String
         if (isPointedBtnInit){  // if button is initialized then we can do some things
-            if (isNotesMode){
+            if (isNotesMode && sudoku.mat[x][y].toString() != pointedBtn.text.toString()){
                 // Only when the hasnt good value
-                if (pointedBtn.isClickable){
-                    tag = btnNumber.text.toString()
+                //btn.isClicable
+//                if (sudoku.mat[x][y] != pointedBtn.text.toString().toInt()){
+//                    tag = btnNumber.text.toString()
                     val notes = Array<String>(9){" "}
 
                     // TODO jeśli wcześniej jest dobra wartość to wyłączy pole fix it
                     var index = 0
-                    val pointedText = pointedBtn.text.toString()
+//                    val pointedText = pointedBtn.text.toString()
                     for (i in "123456789"){
-                        if (i in pointedText){
+                        if (i.toString() in pointedBtn.text.toString()){
                             notes[index++] = i.toString()
                         } else {
                             notes[index++] = " "
                         }
-                        notes.forEach { Log.i("NOTES/" ,it) }
-                        Log.i("NOTES/" ,"=============")
+//                        notes.forEach { Log.i("NOTES/" ,it) }
+//                        Log.i("NOTES/" ,"=============")
                     }
+                    // adding new value to notes of field
                     val addToNotes = btnNumber.text.toString()
                     if (addToNotes == notes[addToNotes.toInt()-1]){
                         notes[addToNotes.toInt()-1] = " "
@@ -288,36 +256,31 @@ class GameActivity : AppCompatActivity() {
                         counter++
                     }
                     pointedBtn.text = notesBtn
-                }
+//                }
 
             } else {
-                if (pointedBtn.isClickable) {
-                    tag = pointedBtn.tag.toString()
-                    pointedBtn.text = btnNumber.text
-                    val i = coords.indexOf(tag[0])
-                    val j = tag[1].toString().toInt() - 1
-                    Log.i("I", i.toString())
-                    Log.i("J", j.toString())
-                    Log.i("Sudo", sudoku.fullMat[i][j].toString())
-                    pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32F)
-                    if (sudoku.fullMat[i][j] == pointedBtn.text.toString().toInt()) {
-                        pointedBtn.isClickable = false
+//                if (sudoku.mat[x][y] != pointedBtn.text.toString().toInt()) {
+////                    tag = pointedBtn.tag.toString()
+//                    pointedBtn.text = btnNumber.text
+//                    val i = coords.indexOf(tag[0])
+//                    val j = tag[1].toString().toInt() - 1
+//                    Log.i("Sudo", sudoku.fullMat[x][y].toString())
+//                    pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32F)
+                    if (sudoku.fullMat[x][y] == btnNumber.text.toString().toInt()) {
+//                        pointedBtn.isClickable = false
+                        pointedBtn.text = btnNumber.text
                         points += (1..9).random() * iteratorPoints
                         iteratorPoints += 2
                         val pointsView: TextView = findViewById(R.id.points)
                         pointsView.text = points.toString()
-                        pointedBtn.setTextColor(
-                            ContextCompat.getColor(
-                                applicationContext,
-                                R.color.littleBlack
-                            )
-                        )
-                        sudoku.mat[i][j] = pointedBtn.text.toString().toInt()
+                        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+
+                        sudoku.mat[x][y] = pointedBtn.text.toString().toInt()
 
                         // Checking if number is printed 9 times and then disappear
-                        countNumbers[sudoku.mat[i][j] - 1]++
-                        Log.i("ARRAY", countNumbers[sudoku.mat[i][j] - 1].toString())
-                        if (countNumbers[sudoku.mat[i][j] - 1] == 9) {
+                        countNumbers[sudoku.mat[x][y] - 1]++
+                        Log.i("ARRAY", countNumbers[sudoku.mat[x][y] - 1].toString())
+                        if (countNumbers[sudoku.mat[x][y] - 1] == 9) {
                             btnNumber.text = ""
                             btnNumber.isClickable = false
                         }
@@ -328,33 +291,29 @@ class GameActivity : AppCompatActivity() {
                             // zapis do bazy danych żeby pamiętać wyniki i dla statystyk
                         }
                     } else {
-                        if (pointedBtn.isClickable) {
+                        if (sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
+                            pointedBtn.text = btnNumber.text
                             mistakes++
                             val miss: TextView = findViewById(R.id.mistakes)
                             miss.text = "$mistakes/3"
-                            //                pointedBtn.setBackgroundResource(R.drawable.border_marked_mistake)
-                            pointedBtn.setTextColor(
-                                ContextCompat.getColor(
-                                    applicationContext,
-                                    R.color.mistake
-                                )
-                            )
+                            pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake))
+
                             if (mistakes == 3) {
                                 //TODO przegrana koniec gry do zrobienia
                             }
                         }
                     }
-                }
+//                }
+                pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32F)
             }
         }
     }
 
+    // printing and cleaning the board
     private fun printSudoku(){
         var id: Int
         var btn: Button
-
         var k = 0
-        // cleaning the board
         for (i in coords) {
             for (j in 1..9) {
                 id = resources.getIdentifier("$i$j", "id", packageName)
@@ -363,16 +322,21 @@ class GameActivity : AppCompatActivity() {
                     btn.text = ""
                 }else{
                     btn.text= sudoku.mat[k][j-1].toString()
-                    btn.isClickable = false
-                    // zmienić to żeby klikać i wtedy podświetlają się wszystkie liczby danego wyboru
+                    countNumbers[sudoku.mat[k][j-1]-1]++
+                    if (countNumbers[sudoku.mat[k][j-1]-1] == 9){
+                        id = resources.getIdentifier("num${btn.text}", "id", packageName)
+                        btn = findViewById(id)
+                        btn.text = ""
+                        btn.isClickable = false
+                    }
                 }
-
             }
             k++
         }
     }
 
-    // Saving and restoring data
+
+    // Saving instance of data
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         var btn: Button
@@ -389,10 +353,11 @@ class GameActivity : AppCompatActivity() {
         outState.putStringArrayList("data", data)
         outState.putInt("miastakes", mistakes)
         outState.putInt("points", points)
-        // TODO save and restore czas
+        // TODO save and restore czas i inne pierdoły i cały board też przy finishActivity
 
     }
 
+    // Restoring instance of data
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState);
         Log.i("RESTORE","WORKS")
