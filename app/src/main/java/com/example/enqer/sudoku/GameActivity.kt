@@ -1,10 +1,11 @@
 package com.example.enqer.sudoku
 
 import android.annotation.SuppressLint
-import android.content.SharedPreferences
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
+import android.content.*
+
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
@@ -12,8 +13,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
-import org.w3c.dom.Text
+import com.example.enqer.sudoku.databinding.ActivityMainBinding
+import kotlin.math.roundToInt
 
 class GameActivity : AppCompatActivity() {
     companion object{
@@ -25,6 +26,8 @@ class GameActivity : AppCompatActivity() {
         var y: Int = 0;
         val isPointedBtnInit get() = this::pointedBtn.isInitialized
         const val coords = "abcdefghi" // coords of board (from top to bottom)
+        @SuppressLint("StaticFieldLeak")
+        lateinit var timerTextView: TextView
 
         // Sudoku object and every data from board
         lateinit var sudoku: Sudoku
@@ -37,11 +40,33 @@ class GameActivity : AppCompatActivity() {
         lateinit var  countNumbers : Array<Int> // count which number is full on board
         var isNotesMode = false
 
+
+        // checking if the game is over, if not so we can back to previous game
+        var isGameOver = false
+        var timeTEST = 0
+
     }
+    // timer stuff
+    private lateinit var binding: ActivityMainBinding
+    private var timerStarted = false
+    private lateinit var  serviceIntent: Intent
+    private var time = 0.0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_game)
+//        setContentView(binding.root)
+
+        timerTextView= findViewById(R.id.timer)
+//        content()
+
+        serviceIntent = Intent(applicationContext, TimerService::class.java)
+        registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
+        startTimer()
+
 
         // SheredPreference dark mode
         val appSettingPref: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
@@ -90,7 +115,16 @@ class GameActivity : AppCompatActivity() {
         countNumbers = Array<Int>(9){0}
         printSudoku()
 
+        // Back to Home button
+        val backToHomeBtn: ImageButton = findViewById(R.id.backToHome)
+        backToHomeBtn.setOnClickListener{
+            finish()
+            //TODO tutaj można zapisać dane z gry jak ktoś wychodzi
+            // Wywołać jakaś inną metodę i tak samo z onDestroy() tam też wtedy wywołać funkcje tą samą i będzie git
+        }
 
+
+        // TODO PODświetlanie do poprawy przy zmianie motywu
         // TODO zrobić liczenie czasu i wyświetlić go
         // TODO przycisk z wróceniem do poprzedniego activity finishActivity() na onclicku ale trzeba zapisać stan
         // TODO do powyższego zapisać stan w sharedpref i wtedy sprawdzać i chyba pobierać z db dane z ostatniej gry
@@ -357,6 +391,7 @@ class GameActivity : AppCompatActivity() {
         outState.putStringArrayList("data", data)
         outState.putInt("miastakes", mistakes)
         outState.putInt("points", points)
+        outState.putInt("timer", timeTEST)
         // TODO save and restore czas i inne pierdoły i cały board też przy finishActivity
 
     }
@@ -367,10 +402,12 @@ class GameActivity : AppCompatActivity() {
         Log.i("RESTORE","WORKS")
         val miss = savedInstanceState.getInt("mistakes",0)
         val po = savedInstanceState.getInt("points",0)
+        timeTEST = savedInstanceState.getInt("time", 0)
         val data = savedInstanceState.getStringArrayList("data") as ArrayList<String>
         var btn: Button
         var id: Int
         Log.i("SAVE","WORKS")
+        // TODO Saving and restoring object and onRestore printSudoku()??
         var index = 0
         for (i in coords) {
             for (j in 1..9) {
@@ -387,7 +424,44 @@ class GameActivity : AppCompatActivity() {
     }
 
 
+    private fun startTimer(){
+        serviceIntent.putExtra(TimerService.TIME_EXTRA, 0.0)
+        startService(serviceIntent)
+        timerStarted = true
 
+    }
+
+    private val updateTime: BroadcastReceiver = object  : BroadcastReceiver(){
+        override fun onReceive(p0: Context?, p1: Intent) {
+            time = p1.getDoubleExtra(TimerService.TIME_EXTRA, 0.0)
+//            val timerTextView: TextView = findViewById(R.id.timer)
+            timerTextView.text = getTimeStringFromDouble(time)
+        }
+    }
+
+    private fun getTimeStringFromDouble(time: Double): String {
+        val resultInt = time.roundToInt()
+        val hours = resultInt % 86400 / 3600
+        val minutes = resultInt % 86400 % 3600 / 60
+        val seconds = resultInt % 86400 % 3600 % 60
+        return makeTimeString(hours, minutes, seconds)
+    }
+
+    private fun makeTimeString(hours: Int, minutes: Int, seconds: Int): String = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+
+    private fun content(){
+        timerTextView.text = timeTEST.toString()
+        timer(1000)
+    }
+
+    private fun timer(mili: Int){
+        // Counting a time
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            timeTEST++
+            content()
+        }, mili.toLong())
+    }
 
 }
 

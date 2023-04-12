@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/backToHome"
             style="@style/game_bar_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +32,7 @@
             android:textColor="@color/granat"
             android:textSize="32sp"
             app:layout_constraintEnd_toStartOf="@+id/changeMode"
-            app:layout_constraintStart_toEndOf="@+id/imageButton4"
+            app:layout_constraintStart_toEndOf="@+id/backToHome"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -123,7 +123,7 @@
                 android:text="Czas" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/timer"
                 style="@style/game_stats_textview"
                 android:textStyle="bold"
                 android:textColor="@color/darkBlue"
