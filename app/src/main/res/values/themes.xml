@@ -4,6 +4,8 @@
 <!--    Theme.MaterialComponents.DayNight.DarkActionBar-->
 <!--    Theme.AppCompat.Light.NoActionBar-->
     <style name="Theme.Sudoku" parent="Theme.AppCompat.Light.NoActionBar">
+
+<!--        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>-->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/newBlue</item>
@@ -19,15 +21,16 @@
 
 
 
-        // didnt work idk
-        <item name="popupMenuBackground">@drawable/background_btn</item>
-        <item name="android:popupBackground">@drawable/background_btn</item>
-        <item name="popupMenuStyle">@style/menu</item>
-
 
     </style>
+
+
     <style name="menu">
         <item name="android:background">@color/black</item>
 
     </style>
+<!--    <style name="WindowAnimationTransition">-->
+<!--        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>-->
+<!--        <item name="android:windowExitAnimation">@android:anim/fade_out</item>-->
+<!--    </style>-->
 </resources>

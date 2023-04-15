@@ -1,3 +1,4 @@
+
 package com.example.enqer.sudoku
 
 import android.app.Service
@@ -33,8 +34,9 @@ class TimerService : Service() {
     }
 
     companion object{
-        const val  TIMER_UPDATED = "timerUpdated"
+        const val TIMER_UPDATED = "timerUpdated"
         const val TIME_EXTRA = "timeExtra"
+        const val NEW_TIME = "newTime"
     }
 
 }

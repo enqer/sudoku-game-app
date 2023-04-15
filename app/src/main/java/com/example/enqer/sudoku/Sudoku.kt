@@ -5,10 +5,10 @@ class Sudoku internal constructor(// number of columns/rows.
     var N: Int, // No. Of missing digits
     var K: Int
 ) {
+
     var fullMat: Array<IntArray>
     var mat: Array<IntArray>
-    var SRN // square root of N
-            : Int
+    var SRN: Int
 
     // Sudoku Generator
     fun fillValues() {

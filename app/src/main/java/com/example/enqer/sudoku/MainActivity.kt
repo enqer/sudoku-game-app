@@ -19,6 +19,9 @@ import androidx.appcompat.app.AppCompatDelegate
 
 
 class MainActivity : AppCompatActivity() {
+
+    var createNewGame = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,10 +52,21 @@ class MainActivity : AppCompatActivity() {
         val statsLayout = findViewById<View>(R.id.stats) as LinearLayout
         statsLayout.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                val b: Button = findViewById(R.id.button2);
+                val b: Button = findViewById(R.id.backToGame);
                 b.text = "ewqeqw"
             }
         })
+
+        // start previous game
+        val previousGame: Button = findViewById(R.id.backToGame)
+        previousGame.setOnClickListener{
+            createNewGame = false
+            val intent: Intent = Intent(this@MainActivity, GameActivity::class.java)
+            intent.putExtra("createNewGame", createNewGame)
+            startActivity(intent)
+        }
+
+
 
         // button onclick starting new game
         val newGame: Button = findViewById(R.id.button);
@@ -78,9 +92,11 @@ class MainActivity : AppCompatActivity() {
                         "Trudny" -> "Trudny"
                         else -> "Łatwy"
                     }
+                    createNewGame = true
                     // changing activity
                     val intent: Intent = Intent(this@MainActivity, GameActivity::class.java)
                     intent.putExtra("diff", diff)
+                    intent.putExtra("createNewGame", createNewGame)
                     startActivity(intent)
 
                     true

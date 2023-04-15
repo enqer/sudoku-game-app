@@ -2,10 +2,7 @@ package com.example.enqer.sudoku
 
 import android.annotation.SuppressLint
 import android.content.*
-
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
@@ -14,10 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.example.enqer.sudoku.databinding.ActivityMainBinding
+import com.google.gson.Gson
 import kotlin.math.roundToInt
+
 
 class GameActivity : AppCompatActivity() {
     companion object{
+
+        var isNewGame = true
 
         @SuppressLint("StaticFieldLeak")
         lateinit var pointedBtn: Button // the button which is selected
@@ -36,6 +37,7 @@ class GameActivity : AppCompatActivity() {
         var missingNumbers: Int = 40
         var mistakes: Int = 0
         var points: Int = 0
+        var hints: Int = 1
         var iteratorPoints: Int = 1
         lateinit var  countNumbers : Array<Int> // count which number is full on board
         var isNotesMode = false
@@ -60,6 +62,7 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
 //        setContentView(binding.root)
 
+        Log.i("TEST///", "TETST")
         timerTextView= findViewById(R.id.timer)
 //        content()
 
@@ -79,47 +82,62 @@ class GameActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
+
         val changeMode: ImageButton = findViewById(R.id.changeMode)
         changeMode.setOnClickListener{
             if(isNightMode){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 sharedPrefsEdit.putBoolean("NightMode",false)
                 sharedPrefsEdit.apply()
+                recreate()
+
             }else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 sharedPrefsEdit.putBoolean("NightMode",true)
                 sharedPrefsEdit.apply()
+                recreate()
             }
         }
 
         // passing data between activities
         val intent = intent
+        isNewGame = intent.getBooleanExtra("createNewGame", true)
 
-        // setting difficulty of the game
-        difficulty = intent.getStringExtra("diff").toString()
-        if (difficulty.equals("Łatwy")){
-            missingNumbers = 40
-            difficulty = "Łatwa"
-        } else if (difficulty.equals("Średni")){
-            missingNumbers = 50
-            difficulty = "Średnia"
-        } else {
-            missingNumbers = 60
-            difficulty = "Trudna"
+        if (isNewGame){
+            //TODO jeśli nowa gra to wszystko trzeba wyzerować i wszystko jest od nowa
+            createNewGame(intent)
+
+        } else{
+            // TODO jeśli stara gra to przywracamy wszystko z sharedpreferencess
+            recreatePreviousGame()
         }
-        val difficultyBtn: TextView = findViewById(R.id.difficultyBtn)
-        difficultyBtn.text = difficulty
 
-        // creating object of the game and small setup
-        sudoku = Sudoku(sizeOfSudoku, missingNumbers)
-        countNumbers = Array<Int>(9){0}
-        printSudoku()
+//        // setting difficulty of the game
+//        difficulty = intent.getStringExtra("diff").toString()
+//        if (difficulty.equals("Łatwy")){
+//            missingNumbers = 40
+//            difficulty = "Łatwa"
+//        } else if (difficulty.equals("Średni")){
+//            missingNumbers = 50
+//            difficulty = "Średnia"
+//        } else {
+//            missingNumbers = 60
+//            difficulty = "Trudna"
+//        }
+//        val difficultyBtn: TextView = findViewById(R.id.difficultyBtn)
+//        difficultyBtn.text = difficulty
+
+//        // creating object of the game and small setup
+//        sudoku = Sudoku(sizeOfSudoku, missingNumbers)
+//        countNumbers = Array<Int>(9){0}
+//        printSudoku()
 
         // Back to Home button
         val backToHomeBtn: ImageButton = findViewById(R.id.backToHome)
         backToHomeBtn.setOnClickListener{
+            onPause()
             finish()
-            //TODO tutaj można zapisać dane z gry jak ktoś wychodzi
+            //TODO tutaj można zapisać dane z gry jak ktoś wychodzi (metoda i w niej to zrobić)
             // Wywołać jakaś inną metodę i tak samo z onDestroy() tam też wtedy wywołać funkcje tą samą i będzie git
         }
 
@@ -132,6 +150,7 @@ class GameActivity : AppCompatActivity() {
         // TODO baza danych tylko dla statystyk??? chyba ta
         // TODO Zakończenie gry
         // TODO wyświetlic informacje że nie można już zmienić znaku który jest gites przy wszystkich funkcjach lul
+        // TODO bug kiedy jest 8 liczb i damy hint to nie usunie danej liczby z dołu
 
 
         // clearing the field
@@ -377,22 +396,24 @@ class GameActivity : AppCompatActivity() {
     // Saving instance of data
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        var btn: Button
-        var id: Int
-        val data = ArrayList<String>()
         Log.i("SAVE","WORKS")
-        for (i in coords) {
-            for (j in 1..9) {
-                id = resources.getIdentifier("$i$j", "id", packageName)
-                btn = findViewById(id)
-                data.add(btn.text.toString())
-            }
-        }
-        outState.putStringArrayList("data", data)
-        outState.putInt("miastakes", mistakes)
-        outState.putInt("points", points)
-        outState.putInt("timer", timeTEST)
-        // TODO save and restore czas i inne pierdoły i cały board też przy finishActivity
+//        var btn: Button
+//        var id: Int
+//        val data = ArrayList<String>()
+
+//        for (i in coords) {
+//            for (j in 1..9) {
+//                id = resources.getIdentifier("$i$j", "id", packageName)
+//                btn = findViewById(id)
+//                data.add(btn.text.toString())
+//            }
+//        }
+//        outState.putStringArrayList("data", data)
+//        outState.putInt("miastakes", mistakes)
+//        outState.putInt("points", points)
+//        outState.putInt("timer", timeTEST)
+        // TODO save and restore czas i inne pierdoły i cały board też przy finishActivity do poprawy chyba idk
+        onPause()
 
     }
 
@@ -400,31 +421,33 @@ class GameActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState);
         Log.i("RESTORE","WORKS")
-        val miss = savedInstanceState.getInt("mistakes",0)
-        val po = savedInstanceState.getInt("points",0)
-        timeTEST = savedInstanceState.getInt("time", 0)
-        val data = savedInstanceState.getStringArrayList("data") as ArrayList<String>
-        var btn: Button
-        var id: Int
-        Log.i("SAVE","WORKS")
-        // TODO Saving and restoring object and onRestore printSudoku()??
-        var index = 0
-        for (i in coords) {
-            for (j in 1..9) {
-                id = resources.getIdentifier("$i$j", "id", packageName)
-                btn = findViewById(id)
-                btn.text = data[index].toString()
-                index++
-            }
-        }
-        val m: TextView = findViewById(R.id.mistakes)
-        m.text = miss.toString()
-        val p: TextView = findViewById(R.id.points)
-        p.text = po.toString()
+//        val miss = savedInstanceState.getInt("mistakes",0)
+//        val po = savedInstanceState.getInt("points",0)
+////        timeTEST = savedInstanceState.getInt("timer", 0)
+//        val data = savedInstanceState.getStringArrayList("data") as ArrayList<String>
+//        var btn: Button
+//        var id: Int
+//        Log.i("SAVE","TESTHEHEHEHEHEHE")
+//        // TODO Saving and restoring object and onRestore printSudoku()??
+//        var index = 0
+//        for (i in coords) {
+//            for (j in 1..9) {
+//                id = resources.getIdentifier("$i$j", "id", packageName)
+//                btn = findViewById(id)
+//                btn.text = data[index].toString()
+//                index++
+//            }
+//        }
+//        val m: TextView = findViewById(R.id.mistakes)
+//        m.text = miss.toString()
+//        val p: TextView = findViewById(R.id.points)
+//        p.text = po.toString()
     }
 
 
     private fun startTimer(){
+        if (isNewGame)
+            serviceIntent.putExtra(TimerService.NEW_TIME, true)
         serviceIntent.putExtra(TimerService.TIME_EXTRA, 0.0)
         startService(serviceIntent)
         timerStarted = true
@@ -449,19 +472,109 @@ class GameActivity : AppCompatActivity() {
 
     private fun makeTimeString(hours: Int, minutes: Int, seconds: Int): String = String.format("%02d:%02d:%02d", hours, minutes, seconds)
 
-    private fun content(){
-        timerTextView.text = timeTEST.toString()
-        timer(1000)
+//    private fun content(){
+//        timerTextView.text = timeTEST.toString()
+//        timer(1000)
+//    }
+
+//    private fun timer(milisec: Int = 1000){
+//        // Counting a time
+//        Handler(Looper.getMainLooper()).postDelayed({
+//
+//            timeTEST++
+////            content()
+//            timerTextView.text = getTimeStringFromDouble(timeTEST.toDouble())
+//            timer(milisec)
+//        }, milisec.toLong())
+//    }
+
+    // creating new game
+    private fun createNewGame(intent: Intent){
+        // setting difficulty of the game
+        difficulty = intent.getStringExtra("diff").toString()
+        if (difficulty == "Łatwy"){
+            missingNumbers = 40
+            difficulty = "Łatwa"
+        } else if (difficulty == "Średni"){
+            missingNumbers = 50
+            difficulty = "Średnia"
+        } else {
+            missingNumbers = 60
+            difficulty = "Trudna"
+        }
+        val difficultyBtn: TextView = findViewById(R.id.difficultyBtn)
+        difficultyBtn.text = difficulty
+
+        // setting property of the game
+        mistakes = 0
+        points = 0
+        iteratorPoints = 1
+        hints = 1
+        countNumbers = Array<Int>(9){0}
+        timeTEST = 0
+
+        // creating object of the game
+        sudoku = Sudoku(sizeOfSudoku, missingNumbers)
+
+//        // setting time
+//        serviceIntent = Intent(applicationContext, TimerService::class.java)
+//        registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
+//        startTimer()
+//        content()
+        Log.i("Jeszcze ","raz")
+        // timer default value is 1000 = 1 sec
+//        timer()
+        // printing the board
+        printSudoku()
+
     }
 
-    private fun timer(mili: Int){
-        // Counting a time
-        Handler(Looper.getMainLooper()).postDelayed({
+    // creating previous saved game
+    private fun recreatePreviousGame(){
+        // TODO from sharedpreferences setup the game
+        Log.i("recreated", "jeden")
+        val sp: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
 
-            timeTEST++
-            content()
-        }, mili.toLong())
+        difficulty = sp.getString("difficulty", "Łatwa").toString()
+        mistakes = sp.getInt("mistakes", 0)
+        points = sp.getInt("points", 0)
+        iteratorPoints = sp.getInt("iteratorPoints", 1)
+        hints = sp.getInt("hints", 1)
+
+        Log.i("recreated", "dwa")
+        val gson = Gson()
+        val json = sp.getString("sudoku","")
+        sudoku = if (json != ""){
+            gson.fromJson(json, sudoku.javaClass)
+        } else {
+            Sudoku(sizeOfSudoku, missingNumbers)
+        }
+
+        countNumbers = Array<Int>(9){0}
+        printSudoku()
+
+        Log.i("recreated", "trzy")
+
     }
+
+    override fun onPause() {
+        super.onPause()
+        val sp: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
+        val spe: SharedPreferences.Editor = sp.edit()
+
+        // store the data
+        spe.putBoolean("isgameover", isGameOver)
+        spe.putString("difficulty", difficulty)
+        spe.putInt("mistakes", mistakes)
+        spe.putInt("points", points)
+        spe.putInt("iteratorPoints", iteratorPoints)
+        spe.putInt("hints", hints)
+        val gson = Gson()
+        val json: String = gson.toJson(sudoku)
+        spe.putString("sudoku", json)
+        spe.apply()
+    }
+
 
 }
 

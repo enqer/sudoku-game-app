@@ -2,6 +2,8 @@
     <!-- Base application theme. -->
 <!--    <style name="Theme.Sudoku" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
     <style name="Theme.Sudoku" parent="Theme.AppCompat.Light.NoActionBar">
+
+<!--        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>-->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -16,4 +18,9 @@
 
 
     </style>
+
+<!--    <style name="WindowAnimationTransition">-->
+<!--        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>-->
+<!--        <item name="android:windowExitAnimation">@android:anim/fade_out</item>-->
+<!--    </style>-->
 </resources>
