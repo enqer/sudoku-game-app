@@ -1,12 +1,14 @@
 package com.example.enqer.sudoku
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.*
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.*
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -62,6 +64,7 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
 //        setContentView(binding.root)
 
+        isGameOver = false
         Log.i("TEST///", "TETST")
         timerTextView= findViewById(R.id.timer)
 //        content()
@@ -109,37 +112,24 @@ class GameActivity : AppCompatActivity() {
 
         } else{
             // TODO jeśli stara gra to przywracamy wszystko z sharedpreferencess
-            recreatePreviousGame()
+//            recreatePreviousGame()
         }
 
-//        // setting difficulty of the game
-//        difficulty = intent.getStringExtra("diff").toString()
-//        if (difficulty.equals("Łatwy")){
-//            missingNumbers = 40
-//            difficulty = "Łatwa"
-//        } else if (difficulty.equals("Średni")){
-//            missingNumbers = 50
-//            difficulty = "Średnia"
-//        } else {
-//            missingNumbers = 60
-//            difficulty = "Trudna"
-//        }
-//        val difficultyBtn: TextView = findViewById(R.id.difficultyBtn)
-//        difficultyBtn.text = difficulty
 
-//        // creating object of the game and small setup
-//        sudoku = Sudoku(sizeOfSudoku, missingNumbers)
-//        countNumbers = Array<Int>(9){0}
-//        printSudoku()
 
         // Back to Home button
         val backToHomeBtn: ImageButton = findViewById(R.id.backToHome)
         backToHomeBtn.setOnClickListener{
-            onPause()
+
+            saveTheData()
             finish()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             //TODO tutaj można zapisać dane z gry jak ktoś wychodzi (metoda i w niej to zrobić)
             // Wywołać jakaś inną metodę i tak samo z onDestroy() tam też wtedy wywołać funkcje tą samą i będzie git
         }
+
+
 
 
         // TODO PODświetlanie do poprawy przy zmianie motywu
@@ -151,6 +141,8 @@ class GameActivity : AppCompatActivity() {
         // TODO Zakończenie gry
         // TODO wyświetlic informacje że nie można już zmienić znaku który jest gites przy wszystkich funkcjach lul
         // TODO bug kiedy jest 8 liczb i damy hint to nie usunie danej liczby z dołu
+        // TODO bug: jeśli liczba jest dobra to trzeba zablokować żeby można było
+        //  dodać jeszcze raz bo znikają liczby i są punkty, więc pewnie oprócz clicable = false to dodać brak zmiany czy coś idk
 
 
         // clearing the field
@@ -343,8 +335,9 @@ class GameActivity : AppCompatActivity() {
 
                     if (sudoku.fullMat contentEquals sudoku.mat) {
                         Log.i("WINNER", "Smiga")
+                        isGameOver = true
                     // TODO winner
-                    // wtedy ma się coś zdażyć wygrana może popup a może komunikat i wyjście po czasie idk
+                    // nowe activity tak samo przy przegranej i tam pokazuje wynik albo coś
                     // zapis do bazy danych żeby pamiętać wyniki i dla statystyk
                     }
                 } else {
@@ -357,6 +350,7 @@ class GameActivity : AppCompatActivity() {
 
                         if (mistakes == 3) {
                             //TODO przegrana koniec gry do zrobienia
+                            isGameOver = true
                             Log.i("LOSER", "Smiga")
                         }
                     }
@@ -559,6 +553,17 @@ class GameActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        saveTheData()
+    }
+
+    override fun onStop() {
+        saveTheData()
+        super.onStop()
+    }
+
+
+
+    private fun saveTheData(){
         val sp: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
         val spe: SharedPreferences.Editor = sp.edit()
 
