@@ -173,7 +173,7 @@ class GameActivity : AppCompatActivity() {
         // TODO img z 1 po kliknieciu i pokazaniu hint zmienić src na img z 0 że 0 podpowiedzi już jest
         val hint: LinearLayout = findViewById(R.id.hint)
         hint.setOnClickListener {
-            if (isPointedBtnInit && sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
+            if (isPointedBtnInit && hints == 1 && sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
                 pointedBtn.text = sudoku.fullMat[x][y].toString()
                 // changing border
                 pointedBtn.setBackgroundResource(R.drawable.border_marked_hint)
@@ -185,6 +185,7 @@ class GameActivity : AppCompatActivity() {
                 val hintImg: ImageView = findViewById(R.id.hintImg)
                 hintImg.setImageResource(R.drawable.ic_light_0)
                 // only one hint so off the button
+                hints--
                 hint.isClickable = false
 
             }
@@ -579,9 +580,22 @@ class GameActivity : AppCompatActivity() {
         difTextView.text = difficulty
         misTextView.text = "$mistakes/3"
         pointsTextView.text = points.toString()
-//        timeTextView.text
         // TODO czas do poprawy
         // TODO do zrobienia hint
+
+
+        val hint: LinearLayout = findViewById(R.id.hint)
+        val hintImg: ImageView = findViewById(R.id.hintImg)
+
+        if (hints == 1){
+            hintImg.setImageResource(R.drawable.ic_light_1)
+            // only one hint so off the button
+            hint.isClickable = true
+        } else {
+            hintImg.setImageResource(R.drawable.ic_light_0)
+            // only one hint so off the button
+            hint.isClickable = false
+        }
 
 
 
@@ -605,7 +619,6 @@ class GameActivity : AppCompatActivity() {
 
 
     private fun saveTheData(){
-        isGameOver = false
         stopTimer()
 
         val sp: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
