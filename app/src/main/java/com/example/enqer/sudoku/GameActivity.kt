@@ -139,9 +139,7 @@ class GameActivity : AppCompatActivity() {
         // TODO Zakończenie gry
         // TODO wyświetlic informacje że nie można już zmienić znaku który jest gites przy wszystkich funkcjach lul
         // TODO bug kiedy jest 8 liczb i damy hint to nie usunie danej liczby z dołu
-        // TODO bug: jeśli liczba jest dobra to trzeba zablokować żeby można było
-        //  dodać jeszcze raz bo znikają liczby i są punkty, więc pewnie oprócz clicable = false to dodać brak zmiany czy coś
-        //  idk ale przy hincie jest to samo ze dodaje punkty i niszczy liczby z dołu
+
 
 
         // clearing the field
@@ -299,7 +297,7 @@ class GameActivity : AppCompatActivity() {
                 pointedBtn.text = notesBtn
 //               }
             } else {
-                if (sudoku.fullMat[x][y] == btnNumber.text.toString().toInt()) {
+                if (sudoku.fullMat[x][y] == btnNumber.text.toString().toInt() && sudoku.fullMat[x][y] != sudoku.mat[x][y]) {
                     pointedBtn.text = btnNumber.text
                     points += (1..9).random() * iteratorPoints
                     iteratorPoints += 2
