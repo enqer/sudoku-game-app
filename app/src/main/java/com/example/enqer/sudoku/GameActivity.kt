@@ -69,9 +69,10 @@ class GameActivity : AppCompatActivity() {
         timerTextView= findViewById(R.id.timer)
 //        content()
 
+        // time service
         serviceIntent = Intent(applicationContext, TimerService::class.java)
         registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
-        startTimer()
+//        startTimer()
 
 
         // SheredPreference dark mode
@@ -437,11 +438,22 @@ class GameActivity : AppCompatActivity() {
 //        p.text = po.toString()
     }
 
+    // maybe to delete maybe use to some new function
+    private fun startStopTimer(){
+        if(timerStarted)
+            stopTimer()
+        else
+            startTimer()
+    }
+
+    private fun stopTimer(){
+        stopService(serviceIntent)
+        timerStarted = false
+    }
 
     private fun startTimer(){
-        if (isNewGame)
-            serviceIntent.putExtra(TimerService.NEW_TIME, true)
-        serviceIntent.putExtra(TimerService.TIME_EXTRA, 0.0)
+
+        serviceIntent.putExtra(TimerService.TIME_EXTRA, time)
         startService(serviceIntent)
         timerStarted = true
 
@@ -506,6 +518,8 @@ class GameActivity : AppCompatActivity() {
         countNumbers = Array<Int>(9){0}
         timeTEST = 0
 
+        startStopTimer()
+
         // creating object of the game
         sudoku = Sudoku(sizeOfSudoku, missingNumbers)
 
@@ -533,6 +547,9 @@ class GameActivity : AppCompatActivity() {
         points = sp.getInt("points", 0)
         iteratorPoints = sp.getInt("iteratorPoints", 1)
         hints = sp.getInt("hints", 1)
+        time = sp.getLong("time", 0).toDouble()
+
+        startStopTimer()
 
         Log.i("recreated", "dwa")
         val gson = Gson()
@@ -551,6 +568,22 @@ class GameActivity : AppCompatActivity() {
         printSudoku()
 
         Log.i("recreated", "trzy")
+
+        // setters data to view
+
+        val difTextView: TextView = findViewById(R.id.difficultyBtn)
+        val misTextView: TextView = findViewById(R.id.mistakes)
+        val pointsTextView: TextView = findViewById(R.id.points)
+        val timeTextView: TextView = findViewById(R.id.timer)
+
+        difTextView.text = difficulty
+        misTextView.text = "$mistakes/3"
+        pointsTextView.text = points.toString()
+//        timeTextView.text
+        // TODO czas do poprawy
+        // TODO do zrobienia hint
+
+
 
     }
 
@@ -573,6 +606,8 @@ class GameActivity : AppCompatActivity() {
 
     private fun saveTheData(){
         isGameOver = false
+        stopTimer()
+
         val sp: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
         val spe: SharedPreferences.Editor = sp.edit()
 //        spe.clear()
@@ -583,6 +618,7 @@ class GameActivity : AppCompatActivity() {
         spe.putInt("points", points)
         spe.putInt("iteratorPoints", iteratorPoints)
         spe.putInt("hints", hints)
+        spe.putLong("time", time.toLong())
         val gson = Gson()
         val json: String = gson.toJson(sudoku)
         spe.putString("sudoku", json)

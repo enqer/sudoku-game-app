@@ -127,7 +127,7 @@
                 style="@style/game_stats_textview"
                 android:textStyle="bold"
                 android:textColor="@color/darkBlue"
-                android:text="0:25" />
+                android:text="00:00:00" />
         </LinearLayout>
 
     </LinearLayout>
