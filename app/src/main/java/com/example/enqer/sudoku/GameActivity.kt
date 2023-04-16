@@ -92,13 +92,11 @@ class GameActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 sharedPrefsEdit.putBoolean("NightMode",false)
                 sharedPrefsEdit.apply()
-                recreate()
 
             }else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 sharedPrefsEdit.putBoolean("NightMode",true)
                 sharedPrefsEdit.apply()
-                recreate()
             }
         }
 
@@ -112,7 +110,7 @@ class GameActivity : AppCompatActivity() {
 
         } else{
             // TODO jeśli stara gra to przywracamy wszystko z sharedpreferencess
-//            recreatePreviousGame()
+            recreatePreviousGame()
         }
 
 
@@ -142,7 +140,8 @@ class GameActivity : AppCompatActivity() {
         // TODO wyświetlic informacje że nie można już zmienić znaku który jest gites przy wszystkich funkcjach lul
         // TODO bug kiedy jest 8 liczb i damy hint to nie usunie danej liczby z dołu
         // TODO bug: jeśli liczba jest dobra to trzeba zablokować żeby można było
-        //  dodać jeszcze raz bo znikają liczby i są punkty, więc pewnie oprócz clicable = false to dodać brak zmiany czy coś idk
+        //  dodać jeszcze raz bo znikają liczby i są punkty, więc pewnie oprócz clicable = false to dodać brak zmiany czy coś
+        //  idk ale przy hincie jest to samo ze dodaje punkty i niszczy liczby z dołu
 
 
         // clearing the field
@@ -389,6 +388,7 @@ class GameActivity : AppCompatActivity() {
 
     // Saving instance of data
     override fun onSaveInstanceState(outState: Bundle) {
+        saveTheData()
         super.onSaveInstanceState(outState)
         Log.i("SAVE","WORKS")
 //        var btn: Button
@@ -407,7 +407,7 @@ class GameActivity : AppCompatActivity() {
 //        outState.putInt("points", points)
 //        outState.putInt("timer", timeTEST)
         // TODO save and restore czas i inne pierdoły i cały board też przy finishActivity do poprawy chyba idk
-        onPause()
+
 
     }
 
@@ -415,6 +415,7 @@ class GameActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState);
         Log.i("RESTORE","WORKS")
+        recreatePreviousGame()
 //        val miss = savedInstanceState.getInt("mistakes",0)
 //        val po = savedInstanceState.getInt("points",0)
 ////        timeTEST = savedInstanceState.getInt("timer", 0)
@@ -538,8 +539,12 @@ class GameActivity : AppCompatActivity() {
         Log.i("recreated", "dwa")
         val gson = Gson()
         val json = sp.getString("sudoku","")
+
+        // without it could be crash at next line ( sudoku must be initialized)
+        sudoku = Sudoku(sizeOfSudoku, missingNumbers)
+
         sudoku = if (json != ""){
-            gson.fromJson(json, sudoku.javaClass)
+            gson.fromJson(json, sudoku::class.java)
         } else {
             Sudoku(sizeOfSudoku, missingNumbers)
         }
@@ -561,12 +566,18 @@ class GameActivity : AppCompatActivity() {
         super.onStop()
     }
 
+    override fun onDestroy() {
+        saveTheData()
+        super.onDestroy()
+    }
+
 
 
     private fun saveTheData(){
+        isGameOver = false
         val sp: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
         val spe: SharedPreferences.Editor = sp.edit()
-
+//        spe.clear()
         // store the data
         spe.putBoolean("isgameover", isGameOver)
         spe.putString("difficulty", difficulty)
@@ -578,6 +589,7 @@ class GameActivity : AppCompatActivity() {
         val json: String = gson.toJson(sudoku)
         spe.putString("sudoku", json)
         spe.apply()
+
     }
 
 

@@ -1,8 +1,6 @@
 package com.example.enqer.sudoku
 
 
-
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -119,7 +117,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        recreate()
+        startActivity(intent)
     }
 
 }
