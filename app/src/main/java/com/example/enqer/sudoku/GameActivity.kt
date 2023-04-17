@@ -57,20 +57,15 @@ class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_game)
-//        setContentView(binding.root)
 
         isGameOver = false
         Log.i("TEST///", "TETST")
         timerTextView= findViewById(R.id.timer)
-//        content()
 
         // time service
         serviceIntent = Intent(applicationContext, TimerService::class.java)
         registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
-//        startTimer()
 
 
         // SheredPreference dark mode
@@ -117,18 +112,15 @@ class GameActivity : AppCompatActivity() {
         // Back to Home button
         val backToHomeBtn: ImageButton = findViewById(R.id.backToHome)
         backToHomeBtn.setOnClickListener{
-
             saveTheData()
             finish()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            //TODO tutaj można zapisać dane z gry jak ktoś wychodzi (metoda i w niej to zrobić)
-            // Wywołać jakaś inną metodę i tak samo z onDestroy() tam też wtedy wywołać funkcje tą samą i będzie git
         }
 
 
 
-
+        // TODO bug podświetlania kiedy zła liczba jest i kliknie się na dobrą to źle podświetla chyba git działa???
         // TODO PODświetlanie do poprawy przy zmianie motywu
         // TODO baza danych tylko dla statystyk??? chyba ta
         // TODO Zakończenie gry
@@ -145,22 +137,15 @@ class GameActivity : AppCompatActivity() {
             }
         }
 
-        //TODO przetestować czy jak klikniemy w notatki przy ostatnim numerze to zniknie cyz nie
-        // setting notes
         val notes: LinearLayout = findViewById(R.id.notes)
         notes.setOnClickListener{
             isNotesMode = !isNotesMode  // true - is in notes mode
             for (i in 1..9){
                 val id = resources.getIdentifier("num$i", "id", packageName)
                 val btn: Button = findViewById(id)
-                if (isNotesMode){
-                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
-                } else{
-                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.granat))
-
-                }
+                if (isNotesMode) btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+                else btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.granat))
             }
-
         }
 
         // getting hint
@@ -189,10 +174,8 @@ class GameActivity : AppCompatActivity() {
                     btn.text = ""
                     btn.isClickable = false
                 }
-
             }
         }
-
     }
 
     // selecting the fields to set a colors
@@ -249,13 +232,11 @@ class GameActivity : AppCompatActivity() {
         }
         // set a color to pointed button
         pointedBtn.setBackgroundResource(R.drawable.border_marked_one)
-
     }
 
 
     fun selectNumber(view: View){
         val btnNumber: Button = findViewById(view.id);
-//        var tag: String
         if (isPointedBtnInit){  // if button is initialized then we can do some things
             if (isNotesMode && sudoku.mat[x][y].toString() != pointedBtn.text.toString()){
                 // Only when the hasnt good value
@@ -322,8 +303,6 @@ class GameActivity : AppCompatActivity() {
                         }
                     }
                     pointedBtn.setBackgroundResource(R.drawable.border_marked_one)
-
-
                     sudoku.mat[x][y] = pointedBtn.text.toString().toInt()
 
                     // Checking if number is printed 9 times and then disappear
@@ -333,10 +312,16 @@ class GameActivity : AppCompatActivity() {
                         btnNumber.text = ""
                         btnNumber.isClickable = false
                     }
-
-                    if (sudoku.fullMat contentEquals sudoku.mat) {
+                    if (sudoku.fullMat.contentDeepEquals(sudoku.mat)) {
                         Log.i("WINNER", "Smiga")
                         isGameOver = true
+                        val intent = Intent(this, ResultActivity::class.java)
+                        intent.putExtra("difficulty", difficulty)
+                        intent.putExtra("mistakes", mistakes)
+                        intent.putExtra("points", points)
+                        intent.putExtra("time", time)
+
+                        startActivity(intent);
                     // TODO winner
                     // nowe activity tak samo przy przegranej i tam pokazuje wynik albo coś
                     // zapis do bazy danych żeby pamiętać wyniki i dla statystyk
@@ -348,11 +333,17 @@ class GameActivity : AppCompatActivity() {
                         val miss: TextView = findViewById(R.id.mistakes)
                         miss.text = "$mistakes/3"
                         pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake))
-
                         if (mistakes == 3) {
                             //TODO przegrana koniec gry do zrobienia
                             isGameOver = true
                             Log.i("LOSER", "Smiga")
+                            val intent = Intent(this, ResultActivity::class.java)
+                            intent.putExtra("difficulty", difficulty)
+                            intent.putExtra("mistakes", mistakes)
+                            intent.putExtra("points", points)
+                            intent.putExtra("time", time)
+
+                            startActivity(intent);
                         }
                     }
                 }
@@ -479,21 +470,6 @@ class GameActivity : AppCompatActivity() {
 
     private fun makeTimeString(hours: Int, minutes: Int, seconds: Int): String = String.format("%02d:%02d:%02d", hours, minutes, seconds)
 
-//    private fun content(){
-//        timerTextView.text = timeTEST.toString()
-//        timer(1000)
-//    }
-
-//    private fun timer(milisec: Int = 1000){
-//        // Counting a time
-//        Handler(Looper.getMainLooper()).postDelayed({
-//
-//            timeTEST++
-////            content()
-//            timerTextView.text = getTimeStringFromDouble(timeTEST.toDouble())
-//            timer(milisec)
-//        }, milisec.toLong())
-//    }
 
     // creating new game
     private fun createNewGame(intent: Intent){
@@ -596,7 +572,6 @@ class GameActivity : AppCompatActivity() {
         }
 
 
-
     }
 
     override fun onPause() {
@@ -613,13 +588,6 @@ class GameActivity : AppCompatActivity() {
         saveTheData()
         super.onDestroy()
     }
-
-    // returns id of element by String id
-
-//    private fun getIDbyStringID(s: String): Int{
-//        return resources.getIdentifier(s, "id", packageName)
-//    }
-
 
     // Saving data from board
     private fun saveTheData(){

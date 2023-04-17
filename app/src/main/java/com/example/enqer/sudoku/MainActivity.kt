@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 //        if (isPreviousGameOver && previousGame.visibility == View.VISIBLE || !isPreviousGameOver && previousGame.visibility == View.INVISIBLE )
 //            recreate()
 
-
+        // TODO  dorobić zeby było pokazane ile czasu tam było i jaka trudność albo coś
         previousGame.setOnClickListener{
             createNewGame = false
             val intent: Intent = Intent(this@MainActivity, GameActivity::class.java)

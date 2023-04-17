@@ -4,6 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResultActivity">
+    tools:context=".ResultActivity"
+    android:background="@drawable/backgrond_result"
+    >
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="Wygrałeś!"
+        android:textSize="50sp"
+        android:textColor="#0097fe"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="50dp"
+        android:text="Podsumowanie gry:"
+        android:textColor="@color/granat"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        style="@style/result_linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+        <TextView
+            android:id="@+id/textView14"
+            style="@style/result_textView"
+            android:text="Trudność:" />
+
+        <TextView
+            android:id="@+id/difficultyText"
+            style="@style/result_textView"
+            android:gravity="right"
+            android:text="Łatwa" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        style="@style/result_linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <TextView
+            android:id="@+id/textView16"
+            style="@style/result_textView"
+            android:text="Błędy:" />
+
+        <TextView
+            android:id="@+id/mistakesText"
+            style="@style/result_textView"
+            android:gravity="right"
+            android:text="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        style="@style/result_linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+        <TextView
+            android:id="@+id/textView18"
+            style="@style/result_textView"
+            android:text="Punkty:" />
+
+        <TextView
+            android:id="@+id/pointsText"
+            style="@style/result_textView"
+            android:gravity="right"
+            android:text="2137" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        style="@style/result_linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <TextView
+            android:id="@+id/textView20"
+            style="@style/result_textView"
+            android:text="Czas:" />
+
+        <TextView
+            android:id="@+id/timeText"
+            style="@style/result_textView"
+            android:gravity="right"
+            android:text="00:31:45" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/toHomeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/newWhite"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:text="Powrót do ekranu głównego"
+        android:padding="20dp"
+        android:background="@drawable/background_btn_gradient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
