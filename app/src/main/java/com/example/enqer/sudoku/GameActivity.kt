@@ -1,14 +1,12 @@
 package com.example.enqer.sudoku
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.*
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.*
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -153,8 +151,7 @@ class GameActivity : AppCompatActivity() {
         notes.setOnClickListener{
             isNotesMode = !isNotesMode  // true - is in notes mode
             for (i in 1..9){
-//                val id = resources.getIdentifier("num$i", "id", packageName)
-                val id = getIDbyName("num$i")
+                val id = resources.getIdentifier("num$i", "id", packageName)
                 val btn: Button = findViewById(id)
                 if (isNotesMode){
                     btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
@@ -187,8 +184,10 @@ class GameActivity : AppCompatActivity() {
                 // Checking if number is printed 9 times and then disappear
                 countNumbers[sudoku.mat[x][y] - 1]++
                 if (countNumbers[sudoku.mat[x][y] - 1] == 9) {
-                    btnNumber.text = ""
-                    btnNumber.isClickable = false
+                    val id = resources.getIdentifier("num${sudoku.mat[x][y]}", "id", packageName)
+                    val btn: Button = findViewById(id)
+                    btn.text = ""
+                    btn.isClickable = false
                 }
 
             }
@@ -615,10 +614,14 @@ class GameActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun getIDbyName(s: String): Int{ return resources.getIdentifier(s, "id", packageName) }
+    // returns id of element by String id
+
+//    private fun getIDbyStringID(s: String): Int{
+//        return resources.getIdentifier(s, "id", packageName)
+//    }
 
 
-
+    // Saving data from board
     private fun saveTheData(){
         stopTimer()
 
