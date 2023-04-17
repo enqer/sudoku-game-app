@@ -58,7 +58,8 @@ class MainActivity : AppCompatActivity() {
         previousGame.setOnClickListener{
             createNewGame = false
             val intent: Intent = Intent(this@MainActivity, GameActivity::class.java)
-            intent.putExtra("createNewGame", createNewGame)
+//            intent.putExtra("createNewGame", createNewGame)
+            sharedPrefsEdit.putBoolean("createNewGame", createNewGame)
             startActivity(intent)
         }
 
@@ -105,7 +106,8 @@ class MainActivity : AppCompatActivity() {
                 // changing activity
                 val intent: Intent = Intent(this@MainActivity, GameActivity::class.java)
                 intent.putExtra("diff", diff)
-                intent.putExtra("createNewGame", createNewGame)
+//                intent.putExtra("createNewGame", createNewGame)
+                sharedPrefsEdit.putBoolean("createNewGame", createNewGame)
                 startActivity(intent)
 
                 true

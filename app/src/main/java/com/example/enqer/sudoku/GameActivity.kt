@@ -18,7 +18,7 @@ import kotlin.math.roundToInt
 class GameActivity : AppCompatActivity() {
     companion object{
 
-        var isNewGame = true
+//        var isNewGame = true
 
         @SuppressLint("StaticFieldLeak")
         lateinit var pointedBtn: Button // the button which is selected
@@ -59,11 +59,12 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        isGameOver = false
+//        isGameOver = false
         Log.i("TEST///", "TETST")
-        timerTextView= findViewById(R.id.timer)
+
 
         // time service
+        timerTextView= findViewById(R.id.timer)
         serviceIntent = Intent(applicationContext, TimerService::class.java)
         registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
 
@@ -96,14 +97,15 @@ class GameActivity : AppCompatActivity() {
 
         // passing data between activities
         val intent = intent
-        isNewGame = intent.getBooleanExtra("createNewGame", true)
+//        var isNewGame = intent.getBooleanExtra("createNewGame", true)
+        val isNewGame = appSettingPref.getBoolean("createNewGame", true)
+
+
 
         if (isNewGame){
-            //TODO jeśli nowa gra to wszystko trzeba wyzerować i wszystko jest od nowa
             createNewGame(intent)
-
+            sharedPrefsEdit.putBoolean("createNewGame", false)
         } else{
-            // TODO jeśli stara gra to przywracamy wszystko z sharedpreferencess
             recreatePreviousGame()
         }
 
@@ -406,9 +408,10 @@ class GameActivity : AppCompatActivity() {
 
     // Restoring instance of data
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState);
+        super.onRestoreInstanceState(savedInstanceState)
         Log.i("RESTORE","WORKS")
-        recreatePreviousGame()
+//        startActivity(intent)
+//        recreatePreviousGame()
 //        val miss = savedInstanceState.getInt("mistakes",0)
 //        val po = savedInstanceState.getInt("points",0)
 ////        timeTEST = savedInstanceState.getInt("timer", 0)
@@ -501,14 +504,8 @@ class GameActivity : AppCompatActivity() {
         // creating object of the game
         sudoku = Sudoku(sizeOfSudoku, missingNumbers)
 
-//        // setting time
-//        serviceIntent = Intent(applicationContext, TimerService::class.java)
-//        registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
-//        startTimer()
-//        content()
         Log.i("Jeszcze ","raz")
-        // timer default value is 1000 = 1 sec
-//        timer()
+
         // printing the board
         printSudoku()
 
@@ -608,7 +605,6 @@ class GameActivity : AppCompatActivity() {
         val json: String = gson.toJson(sudoku)
         spe.putString("sudoku", json)
         spe.apply()
-
     }
 
 
