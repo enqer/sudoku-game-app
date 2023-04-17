@@ -132,10 +132,6 @@ class GameActivity : AppCompatActivity() {
 
 
         // TODO PODświetlanie do poprawy przy zmianie motywu
-        // TODO zrobić liczenie czasu i wyświetlić go
-        // TODO przycisk z wróceniem do poprzedniego activity finishActivity() na onclicku ale trzeba zapisać stan
-        // TODO do powyższego zapisać stan w sharedpref i wtedy sprawdzać i chyba pobierać z db dane z ostatniej gry
-        // TODO do powyższego albo w ssharedpref trzymać dane z gry + zmienna isGame i sprawdzać jak jest to jest btn i można wrócić
         // TODO baza danych tylko dla statystyk??? chyba ta
         // TODO Zakończenie gry
         // TODO wyświetlic informacje że nie można już zmienić znaku który jest gites przy wszystkich funkcjach lul
@@ -157,7 +153,8 @@ class GameActivity : AppCompatActivity() {
         notes.setOnClickListener{
             isNotesMode = !isNotesMode  // true - is in notes mode
             for (i in 1..9){
-                val id = resources.getIdentifier("num$i", "id", packageName)
+//                val id = resources.getIdentifier("num$i", "id", packageName)
+                val id = getIDbyName("num$i")
                 val btn: Button = findViewById(id)
                 if (isNotesMode){
                     btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
@@ -170,7 +167,6 @@ class GameActivity : AppCompatActivity() {
         }
 
         // getting hint
-        // TODO img z 1 po kliknieciu i pokazaniu hint zmienić src na img z 0 że 0 podpowiedzi już jest
         val hint: LinearLayout = findViewById(R.id.hint)
         hint.setOnClickListener {
             if (isPointedBtnInit && hints == 1 && sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
@@ -188,12 +184,19 @@ class GameActivity : AppCompatActivity() {
                 hints--
                 hint.isClickable = false
 
+                // Checking if number is printed 9 times and then disappear
+                countNumbers[sudoku.mat[x][y] - 1]++
+                if (countNumbers[sudoku.mat[x][y] - 1] == 9) {
+                    btnNumber.text = ""
+                    btnNumber.isClickable = false
+                }
+
             }
         }
 
     }
 
-    // selecting the fileds to set a colors
+    // selecting the fields to set a colors
     fun selectField(view: View) {
             pointedBtn = findViewById(view.id);
             val tag: String = pointedBtn.tag.toString()
@@ -406,7 +409,7 @@ class GameActivity : AppCompatActivity() {
 //        outState.putInt("miastakes", mistakes)
 //        outState.putInt("points", points)
 //        outState.putInt("timer", timeTEST)
-        // TODO save and restore czas i inne pierdoły i cały board też przy finishActivity do poprawy chyba idk
+
 
 
     }
@@ -423,7 +426,6 @@ class GameActivity : AppCompatActivity() {
 //        var btn: Button
 //        var id: Int
 //        Log.i("SAVE","TESTHEHEHEHEHEHE")
-//        // TODO Saving and restoring object and onRestore printSudoku()??
 //        var index = 0
 //        for (i in coords) {
 //            for (j in 1..9) {
@@ -539,7 +541,6 @@ class GameActivity : AppCompatActivity() {
 
     // creating previous saved game
     private fun recreatePreviousGame(){
-        // TODO from sharedpreferences setup the game
         Log.i("recreated", "jeden")
         val sp: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
 
@@ -580,8 +581,6 @@ class GameActivity : AppCompatActivity() {
         difTextView.text = difficulty
         misTextView.text = "$mistakes/3"
         pointsTextView.text = points.toString()
-        // TODO czas do poprawy
-        // TODO do zrobienia hint
 
 
         val hint: LinearLayout = findViewById(R.id.hint)
@@ -615,6 +614,8 @@ class GameActivity : AppCompatActivity() {
         saveTheData()
         super.onDestroy()
     }
+
+    private fun getIDbyName(s: String): Int{ return resources.getIdentifier(s, "id", packageName) }
 
 
 
