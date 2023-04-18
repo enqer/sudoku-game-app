@@ -1,13 +1,16 @@
 package com.example.enqer.sudoku.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.enqer.sudoku.MainActivity
 import com.example.enqer.sudoku.R
 import com.example.enqer.sudoku.databinding.FragmentStatsBinding
 
@@ -42,6 +45,14 @@ class PlaceholderFragment : Fragment() {
         pageViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+//        // button home onclick changing layout
+//        val home = binding.toHome as LinearLayout
+//        home.setOnClickListener {
+//            val intent = Intent(activity?.baseContext, MainActivity::class.java)
+//            activity?.startActivity(intent)
+//        }
+
         return root
     }
 

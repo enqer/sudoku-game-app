@@ -63,12 +63,12 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        // button home onclick changing layout
-        val homeLayout = findViewById<View>(R.id.home) as LinearLayout
-        homeLayout.setOnClickListener {
-            val b: Button = findViewById(R.id.button);
-            b.text = "ewqeqw"
-        }
+//        // button home onclick changing layout
+//        val homeLayout = findViewById<View>(R.id.home) as LinearLayout
+//        homeLayout.setOnClickListener {
+//            val b: Button = findViewById(R.id.button);
+//            b.text = "ewqeqw"
+//        }
 
         // button home onclick changing activity
         val statsLayout = findViewById<View>(R.id.stats) as LinearLayout

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Sudoku</string>
-    <string name="title_activity_stats">StatsActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_stats">Statystyki</string>
+    <string name="tab_text_1">Łatwe</string>
+    <string name="tab_text_2">Średnie</string>
+    <string name="tab_text_3">Trudne</string>
 </resources>
