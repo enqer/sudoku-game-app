@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-<!--    Theme.Sudoku // DarkActionBar-->
-<!--    Theme.MaterialComponents.DayNight.DarkActionBar-->
-<!--    Theme.AppCompat.Light.NoActionBar-->
+    <!--    Theme.Sudoku // DarkActionBar-->
+    <!--    Theme.MaterialComponents.DayNight.DarkActionBar-->
+    <!--    Theme.AppCompat.Light.NoActionBar-->
     <style name="Theme.Sudoku" parent="Theme.AppCompat.Light.NoActionBar">
 
-<!--        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>-->
+        <!--        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>-->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/newBlue</item>
@@ -20,8 +20,6 @@
         <!-- Customize your theme here. -->
 
 
-
-
     </style>
 
 
@@ -29,8 +27,17 @@
         <item name="android:background">@color/black</item>
 
     </style>
-<!--    <style name="WindowAnimationTransition">-->
-<!--        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>-->
-<!--        <item name="android:windowExitAnimation">@android:anim/fade_out</item>-->
-<!--    </style>-->
+
+    <style name="Theme.Sudoku.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Sudoku.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Sudoku.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!--    <style name="WindowAnimationTransition">-->
+    <!--        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>-->
+    <!--        <item name="android:windowExitAnimation">@android:anim/fade_out</item>-->
+    <!--    </style>-->
 </resources>

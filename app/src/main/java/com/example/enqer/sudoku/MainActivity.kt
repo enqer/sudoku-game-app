@@ -51,8 +51,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//        if (isPreviousGameOver && previousGame.visibility == View.VISIBLE || !isPreviousGameOver && previousGame.visibility == View.INVISIBLE )
-//            recreate()
 
         // TODO  dorobić zeby było pokazane ile czasu tam było i jaka trudność albo coś
         previousGame.setOnClickListener{
@@ -75,8 +73,10 @@ class MainActivity : AppCompatActivity() {
         // button home onclick changing activity
         val statsLayout = findViewById<View>(R.id.stats) as LinearLayout
         statsLayout.setOnClickListener {
-            val b: Button = findViewById(R.id.backToGame);
-            b.text = "ewqeqw"
+//            val b: Button = findViewById(R.id.backToGame);
+//            b.text = "ewqeqw"
+            val intent = Intent(this, StatsActivity::class.java)
+            startActivity(intent)
         }
 
 
