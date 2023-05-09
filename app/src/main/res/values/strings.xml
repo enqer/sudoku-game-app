@@ -12,4 +12,7 @@
     <string name="winner">Wygrałeś!</string>
     <string name="loser">Przegrałeś!</string>
     <string name="backToHome">Zamknij</string>
+    <string name="easy">Łatwa</string>
+    <string name="medium">Średnia</string>
+    <string name="hard">Trudna</string>
 </resources>

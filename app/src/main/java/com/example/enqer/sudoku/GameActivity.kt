@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.example.enqer.sudoku.databinding.ActivityMainBinding
+import com.example.enqer.sudoku.sqlite.SQLiteManager
 import com.google.gson.Gson
 import kotlin.math.roundToInt
 
@@ -50,7 +51,7 @@ class GameActivity : AppCompatActivity() {
         var timeTEST = 0
 
     }
-
+    private lateinit var sqLiteManager: SQLiteManager
     private var isWinner = false
 
     // timer stuff
@@ -63,7 +64,7 @@ class GameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-
+        sqLiteManager = SQLiteManager(this)
 //        isGameOver = false
         Log.i("TEST///", "TETST")
 
@@ -375,6 +376,12 @@ class GameActivity : AppCompatActivity() {
         val dialog: Dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_result)
+        val diff = when (difficulty){
+            resources.getString(R.string.easy) -> "easy"
+            resources.getString(R.string.medium) -> "medium"
+            resources.getString(R.string.hard) -> "hard"
+            else -> "unknown"
+        }
 
         val difficultyText: TextView = dialog.findViewById(R.id.difficultyText)
         val mistakesText: TextView = dialog.findViewById(R.id.mistakesText)
@@ -386,10 +393,14 @@ class GameActivity : AppCompatActivity() {
         mistakesText.text = mistakes.toString()
         pointsText.text = points.toString()
         timeText.text = timerTextView.text
-        if (isWinner)
+        if (isWinner){
             winner.text = resources.getString(R.string.winner)
-        else
+            sqLiteManager.insertStat("winner", diff, mistakes, points, time)
+        }
+        else{
             winner.text = resources.getString(R.string.loser)
+            sqLiteManager.insertStat("loser", diff, mistakes, points, time)
+        }
         toHomeBtn.setOnClickListener {
             dialog.dismiss()
         }
