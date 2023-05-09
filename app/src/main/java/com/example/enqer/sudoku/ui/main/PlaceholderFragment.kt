@@ -46,12 +46,6 @@ class PlaceholderFragment : Fragment() {
             textView.text = it
         })
 
-//        // button home onclick changing layout
-//        val home = binding.toHome as LinearLayout
-//        home.setOnClickListener {
-//            val intent = Intent(activity?.baseContext, MainActivity::class.java)
-//            activity?.startActivity(intent)
-//        }
 
         return root
     }

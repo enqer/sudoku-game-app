@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ResultActivity"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    >
+
+    <TextView
+        android:id="@+id/winner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/winner"
+        android:textSize="40sp"
+        android:textColor="@color/newBlue"
+        android:textStyle="bold"
+ />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/resultsGame"
+        android:textColor="@color/granat"
+        android:textSize="24sp"
+ />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        style="@style/result_linearLayout">
+
+        <TextView
+            android:id="@+id/textView14"
+            style="@style/result_textView"
+            android:text="@string/difficulty" />
+
+        <TextView
+            android:id="@+id/difficultyText"
+            style="@style/result_textView"
+            android:gravity="end" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        style="@style/result_linearLayout"
+>
+
+        <TextView
+            android:id="@+id/textView16"
+            style="@style/result_textView"
+            android:text="@string/mistakes" />
+
+        <TextView
+            android:id="@+id/mistakesText"
+            style="@style/result_textView"
+            android:gravity="end" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        style="@style/result_linearLayout"
+>
+
+        <TextView
+            android:id="@+id/textView18"
+            style="@style/result_textView"
+            android:text="@string/points" />
+
+        <TextView
+            android:id="@+id/pointsText"
+            style="@style/result_textView"
+            android:gravity="end" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        style="@style/result_linearLayout"
+>
+
+        <TextView
+            android:id="@+id/textView20"
+            style="@style/result_textView"
+            android:text="@string/time" />
+
+        <TextView
+            android:id="@+id/timeText"
+            style="@style/result_textView"
+            android:gravity="end"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/toHomeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/newWhite"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:text="@string/backToHome"
+        android:padding="16dp"
+        android:background="@drawable/background_btn_gradient"
+         />
+
+</LinearLayout>

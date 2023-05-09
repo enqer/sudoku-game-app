@@ -9,11 +9,15 @@
 
 
 
-        <gradient
-            android:startColor="#0097fe"
-            android:centerColor="#07baca"
-            android:endColor="#1adb9a"
-            android:angle="0"/>
+<!--        <gradient-->
+<!--            android:startColor="#0097fe"-->
+<!--            android:centerColor="#07baca"-->
+<!--            android:endColor="#1adb9a"-->
+<!--            android:angle="0"/>-->
+    <gradient
+        android:startColor="@color/newBlue"
+        android:endColor="@color/newBlue"
+        android:angle="0"/>
 
     <padding
         android:left="5dp"
@@ -21,10 +25,10 @@
         android:right="5dp"
         android:bottom="5dp"/>
     <corners
-        android:bottomRightRadius="30dp"
-        android:bottomLeftRadius="30dp"
-        android:topLeftRadius="30dp"
-        android:topRightRadius="30dp"/>
+        android:bottomRightRadius="0dp"
+        android:bottomLeftRadius="0dp"
+        android:topLeftRadius="0dp"
+        android:topRightRadius="0dp"/>
 </shape>
 
 

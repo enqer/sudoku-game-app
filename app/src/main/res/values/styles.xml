@@ -20,8 +20,9 @@
 
     </style>
 
-    <style name="ThemeOverlay.MyPopupTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ThemeOverlay.MyPopupTheme" parent="Theme.Sudoku">
 <!--        Widget.AppCompat.PopupMenu-->
+        <item name="android:background">@color/newBlue</item>
     </style>
 
     <style name="Style.PopupMenu" parent="Theme.Sudoku">
@@ -127,13 +128,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/newBlue</item>
+        <item name="android:textColor">@color/darkBlue</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="result_linearLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_marginTop">15dp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:background">@drawable/background_underline</item>
     </style>

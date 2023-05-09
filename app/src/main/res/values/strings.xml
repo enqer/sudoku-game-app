@@ -4,4 +4,12 @@
     <string name="tab_text_1">Łatwe</string>
     <string name="tab_text_2">Średnie</string>
     <string name="tab_text_3">Trudne</string>
+    <string name="difficulty">Trudność:</string>
+    <string name="mistakes">Błędy:</string>
+    <string name="points">Punkty:</string>
+    <string name="time">Czas:</string>
+    <string name="resultsGame">Podsumowanie gry:</string>
+    <string name="winner">Wygrałeś!</string>
+    <string name="loser">Przegrałeś!</string>
+    <string name="backToHome">Zamknij</string>
 </resources>

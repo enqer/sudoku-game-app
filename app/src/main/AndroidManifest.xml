@@ -19,7 +19,7 @@
             android:name=".StatsActivity"
             android:exported="false"
             android:label="@string/title_activity_stats"
-            android:theme="@style/Theme.Sudoku.NoActionBar" />
+            android:theme="@style/Theme.Sudoku" />
         <activity
             android:name=".ResultActivity"
             android:exported="false" />

@@ -1,11 +1,13 @@
 package com.example.enqer.sudoku
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.*
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -48,6 +50,9 @@ class GameActivity : AppCompatActivity() {
         var timeTEST = 0
 
     }
+
+    private var isWinner = false
+
     // timer stuff
     private lateinit var binding: ActivityMainBinding
     private var timerStarted = false
@@ -317,16 +322,8 @@ class GameActivity : AppCompatActivity() {
                     if (sudoku.fullMat.contentDeepEquals(sudoku.mat)) {
                         Log.i("WINNER", "Smiga")
                         isGameOver = true
-                        val intent = Intent(this, ResultActivity::class.java)
-                        intent.putExtra("difficulty", difficulty)
-                        intent.putExtra("mistakes", mistakes)
-                        intent.putExtra("points", points)
-                        intent.putExtra("time", time)
-
-                        startActivity(intent);
-                    // TODO winner
-                    // nowe activity tak samo przy przegranej i tam pokazuje wynik albo coś
-                    // zapis do bazy danych żeby pamiętać wyniki i dla statystyk
+                        isWinner = true
+                        showResults()
                     }
                 } else {
                     if (sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
@@ -336,16 +333,10 @@ class GameActivity : AppCompatActivity() {
                         miss.text = "$mistakes/3"
                         pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake))
                         if (mistakes == 3) {
-                            //TODO przegrana koniec gry do zrobienia
                             isGameOver = true
+                            isWinner = false
+                            showResults()
                             Log.i("LOSER", "Smiga")
-                            val intent = Intent(this, ResultActivity::class.java)
-                            intent.putExtra("difficulty", difficulty)
-                            intent.putExtra("mistakes", mistakes)
-                            intent.putExtra("points", points)
-                            intent.putExtra("time", time)
-
-                            startActivity(intent);
                         }
                     }
                 }
@@ -378,6 +369,37 @@ class GameActivity : AppCompatActivity() {
             }
             k++
         }
+    }
+
+    private fun showResults(){
+        val dialog: Dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_result)
+
+        val difficultyText: TextView = dialog.findViewById(R.id.difficultyText)
+        val mistakesText: TextView = dialog.findViewById(R.id.mistakesText)
+        val pointsText: TextView = dialog.findViewById(R.id.pointsText)
+        val timeText: TextView = dialog.findViewById(R.id.timeText)
+        val winner: TextView = dialog.findViewById(R.id.winner)
+        val toHomeBtn: Button = dialog.findViewById(R.id.toHomeBtn)
+        difficultyText.text = difficulty
+        mistakesText.text = mistakes.toString()
+        pointsText.text = points.toString()
+        timeText.text = timerTextView.text
+        if (isWinner)
+            winner.text = resources.getString(R.string.winner)
+        else
+            winner.text = resources.getString(R.string.loser)
+        toHomeBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+        dialog.setOnDismissListener {
+            finish()
+            val changeIntent = Intent(this, MainActivity::class.java)
+            startActivity(changeIntent)
+        }
+        //TODO database
     }
 
 
