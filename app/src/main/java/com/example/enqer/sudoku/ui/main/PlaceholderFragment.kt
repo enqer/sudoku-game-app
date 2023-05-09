@@ -46,10 +46,10 @@ class PlaceholderFragment : Fragment() {
         sqLiteManager = SQLiteManager(this.requireContext())
         val a = sqLiteManager.getGamesPlayedByDifficulty("Trudna")
         Log.d("ileGierhehehe", a.toString())
-        val textView: TextView = binding.sectionLabel
-        pageViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.sectionLabel
+//        pageViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
 
 
         return root

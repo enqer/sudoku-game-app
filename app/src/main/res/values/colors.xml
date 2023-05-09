@@ -22,4 +22,6 @@
     <color name="littleBlack">#1B1A1A</color>
     <color name="yellow">#FFEB3B</color>
     <color name="same">#86BABE</color>
+    <color name="grely">#656262</color>
+    <color name="myLightGray">#D4D9DB</color>
 </resources>

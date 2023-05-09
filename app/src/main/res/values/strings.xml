@@ -15,4 +15,16 @@
     <string name="easy">Łatwa</string>
     <string name="medium">Średnia</string>
     <string name="hard">Trudna</string>
+    <string name="games">Gry</string>
+    <string name="startedGames">Rozpoczęte gry</string>
+    <string name="winnerGames">Wygrane gry</string>
+    <string name="percentGames">Współczynnik zwycięstw</string>
+    <string name="pointsGames">Punkty</string>
+    <string name="maxPointsGame">Najwięcej zdobytych punktów</string>
+    <string name="avgPointsGame">Średnie punkty na grę</string>
+    <string name="mistakesGame">Błędy</string>
+    <string name="avgMistakesGame">Współczynnik błędów</string>
+    <string name="timeGame">Czas</string>
+    <string name="bestTimeGame">Najlepszy czas</string>
+    <string name="avgTimeGame">Średni czas</string>
 </resources>
