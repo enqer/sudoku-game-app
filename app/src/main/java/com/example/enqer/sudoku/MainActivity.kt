@@ -1,25 +1,28 @@
 package com.example.enqer.sudoku
 
 
-import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.ContextThemeWrapper
+import android.view.Gravity
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.PopupMenu
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 
 
 class MainActivity : AppCompatActivity() {
 
-    var createNewGame = true
+    var createNewGame = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,38 +86,61 @@ class MainActivity : AppCompatActivity() {
         // button onclick starting new game
         val newGame: Button = findViewById(R.id.button);
         newGame.setOnClickListener {
-            // style of popup menu to new game
-            val wrapper: Context = ContextThemeWrapper(this@MainActivity, R.style.Style_PopupMenu)
+            val dialog: Dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.menu_new_game)
+            val window: Window = dialog.window!!
+            val wlp = window.attributes
+            wlp.gravity = Gravity.BOTTOM
+            wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+            window.attributes = wlp
+            window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            window.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL)
+            window.setDimAmount(0.3f)
+            var choice: String = "Łatwy"
+            val easyGame: TextView = dialog.findViewById(R.id.newGameEasy)
+            val mediumGame: TextView = dialog.findViewById(R.id.newGameMedium)
+            val hardGame: TextView = dialog.findViewById(R.id.newGameHard)
 
-            val popup = PopupMenu(wrapper, newGame)
-
-            popup.menuInflater.inflate(R.menu.menu_game, popup.menu)
-            var diff: String = "Łatwy"
-            popup.setOnMenuItemClickListener { item ->
-                //                    Toast.makeText(
-                //                        this@MainActivity,
-                //                        "You Clicked : " + item.getTitle(),
-                //                        Toast.LENGTH_SHORT
-                //                    ).show()
-                diff = when (item.title) {
-                    "Łatwy" -> "Łatwy"
-                    "Średni" -> "Średni"
-                    "Trudny" -> "Trudny"
-                    else -> "Łatwy"
-                }
+            easyGame.setOnClickListener {
+                choice = "Łatwy"
                 createNewGame = true
-                // changing activity
-                val intent: Intent = Intent(this@MainActivity, GameActivity::class.java)
-                intent.putExtra("diff", diff)
-//                intent.putExtra("createNewGame", createNewGame)
+                window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                dialog.dismiss()
+                createGame(choice)
                 sharedPrefsEdit.putBoolean("createNewGame", createNewGame)
-                startActivity(intent)
-
-                true
             }
-            popup.show()
+            mediumGame.setOnClickListener {
+                choice = "Średni"
+                createNewGame = true
+                window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                dialog.dismiss()
+                sharedPrefsEdit.putBoolean("createNewGame", createNewGame)
+                createGame(choice)
+            }
+            hardGame.setOnClickListener {
+                choice = "Trudny"
+                createNewGame = true
+                window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                dialog.dismiss()
+                sharedPrefsEdit.putBoolean("createNewGame", createNewGame)
+                createGame(choice)
+            }
+
+            dialog.create()
+            dialog.show()
+            dialog.setOnDismissListener {
+                dialog.dismiss()
+            }
+
         }
 
+    }
+
+    private fun createGame(choice: String) {
+        val intent: Intent = Intent(this@MainActivity, GameActivity::class.java)
+        intent.putExtra("diff", choice)
+        startActivity(intent)
     }
 
     override fun onRestart() {

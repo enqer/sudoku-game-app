@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/background_menu"
+    >
+
+    <TextView
+        android:id="@+id/newGameEasy"
+        style="@style/home_newGame_textview"
+        android:minHeight="48dp"
+        android:text="@string/easy" />
+
+    <TextView
+        android:id="@+id/newGameMedium"
+        style="@style/home_newGame_textview"
+        android:background="@drawable/border_menu"
+        android:minHeight="48dp"
+        android:text="@string/medium" />
+
+    <TextView
+        android:id="@+id/newGameHard"
+        style="@style/home_newGame_textview"
+        android:minHeight="48dp"
+        android:text="@string/hard" />
+</LinearLayout>

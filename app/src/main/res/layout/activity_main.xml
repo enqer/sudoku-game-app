@@ -57,7 +57,7 @@
             style="@style/home_button"
             android:layout_marginBottom="10dp"
             android:background="@drawable/background_btn"
-            android:text="Back to game"
+            android:text="@string/back_to_game"
             android:textColor="@color/newBlue"
 
             app:backgroundTint="@color/newWhite"
@@ -71,7 +71,7 @@
             style="@style/home_button"
             android:layout_marginBottom="150dp"
             android:background="@drawable/background_btn"
-            android:text="New game"
+            android:text="@string/new_game"
             android:textColor="@color/newWhite"
 
             app:backgroundTint="@color/newBlue"
@@ -92,9 +92,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
             android:orientation="horizontal"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,12 +101,13 @@
             <LinearLayout
                 android:id="@+id/home"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:gravity="center"
                 android:minHeight="48dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:focusable="true">
 
                 <ImageView
                     android:id="@+id/imageButton"
@@ -119,19 +118,20 @@
                 <TextView
                     android:id="@+id/textView"
                     style="@style/home_menu_textview"
-                    android:text="Home"
+                    android:text="@string/home"
                     android:textColor="#1976D2" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/stats"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:gravity="center"
                 android:minHeight="48dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:focusable="true">
 
                 <ImageView
                     android:id="@+id/imageButton3"
@@ -142,7 +142,7 @@
                 <TextView
                     android:id="@+id/textView6"
                     style="@style/home_menu_textview"
-                    android:text="Statistics"
+                    android:text="@string/statistics"
                     android:textColor="#1976D2" />
             </LinearLayout>
         </LinearLayout>

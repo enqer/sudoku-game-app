@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:minHeight="?actionBarSize"
+            android:minHeight="50dp"
             android:padding="@dimen/appbar_padding"
             android:text="@string/title_activity_stats"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
@@ -24,7 +24,10 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabIndicatorHeight="3dp"
+            />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -36,31 +39,23 @@
 
     </androidx.viewpager.widget.ViewPager>
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        android:layout_marginEnd="@dimen/fab_margin"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        app:srcCompat="@android:drawable/ic_dialog_email" />-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_gravity="bottom|end"
         android:orientation="horizontal"
-        android:padding="10dp"
         android:id="@+id/te">
 
         <LinearLayout
             android:id="@+id/toHome"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
             android:minHeight="48dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/imageButton"
@@ -71,19 +66,20 @@
             <TextView
                 android:id="@+id/textView"
                 style="@style/home_menu_textview"
-                android:text="Home"
+                android:text="@string/home"
                 android:textColor="#1976D2" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/toStats"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
             android:minHeight="48dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/imageButton3"
@@ -94,7 +90,7 @@
             <TextView
                 android:id="@+id/textView6"
                 style="@style/home_menu_textview"
-                android:text="Statistics"
+                android:text="@string/statistics"
                 android:textColor="#1976D2" />
         </LinearLayout>
     </LinearLayout>

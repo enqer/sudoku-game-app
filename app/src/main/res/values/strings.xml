@@ -27,4 +27,9 @@
     <string name="timeGame">Czas</string>
     <string name="bestTimeGame">Najlepszy czas</string>
     <string name="avgTimeGame">Średni czas</string>
+    <string name="statistics">Statystyki</string>
+    <string name="home">Ekran główny</string>
+    <string name="new_game">Nowa gra</string>
+    <string name="back_to_game">Powrót do gry</string>
+    <string name="reset_stats">Zresetuj statystyki</string>
 </resources>

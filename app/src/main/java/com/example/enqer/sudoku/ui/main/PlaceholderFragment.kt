@@ -44,8 +44,8 @@ class PlaceholderFragment : Fragment() {
         _binding = FragmentStatsBinding.inflate(inflater, container, false)
         val root = binding.root
         sqLiteManager = SQLiteManager(this.requireContext())
-        val a = sqLiteManager.getGamesPlayedByDifficulty("Trudna")
-        Log.d("ileGierhehehe", a.toString())
+        binding.startedGames.text = sqLiteManager.getGamesPlayedByDifficulty("Trudna").toString()
+
 //        val textView: TextView = binding.sectionLabel
 //        pageViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
