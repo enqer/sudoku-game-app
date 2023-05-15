@@ -63,15 +63,7 @@ class MainActivity : AppCompatActivity() {
             sharedPrefsEdit.putBoolean("createNewGame", createNewGame)
             startActivity(intent)
         }
-
-
-
-//        // button home onclick changing layout
-//        val homeLayout = findViewById<View>(R.id.home) as LinearLayout
-//        homeLayout.setOnClickListener {
-//            val b: Button = findViewById(R.id.button);
-//            b.text = "ewqeqw"
-//        }
+        
 
         // button home onclick changing activity
         val statsLayout = findViewById<View>(R.id.stats) as LinearLayout
@@ -89,13 +81,13 @@ class MainActivity : AppCompatActivity() {
             val dialog: Dialog = Dialog(this)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.menu_new_game)
+            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent);
             val window: Window = dialog.window!!
             val wlp = window.attributes
             wlp.gravity = Gravity.BOTTOM
             wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
             window.attributes = wlp
             window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-            window.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL)
             window.setDimAmount(0.3f)
             var choice: String = "Łatwy"
             val easyGame: TextView = dialog.findViewById(R.id.newGameEasy)
@@ -126,13 +118,9 @@ class MainActivity : AppCompatActivity() {
                 sharedPrefsEdit.putBoolean("createNewGame", createNewGame)
                 createGame(choice)
             }
-
             dialog.create()
             dialog.show()
-            dialog.setOnDismissListener {
-                dialog.dismiss()
-            }
-
+            dialog.setCanceledOnTouchOutside(true);
         }
 
     }
