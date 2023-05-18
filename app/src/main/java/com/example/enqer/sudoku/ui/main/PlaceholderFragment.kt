@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.example.enqer.sudoku.databinding.FragmentStatsBinding
+import com.example.enqer.sudoku.interfaces.TimeFormatter
 import com.example.enqer.sudoku.sqlite.SQLiteManager
 import kotlin.math.roundToInt
 
@@ -88,10 +89,11 @@ class PlaceholderFragment : Fragment() {
             binding.avgMistakesGames.text = if (mistakes == 0) "0" else String.format("%.1f",(mistakes.toDouble()/games.toDouble()))
             binding.maxPointsGames.text = if (games == 0) "0" else mostPoints.toString()
             binding.avgPointsGames.text =  if (allPoints == 0) "0" else String.format("%.1f",(allPoints.toDouble()/wins.toDouble()))
-            binding.bestTimeGames.text = if (bestTime.toInt() == 0) "0" else getTimeStringFromDouble(bestTime.toDouble())
-            binding.avgTimeGames.text = if (avgTime.toInt() == 0) "0" else getTimeStringFromDouble((avgTime.toDouble()/wins.toDouble()))
+            binding.bestTimeGames.text = if (bestTime.toInt() == 0) "0" else TimeFormatter.getTimeStringFromDouble(bestTime.toDouble())
+            binding.avgTimeGames.text = if (avgTime.toInt() == 0) "0" else TimeFormatter.getTimeStringFromDouble((avgTime.toDouble()/wins.toDouble()))
         }catch (e: Exception){
             e.printStackTrace()
+
         }
 
 //        val textView: TextView = binding.sectionLabel
@@ -149,16 +151,5 @@ class PlaceholderFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    private fun getTimeStringFromDouble(time: Double): String {
-        val resultInt = time.roundToInt()
-        val hours = resultInt % 86400 / 3600
-        val minutes = resultInt % 86400 % 3600 / 60
-        val seconds = resultInt % 86400 % 3600 % 60
-        return makeTimeString(hours, minutes, seconds)
-    }
-
-    private fun makeTimeString(hours: Int, minutes: Int, seconds: Int): String = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-
 
 }

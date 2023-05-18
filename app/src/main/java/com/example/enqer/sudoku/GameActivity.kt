@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.example.enqer.sudoku.databinding.ActivityMainBinding
+import com.example.enqer.sudoku.interfaces.TimeFormatter
 import com.example.enqer.sudoku.sqlite.SQLiteManager
 import com.google.gson.Gson
 import kotlin.math.roundToInt
@@ -461,19 +462,19 @@ class GameActivity : AppCompatActivity() {
         override fun onReceive(p0: Context?, p1: Intent) {
             time = p1.getDoubleExtra(TimerService.TIME_EXTRA, 0.0)
 //            val timerTextView: TextView = findViewById(R.id.timer)
-            timerTextView.text = getTimeStringFromDouble(time)
+            timerTextView.text = TimeFormatter.getTimeStringFromDouble(time)
         }
     }
 
-    private fun getTimeStringFromDouble(time: Double): String {
-        val resultInt = time.roundToInt()
-        val hours = resultInt % 86400 / 3600
-        val minutes = resultInt % 86400 % 3600 / 60
-        val seconds = resultInt % 86400 % 3600 % 60
-        return makeTimeString(hours, minutes, seconds)
-    }
-
-    private fun makeTimeString(hours: Int, minutes: Int, seconds: Int): String = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+//    private fun getTimeStringFromDouble(time: Double): String {
+//        val resultInt = time.roundToInt()
+//        val hours = resultInt % 86400 / 3600
+//        val minutes = resultInt % 86400 % 3600 / 60
+//        val seconds = resultInt % 86400 % 3600 % 60
+//        return makeTimeString(hours, minutes, seconds)
+//    }
+//
+//    private fun makeTimeString(hours: Int, minutes: Int, seconds: Int): String = String.format("%02d:%02d:%02d", hours, minutes, seconds)
 
 
     // creating new game

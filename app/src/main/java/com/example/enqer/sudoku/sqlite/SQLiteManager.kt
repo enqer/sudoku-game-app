@@ -21,7 +21,6 @@ class SQLiteManager(context: Context)
         private const val TIME= "time"
     }
 
-
     override fun onCreate(db: SQLiteDatabase?) {
         // creating stats table
         val createTableCashify = ("CREATE TABLE "+ TABLE_NAME + "("
@@ -33,12 +32,10 @@ class SQLiteManager(context: Context)
                 + TIME + " DOUBLE " + ")")
         db?.execSQL(createTableCashify)
     }
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
-
     // name = name of table
     fun insertStat(isWinner: String, difficulty: String, mistakes: Int,points: Int, time: Double ): Long{
         val db = this.writableDatabase
@@ -54,7 +51,6 @@ class SQLiteManager(context: Context)
         db.close()
         return success
     }
-
     // returns number of games
     fun getGamesPlayedByDifficulty(diff: String): Int{
         val selectQuery = "SELECT COUNT(*) FROM $TABLE_NAME WHERE $DIFFICULTY='$diff'"
@@ -106,7 +102,6 @@ class SQLiteManager(context: Context)
         }
         return 0
     }
-
     // returns most points
     fun getMostPoints(diff: String): Int{
         val selectQuery = "SELECT MAX($POINTS) FROM $TABLE_NAME WHERE $DIFFICULTY='$diff' AND $ISWINNER='winner'"
@@ -124,7 +119,6 @@ class SQLiteManager(context: Context)
         }
         return 0
     }
-
     // returns all Points
     fun getAllPoints(diff: String): Int{
         val selectQuery = "SELECT SUM($POINTS) FROM $TABLE_NAME WHERE $DIFFICULTY='$diff' AND $ISWINNER='winner'"
@@ -159,7 +153,6 @@ class SQLiteManager(context: Context)
         }
         return 0
     }
-
     // returns all Points
     fun getAvgTime(diff: String): Long{
         val selectQuery = "SELECT SUM($TIME) FROM $TABLE_NAME WHERE $DIFFICULTY='$diff' AND $ISWINNER='winner'"
@@ -177,8 +170,6 @@ class SQLiteManager(context: Context)
         }
         return 0
     }
-
-
     // reset statistics
     fun deleteStats(diff: String): Int{
         val db = this.writableDatabase
@@ -188,5 +179,4 @@ class SQLiteManager(context: Context)
         db.close()
         return success
     }
-
 }
