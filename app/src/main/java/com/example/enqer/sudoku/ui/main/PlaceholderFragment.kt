@@ -62,10 +62,14 @@ class PlaceholderFragment : Fragment() {
                 Log.d("gry", sqLiteManager.getGamesPlayedByDifficulty(EASY).toString())
                 wins = sqLiteManager.getGamesByDifficulty(EASY, "winner")
                 mistakes = sqLiteManager.getAvgMistakes(EASY)
+                mostPoints = sqLiteManager.getMostPoints(EASY)
+                allPoints = sqLiteManager.getAllPoints(EASY)
                 binding.startedGames.text = games.toString()
                 binding.winnerGames.text = wins.toString()
                 binding.percentGames.text = (wins/games).toString()
                 binding.avgMistakesGames.text = (mistakes/games).toString()
+                binding.maxPointsGames.text = mostPoints.toString()
+                binding.avgPointsGames.text = (allPoints.toDouble()/games.toDouble()).toString()
             }else{
                 binding.winnerGames.text = "4"
             }

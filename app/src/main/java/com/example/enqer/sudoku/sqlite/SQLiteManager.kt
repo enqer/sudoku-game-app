@@ -107,6 +107,41 @@ class SQLiteManager(context: Context)
         return 0
     }
 
+    // returns most points
+    fun getMostPoints(diff: String): Int{
+        val selectQuery = "SELECT MAX($POINTS) FROM $TABLE_NAME WHERE $DIFFICULTY='$diff'"
+        val db = this.readableDatabase
+        val cursor: Cursor?
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception){
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return 0
+        }
+        if (cursor.moveToFirst()){
+            return cursor.getInt(0)
+        }
+        return 0
+    }
+
+    // returns all Points
+    fun getAllPoints(diff: String): Int{
+        val selectQuery = "SELECT SUM($POINTS) FROM $TABLE_NAME WHERE $DIFFICULTY='$diff'"
+        val db = this.readableDatabase
+        val cursor: Cursor?
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception){
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return 0
+        }
+        if (cursor.moveToFirst()){
+            return cursor.getInt(0)
+        }
+        return 0
+    }
 
 
 
