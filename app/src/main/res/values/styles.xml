@@ -9,7 +9,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/newBlue</item>
+        <item name="android:textColor">?attr/custom19</item>
         <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">@font/wixmadeforybold</item>
     </style>
@@ -61,7 +61,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/newWhite</item>
+        <item name="android:textColor">?attr/custom15</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/wixmadeforybold</item>
     </style>
@@ -79,7 +79,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColor">?attr/custom7</item>
         <item name="android:textSize">16sp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:fontFamily">@font/wixmadeforybold</item>
@@ -92,7 +92,7 @@
         <item name="android:background">@drawable/border</item>
         <item name="android:onClick">selectField</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/littleBlack</item>
+        <item name="android:textColor">?attr/custom11</item>
         <item name="layout_rowWeight">1</item>
         <item name="layout_columnWeight">1</item>
         <item name="android:fontFamily">@font/wixmadeforybold</item>
@@ -125,7 +125,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/darkBlue</item>
+        <item name="android:textColor">?attr/custom5</item>
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/wixmadeforybold</item>
     </style>
@@ -134,7 +134,7 @@
     <style name="game_numbers_button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/granat</item>
+        <item name="android:textColor">?attr/custom6</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:layout_margin">0dp</item>
         <item name="android:layout_weight">1</item>
@@ -150,7 +150,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/darkBlue</item>
+        <item name="android:textColor">?attr/custom5</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/wixmadeforybold</item>
     </style>
@@ -170,7 +170,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">?attr/custom17</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:fontFamily">@font/wixmadeforybold</item>

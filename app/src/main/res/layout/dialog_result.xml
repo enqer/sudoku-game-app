@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     tools:context=".ResultActivity"
     android:orientation="vertical"
-    android:layout_margin="10dp"
+    android:layout_margin="30dp"
+    android:background="?attr/custom18"
     >
 
     <TextView
@@ -16,7 +17,7 @@
         android:layout_gravity="center"
         android:text="@string/winner"
         android:textSize="40sp"
-        android:textColor="@color/newBlue"
+        android:textColor="?attr/custom2"
         android:textStyle="bold"
  />
 
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/resultsGame"
-        android:textColor="@color/granat"
+        android:textColor="?attr/custom6"
         android:textSize="24sp"
  />
 
@@ -98,7 +99,7 @@
         android:id="@+id/toHomeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/newWhite"
+        android:textColor="?attr/custom1"
         android:textSize="18sp"
         android:textAllCaps="false"
         android:textStyle="bold"

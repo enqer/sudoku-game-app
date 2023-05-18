@@ -25,4 +25,6 @@
     <color name="greyly">#656262</color>
     <color name="myLightGray">#D4D9DB</color>
     <color name="brown">#421406</color>
+    <color name="darkerBlue">#1976D2</color>
+    <color name="achivments">#000000</color>
 </resources>

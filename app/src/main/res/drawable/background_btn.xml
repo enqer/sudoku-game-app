@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/newBlue">
-        <solid android:background="@color/newBlue"/>
+    android:background="?attr/custom2">
+        <solid android:background="?attr/custom2"/>
 
     <stroke
         android:width="3dp"
-        android:color="@color/newBlue"/>
+        android:color="?attr/custom2"/>
 
 
 

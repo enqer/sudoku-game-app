@@ -1,4 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <attr name="custom1" format="reference|color"/>
+    <attr name="custom2" format="reference|color"/>
+    <attr name="custom3" format="reference|color"/>
+    <attr name="custom4" format="reference|color"/>
+    <attr name="custom5" format="reference|color"/>
+    <attr name="custom6" format="reference|color"/>
+    <attr name="custom7" format="reference|color"/>
+    <attr name="custom8" format="reference|color"/>
+    <attr name="custom9" format="reference|color"/>
+    <attr name="custom10" format="reference|color"/>
+    <attr name="custom11" format="reference|color"/>
+    <attr name="custom12" format="reference|color"/>
+    <attr name="custom13" format="reference|color"/>
+    <attr name="custom14" format="reference|color"/>
+    <attr name="custom15" format="reference|color"/>
+    <attr name="custom16" format="reference|color"/>
+    <attr name="custom17" format="reference|color"/>
+    <attr name="custom18" format="reference|color"/>
+    <attr name="custom19" format="reference|color"/>
+    <attr name="custom20" format="reference|color"/>
+    <attr name="custom21" format="reference|color"/>
+
     <!-- Base application theme. -->
     <!--    Theme.Sudoku // DarkActionBar-->
     <!--    Theme.MaterialComponents.DayNight.DarkActionBar-->
@@ -18,6 +40,27 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
         <!-- Customize your theme here. -->
+        <item name="custom1">@color/newWhite</item>
+        <item name="custom2">@color/newBlue</item>
+        <item name="custom3">@color/littleBlue</item>
+        <item name="custom4">@color/pointedBtn</item>
+        <item name="custom5">@color/darkBlue</item>
+        <item name="custom6">@color/granat</item>
+        <item name="custom7">@color/grey</item>
+        <item name="custom8">@color/border</item>
+        <item name="custom9">@color/backgroundC</item>
+        <item name="custom10">@color/mistake</item>
+        <item name="custom11">@color/littleBlack</item>
+        <item name="custom12">@color/yellow</item>
+        <item name="custom13">@color/same</item>
+        <item name="custom14">@color/greyly</item>
+        <item name="custom15">@color/myLightGray</item>
+        <item name="custom16">@color/brown</item>
+        <item name="custom17">@color/black</item>
+        <item name="custom18">@color/white</item>
+        <item name="custom19">@color/darkerBlue</item>
+        <item name="custom20">@color/achivments</item>
+        <item name="custom21">@color/black</item>
 
 
     </style>

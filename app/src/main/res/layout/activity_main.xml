@@ -50,11 +50,11 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/background_back_game"
             android:text="@string/back_to_game"
-            android:textColor="@color/newWhite"
+            android:textColor="?attr/custom1"
             android:textStyle="bold"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/newBlue"
+            app:backgroundTint="?attr/custom2"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,8 +79,8 @@
             android:layout_marginBottom="150dp"
             android:background="@drawable/background_btn"
             android:text="@string/new_game"
-            android:textColor="@color/newBlue"
-            app:backgroundTint="@color/newWhite"
+            android:textColor="?attr/custom2"
+            app:backgroundTint="?attr/custom1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -88,7 +88,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:background="@color/white"
+        android:background="?attr/custom18"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -124,9 +124,7 @@
                 <TextView
                     android:id="@+id/textView"
                     style="@style/home_menu_textview"
-                    android:text="@string/home"
-
-                    android:textColor="#1976D2" />
+                    android:text="@string/home" />
             </LinearLayout>
 
             <LinearLayout
@@ -150,7 +148,7 @@
                     android:id="@+id/textView6"
                     style="@style/home_menu_textview"
                     android:text="@string/statistics"
-                    android:textColor="#1976D2" />
+                     />
             </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

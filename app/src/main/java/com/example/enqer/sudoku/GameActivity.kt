@@ -133,16 +133,7 @@ class GameActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
-        // TODO bug podświetlania kiedy zła liczba jest i kliknie się na dobrą to źle podświetla chyba git działa???
-        // TODO PODświetlanie do poprawy przy zmianie motywu
-        // TODO baza danych tylko dla statystyk??? chyba ta
-        // TODO Zakończenie gry
-        // TODO wyświetlic informacje że nie można już zmienić znaku który jest gites przy wszystkich funkcjach lul
-        // TODO bug kiedy jest 8 liczb i damy hint to nie usunie danej liczby z dołu
-
-
+        // TODO time crashing??
 
         // clearing the field
         val clear: LinearLayout = findViewById(R.id.clear)
@@ -276,23 +267,13 @@ class GameActivity : AppCompatActivity() {
                 // notes has a different styles
                 pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
                 pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
-
-                // 2 space between letter(number) and 2 space instead of letter(number)
-                //TODO dodać spacje między cyframi
                 var notesBtn = ""
                 // print the note in the field
-                var counter = 0
-                for (i in notes){
-//                    if (i == " "){
-//                        notesBtn += '\u00A0'
-//                    } else{
-//                        notesBtn += i
-//                    }
-                    notesBtn += i
+                for ((counter, i) in notes.withIndex()){
+                    notesBtn += "$i "
                     if (counter == 2 || counter == 5){
                         notesBtn += "\n"
                     }
-                    counter++
                 }
                 pointedBtn.text = notesBtn
 //               }
@@ -313,7 +294,7 @@ class GameActivity : AppCompatActivity() {
                             id = resources.getIdentifier("$i$j", "id", packageName)
                             btn = findViewById(id)
                             if (pointedBtn.text == btn.text && btn.text != ""){
-                                btn.setBackgroundResource(R.drawable.border_marked_same)
+                                btn.setBackgroundResource(R.drawable.border_marked_one)
                             }
                         }
                     }
@@ -419,7 +400,6 @@ class GameActivity : AppCompatActivity() {
 
             startActivity(changeIntent)
         }
-        //TODO database
     }
 
 
