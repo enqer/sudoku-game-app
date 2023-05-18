@@ -52,18 +52,34 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             tools:ignore="HardcodedText" />
 
-        <Button
+        <LinearLayout
             android:id="@+id/backToGame"
-            style="@style/home_button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/background_btn"
+            android:background="@drawable/background_back_game"
             android:text="@string/back_to_game"
             android:textColor="@color/newWhite"
             android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
             app:backgroundTint="@color/newBlue"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView28"
+                style="@style/home_backGame_text"
+                android:text="@string/back_to_game"/>
+
+            <TextView
+                android:id="@+id/infoBackGame"
+                style="@style/home_backGame_text"
+                android:textSize="14sp"
+            />
+        </LinearLayout>
 
         <Button
 
@@ -73,7 +89,6 @@
             android:background="@drawable/background_btn"
             android:text="@string/new_game"
             android:textColor="@color/newBlue"
-            android:textStyle="bold"
             app:backgroundTint="@color/newWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

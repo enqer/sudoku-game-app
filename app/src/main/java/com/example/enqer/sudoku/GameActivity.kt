@@ -595,6 +595,11 @@ class GameActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+    override fun onBackPressed() {
+        saveTheData()
+        super.onBackPressed()
+    }
+
     // Saving data from board
     private fun saveTheData(){
         stopTimer()

@@ -47,13 +47,21 @@
 
     <style name="home_button">
         <item name="android:textColor">@color/newWhite</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:padding">15dp</item>
         <item name="android:layout_width">250dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
-
+    <style name="home_backGame_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/newWhite</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 <!--    GAME ACTIVITY -->
     <style name="game_bar_button">

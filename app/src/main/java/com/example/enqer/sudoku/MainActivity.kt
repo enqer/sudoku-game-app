@@ -15,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.enqer.sudoku.interfaces.TimeFormatter
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,12 +41,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         // previous game button
-        val previousGame: Button = findViewById(R.id.backToGame)
+        val previousGame: LinearLayout = findViewById(R.id.backToGame)
 
         if (isPreviousGameOver){
             previousGame.visibility = View.INVISIBLE
         } else {
             previousGame.visibility = View.VISIBLE
+            val timePrevGame = appSettingPref.getLong("time", 0)
+            val difPrevGame = appSettingPref.getString("difficulty", "Łatwa")
+            val infoBackGame: TextView = findViewById(R.id.infoBackGame)
+            infoBackGame.text = "$difPrevGame ∙ ${TimeFormatter.getTimeStringFromDouble(timePrevGame.toDouble())}"
         }
 
 
