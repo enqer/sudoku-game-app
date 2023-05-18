@@ -399,6 +399,7 @@ class GameActivity : AppCompatActivity() {
         mistakesText.text = mistakes.toString()
         pointsText.text = points.toString()
         timeText.text = timerTextView.text
+        Log.d("timererere", time.toString())
         if (isWinner){
             winner.text = resources.getString(R.string.winner)
             sqLiteManager.insertStat("winner", diff, mistakes, points, time)

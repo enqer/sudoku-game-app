@@ -15,6 +15,7 @@ import com.example.enqer.sudoku.MainActivity
 import com.example.enqer.sudoku.R
 import com.example.enqer.sudoku.databinding.FragmentStatsBinding
 import com.example.enqer.sudoku.sqlite.SQLiteManager
+import kotlin.math.roundToInt
 
 /**
  * A placeholder fragment containing a simple view.
@@ -50,26 +51,32 @@ class PlaceholderFragment : Fragment() {
         binding.startedGames.text = sqLiteManager.getGamesPlayedByDifficulty("Trudna").toString()
 
 
-        Log.d("test",arguments?.getInt(ARG_SECTION_NUMBER).toString())
+//        Log.d("test",arguments?.getInt(ARG_SECTION_NUMBER).toString())
         var games: Int
         var wins: Int
         var mistakes: Int
         var mostPoints: Int
         var allPoints: Int
+        var bestTime: Long
+        var avgTime: Long
         try {
             if (arguments?.getInt(ARG_SECTION_NUMBER) == 1){
                 games = sqLiteManager.getGamesPlayedByDifficulty(EASY)
-                Log.d("gry", sqLiteManager.getGamesPlayedByDifficulty(EASY).toString())
-                wins = sqLiteManager.getGamesByDifficulty(EASY, "winner")
+                wins = sqLiteManager.getWinGamesByDifficulty(EASY)
                 mistakes = sqLiteManager.getAvgMistakes(EASY)
                 mostPoints = sqLiteManager.getMostPoints(EASY)
                 allPoints = sqLiteManager.getAllPoints(EASY)
+                bestTime = sqLiteManager.getBestTime(EASY)
+                avgTime = sqLiteManager.getAvgTime(EASY)
+                Log.d("gry", sqLiteManager.getAvgTime(EASY).toString())
                 binding.startedGames.text = games.toString()
                 binding.winnerGames.text = wins.toString()
                 binding.percentGames.text = (wins/games).toString()
                 binding.avgMistakesGames.text = (mistakes/games).toString()
                 binding.maxPointsGames.text = mostPoints.toString()
-                binding.avgPointsGames.text = (allPoints.toDouble()/games.toDouble()).toString()
+                binding.avgPointsGames.text =  String.format("%.1f",(allPoints.toDouble()/games.toDouble()))
+                binding.bestTimeGames.text = getTimeStringFromDouble(bestTime.toDouble())
+                binding.avgTimeGames.text = getTimeStringFromDouble((avgTime.toDouble()/wins.toDouble()))
             }else{
                 binding.winnerGames.text = "4"
             }
@@ -78,9 +85,9 @@ class PlaceholderFragment : Fragment() {
         }
 
 //        val textView: TextView = binding.sectionLabel
-        pageViewModel.text.observe(viewLifecycleOwner, Observer {
-            it
-        })
+//        pageViewModel.text.observe(viewLifecycleOwner, Observer {
+//            it
+//        })
 
 
 
@@ -112,4 +119,16 @@ class PlaceholderFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun getTimeStringFromDouble(time: Double): String {
+        val resultInt = time.roundToInt()
+        val hours = resultInt % 86400 / 3600
+        val minutes = resultInt % 86400 % 3600 / 60
+        val seconds = resultInt % 86400 % 3600 % 60
+        return makeTimeString(hours, minutes, seconds)
+    }
+
+    private fun makeTimeString(hours: Int, minutes: Int, seconds: Int): String = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+
+
 }

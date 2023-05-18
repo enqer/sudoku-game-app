@@ -12,10 +12,10 @@ import com.example.enqer.sudoku.sqlite.SQLiteManager
 class PageViewModel : ViewModel() {
 
     private val _index = MutableLiveData<Int>()
-    val text: LiveData<String> = Transformations.map(_index) {
-        "Hello world from section: $it"
-        Log.d("text", it.toString()).toString()
-    }
+//    val text: LiveData<String> = Transformations.map(_index) {
+//        "Hello world from section: $it"
+//        Log.d("text", it.toString()).toString()
+//    }
 
     fun setIndex(index: Int) {
         _index.value = index
