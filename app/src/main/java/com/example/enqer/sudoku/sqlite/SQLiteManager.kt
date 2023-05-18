@@ -72,6 +72,7 @@ class SQLiteManager(context: Context)
         }
         return 0
     }
+    // returns number of winner/loser game
     fun getGamesByDifficulty(diff: String, iswinner: String): Int{
         val selectQuery = "SELECT COUNT(*) FROM $TABLE_NAME WHERE $DIFFICULTY='$diff' AND $ISWINNER='$iswinner'"
         val db = this.readableDatabase
@@ -88,6 +89,24 @@ class SQLiteManager(context: Context)
         }
         return 0
     }
+    // returns avg mistakes per game
+    fun getAvgMistakes(diff: String): Int{
+        val selectQuery = "SELECT SUM($MISTAKES) FROM $TABLE_NAME WHERE $DIFFICULTY='$diff'"
+        val db = this.readableDatabase
+        val cursor: Cursor?
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: Exception){
+            e.printStackTrace()
+            db.execSQL(selectQuery)
+            return 0
+        }
+        if (cursor.moveToFirst()){
+            return cursor.getInt(0)
+        }
+        return 0
+    }
+
 
 
 

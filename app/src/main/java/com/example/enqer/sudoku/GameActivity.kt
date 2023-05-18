@@ -67,8 +67,14 @@ class GameActivity : AppCompatActivity() {
         sqLiteManager = SQLiteManager(this)
 //        isGameOver = false
         Log.i("TEST///", "TETST")
+//        savedInstanceState.
 
-
+//        if (savedInstanceState != null){
+//            finish();
+//            overridePendingTransition(0, 0);
+//            startActivity(intent);
+//            overridePendingTransition(0, 0);
+//        }
         // time service
         timerTextView= findViewById(R.id.timer)
         serviceIntent = Intent(applicationContext, TimerService::class.java)
@@ -103,8 +109,8 @@ class GameActivity : AppCompatActivity() {
 
         // passing data between activities
         val intent = intent
-//        var isNewGame = intent.getBooleanExtra("createNewGame", true)
-        val isNewGame = appSettingPref.getBoolean("createNewGame", true)
+        var isNewGame = intent.getBooleanExtra("createNewGame", true)
+//        val isNewGame = appSettingPref.getBoolean("createNewGame", true)
 
 
 
@@ -408,6 +414,7 @@ class GameActivity : AppCompatActivity() {
         dialog.setOnDismissListener {
             finish()
             val changeIntent = Intent(this, MainActivity::class.java)
+
             startActivity(changeIntent)
         }
         //TODO database
@@ -418,53 +425,15 @@ class GameActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         saveTheData()
         super.onSaveInstanceState(outState)
-        Log.i("SAVE","WORKS")
-//        var btn: Button
-//        var id: Int
-//        val data = ArrayList<String>()
-
-//        for (i in coords) {
-//            for (j in 1..9) {
-//                id = resources.getIdentifier("$i$j", "id", packageName)
-//                btn = findViewById(id)
-//                data.add(btn.text.toString())
-//            }
-//        }
-//        outState.putStringArrayList("data", data)
-//        outState.putInt("miastakes", mistakes)
-//        outState.putInt("points", points)
-//        outState.putInt("timer", timeTEST)
-
-
-
     }
 
     // Restoring instance of data
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
+        recreatePreviousGame()
         Log.i("RESTORE","WORKS")
 //        startActivity(intent)
-//        recreatePreviousGame()
-//        val miss = savedInstanceState.getInt("mistakes",0)
-//        val po = savedInstanceState.getInt("points",0)
-////        timeTEST = savedInstanceState.getInt("timer", 0)
-//        val data = savedInstanceState.getStringArrayList("data") as ArrayList<String>
-//        var btn: Button
-//        var id: Int
-//        Log.i("SAVE","TESTHEHEHEHEHEHE")
-//        var index = 0
-//        for (i in coords) {
-//            for (j in 1..9) {
-//                id = resources.getIdentifier("$i$j", "id", packageName)
-//                btn = findViewById(id)
-//                btn.text = data[index].toString()
-//                index++
-//            }
-//        }
-//        val m: TextView = findViewById(R.id.mistakes)
-//        m.text = miss.toString()
-//        val p: TextView = findViewById(R.id.points)
-//        p.text = po.toString()
+
     }
 
     // maybe to delete maybe use to some new function
@@ -481,7 +450,6 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun startTimer(){
-
         serviceIntent.putExtra(TimerService.TIME_EXTRA, time)
         startService(serviceIntent)
         timerStarted = true
@@ -511,15 +479,19 @@ class GameActivity : AppCompatActivity() {
     private fun createNewGame(intent: Intent){
         // setting difficulty of the game
         difficulty = intent.getStringExtra("diff").toString()
-        if (difficulty == "Łatwy"){
-            missingNumbers = 40
-            difficulty = "Łatwa"
-        } else if (difficulty == "Średni"){
-            missingNumbers = 50
-            difficulty = "Średnia"
-        } else {
-            missingNumbers = 60
-            difficulty = "Trudna"
+        when (difficulty) {
+            "Łatwy" -> {
+                missingNumbers = 40
+                difficulty = "Łatwa"
+            }
+            "Średni" -> {
+                missingNumbers = 50
+                difficulty = "Średnia"
+            }
+            else -> {
+                missingNumbers = 60
+                difficulty = "Trudna"
+            }
         }
         val difficultyBtn: TextView = findViewById(R.id.difficultyBtn)
         difficultyBtn.text = difficulty
@@ -533,7 +505,6 @@ class GameActivity : AppCompatActivity() {
         timeTEST = 0
 
         startStopTimer()
-
         // creating object of the game
         sudoku = Sudoku(sizeOfSudoku, missingNumbers)
 
@@ -555,8 +526,10 @@ class GameActivity : AppCompatActivity() {
         iteratorPoints = sp.getInt("iteratorPoints", 1)
         hints = sp.getInt("hints", 1)
         time = sp.getLong("time", 0).toDouble()
+        timerStarted = sp.getBoolean("timeStarted", false)
 
         startStopTimer()
+        Log.d("timer", timerStarted.toString())
 
         Log.i("recreated", "dwa")
         val gson = Gson()
@@ -600,14 +573,15 @@ class GameActivity : AppCompatActivity() {
             // only one hint so off the button
             hint.isClickable = false
         }
-
-
     }
+
+
 
     override fun onPause() {
-        super.onPause()
         saveTheData()
+        super.onPause()
     }
+
 
     override fun onStop() {
         saveTheData()
@@ -627,6 +601,7 @@ class GameActivity : AppCompatActivity() {
         val spe: SharedPreferences.Editor = sp.edit()
 //        spe.clear()
         // store the data
+        Log.d("SAVEtheDATA", isGameOver.toString())
         spe.putBoolean("isgameover", isGameOver)
         spe.putString("difficulty", difficulty)
         spe.putInt("mistakes", mistakes)
@@ -634,13 +609,14 @@ class GameActivity : AppCompatActivity() {
         spe.putInt("iteratorPoints", iteratorPoints)
         spe.putInt("hints", hints)
         spe.putLong("time", time.toLong())
+        spe.putBoolean("timeStarted", timerStarted)
         val gson = Gson()
         val json: String = gson.toJson(sudoku)
         spe.putString("sudoku", json)
         spe.apply()
+        //TODO OnRestore time not working
+
     }
-
-
 }
 
 

@@ -1,5 +1,7 @@
 package com.example.enqer.sudoku.ui.main
 
+
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -12,7 +14,7 @@ class PageViewModel : ViewModel() {
     private val _index = MutableLiveData<Int>()
     val text: LiveData<String> = Transformations.map(_index) {
         "Hello world from section: $it"
-
+        Log.d("text", it.toString()).toString()
     }
 
     fun setIndex(index: Int) {

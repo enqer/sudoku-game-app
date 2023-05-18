@@ -61,7 +61,7 @@
                     <TextView
                         android:id="@+id/startedGames"
                         style="@style/stats_textview"
-                        android:text="1"
+                        android:text="@string/zero"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -88,7 +88,7 @@
                     <TextView
                         android:id="@+id/winnerGames"
                         style="@style/stats_textview"
-                        android:text="1"
+                        android:text="@string/zero"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -118,7 +118,7 @@
                     <TextView
                         android:id="@+id/percentGames"
                         style="@style/stats_textview"
-                        android:text="1"
+                        android:text="@string/zero"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -160,7 +160,7 @@
                     <TextView
                         android:id="@+id/avgMistakesGames"
                         style="@style/stats_textview"
-                        android:text="1"
+                        android:text="@string/zero"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -203,7 +203,7 @@
                     <TextView
                         android:id="@+id/maxPointsGames"
                         style="@style/stats_textview"
-                        android:text="1"
+                        android:text="@string/zero"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -233,7 +233,7 @@
                     <TextView
                         android:id="@+id/avgPointsGames"
                         style="@style/stats_textview"
-                        android:text="1"
+                        android:text="@string/zero"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -274,7 +274,7 @@
                     <TextView
                         android:id="@+id/bestTimeGames"
                         style="@style/stats_textview"
-                        android:text="1"
+                        android:text="@string/zero"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -304,7 +304,7 @@
                     <TextView
                         android:id="@+id/avgTimeGames"
                         style="@style/stats_textview"
-                        android:text="1"
+                        android:text="@string/zero"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

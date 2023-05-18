@@ -2,19 +2,16 @@ package com.example.enqer.sudoku
 
 
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.ContextThemeWrapper
 import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -59,11 +56,11 @@ class MainActivity : AppCompatActivity() {
         previousGame.setOnClickListener{
             createNewGame = false
             val intent: Intent = Intent(this@MainActivity, GameActivity::class.java)
-//            intent.putExtra("createNewGame", createNewGame)
-            sharedPrefsEdit.putBoolean("createNewGame", createNewGame)
+            intent.putExtra("createNewGame", createNewGame)
+//            sharedPrefsEdit.putBoolean("createNewGame", createNewGame)
             startActivity(intent)
         }
-        
+
 
         // button home onclick changing activity
         val statsLayout = findViewById<View>(R.id.stats) as LinearLayout

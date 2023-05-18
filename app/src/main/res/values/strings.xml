@@ -23,11 +23,12 @@
     <string name="maxPointsGame">Najwięcej zdobytych punktów</string>
     <string name="avgPointsGame">Średnie punkty na grę</string>
     <string name="mistakesGame">Błędy</string>
-    <string name="avgMistakesGame">Współczynnik błędów</string>
+    <string name="avgMistakesGame">Średnie błędy na grę</string>
     <string name="timeGame">Czas</string>
     <string name="bestTimeGame">Najlepszy czas</string>
     <string name="avgTimeGame">Średni czas</string>
     <string name="statistics">Statystyki</string>
+    <string name="zero">0</string>
     <string name="home">Ekran główny</string>
     <string name="new_game">Nowa gra</string>
     <string name="back_to_game">Powrót do gry</string>

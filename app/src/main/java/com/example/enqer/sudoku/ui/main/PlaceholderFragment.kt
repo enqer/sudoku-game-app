@@ -21,6 +21,9 @@ import com.example.enqer.sudoku.sqlite.SQLiteManager
  */
 class PlaceholderFragment : Fragment() {
 
+    private val EASY = "easy"
+    private val MEDIUM = "medium"
+    private val HARD = "hard"
     private lateinit var sqLiteManager: SQLiteManager
     private lateinit var pageViewModel: PageViewModel
     private var _binding: FragmentStatsBinding? = null
@@ -31,7 +34,7 @@ class PlaceholderFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pageViewModel = ViewModelProvider(this).get(PageViewModel::class.java).apply {
+        pageViewModel = ViewModelProvider(this)[PageViewModel::class.java].apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
     }
@@ -39,17 +42,42 @@ class PlaceholderFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentStatsBinding.inflate(inflater, container, false)
         val root = binding.root
         sqLiteManager = SQLiteManager(this.requireContext())
         binding.startedGames.text = sqLiteManager.getGamesPlayedByDifficulty("Trudna").toString()
 
+
+        Log.d("test",arguments?.getInt(ARG_SECTION_NUMBER).toString())
+        var games: Int
+        var wins: Int
+        var mistakes: Int
+        var mostPoints: Int
+        var allPoints: Int
+        try {
+            if (arguments?.getInt(ARG_SECTION_NUMBER) == 1){
+                games = sqLiteManager.getGamesPlayedByDifficulty(EASY)
+                Log.d("gry", sqLiteManager.getGamesPlayedByDifficulty(EASY).toString())
+                wins = sqLiteManager.getGamesByDifficulty(EASY, "winner")
+                mistakes = sqLiteManager.getAvgMistakes(EASY)
+                binding.startedGames.text = games.toString()
+                binding.winnerGames.text = wins.toString()
+                binding.percentGames.text = (wins/games).toString()
+                binding.avgMistakesGames.text = (mistakes/games).toString()
+            }else{
+                binding.winnerGames.text = "4"
+            }
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+
 //        val textView: TextView = binding.sectionLabel
-//        pageViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
+        pageViewModel.text.observe(viewLifecycleOwner, Observer {
+            it
+        })
+
 
 
         return root
