@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameActivity">
+    tools:context=".GameActivity"
+    android:layout_margin="5dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Sudoku"
+            android:fontFamily="@font/wixmadeforybold"
+            android:text="@string/sudoku"
             android:textColor="@color/granat"
             android:textSize="32sp"
             app:layout_constraintEnd_toStartOf="@+id/changeMode"
@@ -137,8 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:columnCount="3"
-        android:padding="1dp"
-        android:layout_margin="1dp"
+        android:padding="2dp"
         android:background="@drawable/border_table"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -726,6 +727,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -15,16 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/settings"
-            android:padding="10dp"
-            android:background="@android:color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_settings"
-            tools:ignore="SpeakableTextPresentCheck" />
+
 
         <ImageView
             android:id="@+id/imageView2"
@@ -43,7 +34,7 @@
             android:layout_height="wrap_content"
             android:text="Sudoku"
             android:textColor="#f000"
-
+            android:fontFamily="@font/wixmadeforybold"
             android:textSize="32sp"
 
 
@@ -134,6 +125,7 @@
                     android:id="@+id/textView"
                     style="@style/home_menu_textview"
                     android:text="@string/home"
+
                     android:textColor="#1976D2" />
             </LinearLayout>
 

@@ -171,7 +171,7 @@ class GameActivity : AppCompatActivity() {
                 // changing border
                 pointedBtn.setBackgroundResource(R.drawable.border_marked_hint)
                 pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
-                pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32F)
+                pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
                 sudoku.mat[x][y] = sudoku.fullMat[x][y]
 
                 //changing img of hint
@@ -208,7 +208,7 @@ class GameActivity : AppCompatActivity() {
                     id = resources.getIdentifier("$i$j", "id", packageName)
                     btn = findViewById(id)
                     if (pointedBtn.text == btn.text && btn.text != ""){
-                        btn.setBackgroundResource(R.drawable.border_marked_same)
+                        btn.setBackgroundResource(R.drawable.border_marked_one)
                     }else{
                         btn.setBackgroundResource(R.drawable.border)
                     }
@@ -275,7 +275,7 @@ class GameActivity : AppCompatActivity() {
 //               }
                 // notes has a different styles
                 pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
-                pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11F)
+                pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
 
                 // 2 space between letter(number) and 2 space instead of letter(number)
                 //TODO dodać spacje między cyframi
@@ -348,7 +348,7 @@ class GameActivity : AppCompatActivity() {
                         }
                     }
                 }
-                pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32F)
+                pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
             }
         }
     }
