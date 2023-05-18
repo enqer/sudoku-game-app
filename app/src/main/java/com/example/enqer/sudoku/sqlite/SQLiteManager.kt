@@ -179,11 +179,7 @@ class SQLiteManager(context: Context)
     }
 
 
-
-
-
-    //TODO DELETE TABLE jeśli chcemy wyczyścić statystyki onclick!!!
-
+    // reset statistics
     fun deleteStats(diff: String): Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()

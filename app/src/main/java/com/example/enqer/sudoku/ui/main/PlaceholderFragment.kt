@@ -1,22 +1,18 @@
 package com.example.enqer.sudoku.ui.main
 
-import android.content.Intent
+import android.app.AlertDialog
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.MediaController
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import com.example.enqer.sudoku.MainActivity
-import com.example.enqer.sudoku.R
 import com.example.enqer.sudoku.databinding.FragmentStatsBinding
 import com.example.enqer.sudoku.sqlite.SQLiteManager
 import kotlin.math.roundToInt
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -103,7 +99,27 @@ class PlaceholderFragment : Fragment() {
 //            it
 //        })
 
-
+        binding.deleteStats.setOnClickListener {
+            val dialog = AlertDialog.Builder(context)
+            dialog.setMessage("Czy na pewno chcesz zresetować statystyki?")
+            dialog.setPositiveButton("Tak") { p0, p1 ->
+                if (arguments?.getInt(ARG_SECTION_NUMBER) == 1)
+                    sqLiteManager.deleteStats(EASY)
+                else if (arguments?.getInt(ARG_SECTION_NUMBER) == 2)
+                    sqLiteManager.deleteStats(MEDIUM)
+                else if (arguments?.getInt(ARG_SECTION_NUMBER) == 3)
+                    sqLiteManager.deleteStats(HARD)
+                binding.startedGames.text = "0"
+                binding.winnerGames.text = "0"
+                binding.percentGames.text = "0"
+                binding.avgMistakesGames.text = "0"
+                binding.maxPointsGames.text = "0"
+                binding.avgPointsGames.text = "0"
+                binding.bestTimeGames.text = "0"
+                binding.avgTimeGames.text = "0"
+            }
+            dialog.show()
+        }
 
         return root
     }

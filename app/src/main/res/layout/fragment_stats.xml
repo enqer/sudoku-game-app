@@ -312,7 +312,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/deleteStats"
                 style="@style/stats_textview"
                 android:layout_gravity="center"
                 android:clickable="true"
