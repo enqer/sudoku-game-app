@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.MediaController
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -68,18 +69,31 @@ class PlaceholderFragment : Fragment() {
                 allPoints = sqLiteManager.getAllPoints(EASY)
                 bestTime = sqLiteManager.getBestTime(EASY)
                 avgTime = sqLiteManager.getAvgTime(EASY)
-                Log.d("gry", sqLiteManager.getAvgTime(EASY).toString())
-                binding.startedGames.text = games.toString()
-                binding.winnerGames.text = wins.toString()
-                binding.percentGames.text = (wins/games).toString()
-                binding.avgMistakesGames.text = (mistakes/games).toString()
-                binding.maxPointsGames.text = mostPoints.toString()
-                binding.avgPointsGames.text =  String.format("%.1f",(allPoints.toDouble()/games.toDouble()))
-                binding.bestTimeGames.text = getTimeStringFromDouble(bestTime.toDouble())
-                binding.avgTimeGames.text = getTimeStringFromDouble((avgTime.toDouble()/wins.toDouble()))
-            }else{
-                binding.winnerGames.text = "4"
+            }else if(arguments?.getInt(ARG_SECTION_NUMBER) == 2){
+                games = sqLiteManager.getGamesPlayedByDifficulty(MEDIUM)
+                wins = sqLiteManager.getWinGamesByDifficulty(MEDIUM)
+                mistakes = sqLiteManager.getAvgMistakes(MEDIUM)
+                mostPoints = sqLiteManager.getMostPoints(MEDIUM)
+                allPoints = sqLiteManager.getAllPoints(MEDIUM)
+                bestTime = sqLiteManager.getBestTime(MEDIUM)
+                avgTime = sqLiteManager.getAvgTime(MEDIUM)
+            }else {
+                games = sqLiteManager.getGamesPlayedByDifficulty(HARD)
+                wins = sqLiteManager.getWinGamesByDifficulty(HARD)
+                mistakes = sqLiteManager.getAvgMistakes(HARD)
+                mostPoints = sqLiteManager.getMostPoints(HARD)
+                allPoints = sqLiteManager.getAllPoints(HARD)
+                bestTime = sqLiteManager.getBestTime(HARD)
+                avgTime = sqLiteManager.getAvgTime(HARD)
             }
+            binding.startedGames.text = if (games == 0) "0" else games.toString()
+            binding.winnerGames.text = if (games == 0) "0" else wins.toString()
+            binding.percentGames.text = if (wins == 0) "0" else String.format("%.1f",(wins.toDouble()/games.toDouble())*100)+"%"
+            binding.avgMistakesGames.text = if (mistakes == 0) "0" else String.format("%.1f",(mistakes.toDouble()/games.toDouble()))
+            binding.maxPointsGames.text = if (games == 0) "0" else mostPoints.toString()
+            binding.avgPointsGames.text =  if (allPoints == 0) "0" else String.format("%.1f",(allPoints.toDouble()/wins.toDouble()))
+            binding.bestTimeGames.text = if (bestTime.toInt() == 0) "0" else getTimeStringFromDouble(bestTime.toDouble())
+            binding.avgTimeGames.text = if (avgTime.toInt() == 0) "0" else getTimeStringFromDouble((avgTime.toDouble()/wins.toDouble()))
         }catch (e: Exception){
             e.printStackTrace()
         }
