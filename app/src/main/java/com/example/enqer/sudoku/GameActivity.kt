@@ -149,10 +149,18 @@ class GameActivity : AppCompatActivity() {
         notes.setOnClickListener{
             isNotesMode = !isNotesMode  // true - is in notes mode
             for (i in 1..9){
+                val imgNotes: ImageView = findViewById(R.id.imgNotes)
                 val id = resources.getIdentifier("num$i", "id", packageName)
                 val btn: Button = findViewById(id)
-                if (isNotesMode) btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey)) //TODO do zmiany
+                if (isNotesMode) {
+                    imgNotes.setImageResource(R.drawable.ic_pencil_mode)
+                    if (isNightMode)
+                        btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.numBack))
+                    else
+                        btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.numBack))
+                }
                 else{
+                    imgNotes.setImageResource(R.drawable.ic_pencil)
                     if (isNightMode)
                         btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
                     else
@@ -167,20 +175,18 @@ class GameActivity : AppCompatActivity() {
             if (isPointedBtnInit && hints == 1 && sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
                 pointedBtn.text = sudoku.fullMat[x][y].toString()
                 // changing border
-                pointedBtn.setBackgroundResource(R.drawable.border_marked_hint)
-//                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
-//                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.attr.custom11))
-//                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.attr.custom11))
-                if (isNightMode)
-                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
-                else
-                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+                //pointedBtn.setBackgroundResource(R.drawable.border_marked_hint)
+//                if (isNightMode)
+//                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
+//                else
+//                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+//                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.yellow))
                 pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
                 sudoku.mat[x][y] = sudoku.fullMat[x][y]
 
                 //changing img of hint
                 val hintImg: ImageView = findViewById(R.id.hintImg)
-                hintImg.setImageResource(R.drawable.ic_light_0)
+                hintImg.setImageResource(R.drawable.ic_light_mode2)
                 // only one hint so off the button
                 hints--
                 hint.isClickable = false
@@ -279,7 +285,10 @@ class GameActivity : AppCompatActivity() {
                 }
 //               }
                 // notes has a different styles
-                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey)) //TODO do zmiany
+//                if (isNightMode)
+                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
+//                else
+//                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
                 pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
                 var notesBtn = ""
                 // print the note in the field
@@ -554,11 +563,11 @@ class GameActivity : AppCompatActivity() {
         val hintImg: ImageView = findViewById(R.id.hintImg)
 
         if (hints == 1){
-            hintImg.setImageResource(R.drawable.ic_light_1)
+            hintImg.setImageResource(R.drawable.ic_light_mode1)
             // only one hint so off the button
             hint.isClickable = true
         } else {
-            hintImg.setImageResource(R.drawable.ic_light_0)
+            hintImg.setImageResource(R.drawable.ic_light_mode2)
             // only one hint so off the button
             hint.isClickable = false
         }
@@ -609,7 +618,7 @@ class GameActivity : AppCompatActivity() {
         spe.putString("sudoku", json)
         spe.apply()
         //TODO OnRestore time not working
-
+        // TODO zapisywanie stanów notatek przy zmianie dark mode
     }
 }
 

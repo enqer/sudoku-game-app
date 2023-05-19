@@ -22,6 +22,9 @@
     <attr name="custom21" format="reference|color"/>
     <attr name="custom22" format="reference|color"/>
     <attr name="custom23" format="reference|color"/>
+    <attr name="custom24" format="reference|color"/>
+    <attr name="custom25" format="reference|color"/>
+    <attr name="custom26" format="reference|color"/>
 
     <!-- Base application theme. -->
 <!--    <style name="Theme.Sudoku" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
@@ -42,9 +45,9 @@
 <!--        <item name="colorT"></item>-->
         <item name="custom1">@color/blackBack</item>
         <item name="custom2">@color/newBlueBack</item>
-        <item name="custom3">@color/boardBack</item>
+        <item name="custom3">@color/blackBack</item>
         <item name="custom4">@color/pointedBack</item>
-        <item name="custom5">@color/greylyBack</item>
+        <item name="custom5">@color/greyBack</item>
         <item name="custom6">@color/greyBack</item>
         <item name="custom7">@color/grey</item>
         <item name="custom8">@color/miniBoardBack</item>
@@ -63,6 +66,9 @@
         <item name="custom21">@color/black</item>
         <item name="custom22">@color/iconGrey</item>
         <item name="custom23">@color/darkerBlue</item>
+        <item name="custom24">@color/boardBack</item>
+        <item name="custom25">@color/greyBack</item>
+        <item name="custom26">@color/boardBack</item>
 
     </style>
 <!--    <style name="color">-->

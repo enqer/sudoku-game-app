@@ -769,7 +769,7 @@
             >
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imgNotes"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 app:srcCompat="@drawable/ic_pencil" />
@@ -788,7 +788,7 @@
                 android:id="@+id/hintImg"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_light_1"
+                android:src="@drawable/ic_light_mode1"
                 />
 
             <TextView

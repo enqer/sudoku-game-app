@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:context=".ResultActivity"
     android:orientation="vertical"
-    android:layout_margin="30dp"
+    android:padding="30dp"
     android:background="?attr/custom18"
     >
 
