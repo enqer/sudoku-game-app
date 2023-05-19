@@ -60,8 +60,10 @@ class GameActivity : AppCompatActivity() {
     private var timerStarted = false
     private lateinit var  serviceIntent: Intent
     private var time = 0.0
+    private var isNightMode = false
 
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -85,7 +87,7 @@ class GameActivity : AppCompatActivity() {
         // SheredPreference dark mode
         val appSettingPref: SharedPreferences = getSharedPreferences("AppSettingPref", 0)
         val sharedPrefsEdit: SharedPreferences.Editor = appSettingPref.edit()
-        val isNightMode: Boolean = appSettingPref.getBoolean("NightMode", false)
+        isNightMode= appSettingPref.getBoolean("NightMode", false)
 
         if(isNightMode){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -149,8 +151,13 @@ class GameActivity : AppCompatActivity() {
             for (i in 1..9){
                 val id = resources.getIdentifier("num$i", "id", packageName)
                 val btn: Button = findViewById(id)
-                if (isNotesMode) btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
-                else btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.granat))
+                if (isNotesMode) btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey)) //TODO do zmiany
+                else{
+                    if (isNightMode)
+                        btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
+                    else
+                        btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.granat))
+                }
             }
         }
 
@@ -161,7 +168,13 @@ class GameActivity : AppCompatActivity() {
                 pointedBtn.text = sudoku.fullMat[x][y].toString()
                 // changing border
                 pointedBtn.setBackgroundResource(R.drawable.border_marked_hint)
-                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+//                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+//                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.attr.custom11))
+//                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.attr.custom11))
+                if (isNightMode)
+                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
+                else
+                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
                 pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
                 sudoku.mat[x][y] = sudoku.fullMat[x][y]
 
@@ -241,6 +254,7 @@ class GameActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("ResourceType")
     fun selectNumber(view: View){
         val btnNumber: Button = findViewById(view.id);
         if (isPointedBtnInit){  // if button is initialized then we can do some things
@@ -265,7 +279,7 @@ class GameActivity : AppCompatActivity() {
                 }
 //               }
                 // notes has a different styles
-                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey)) //TODO do zmiany
                 pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
                 var notesBtn = ""
                 // print the note in the field
@@ -284,7 +298,10 @@ class GameActivity : AppCompatActivity() {
                     iteratorPoints += 2
                     val pointsView: TextView = findViewById(R.id.points)
                     pointsView.text = points.toString()
-                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+                    if (isNightMode)
+                        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
+                    else
+                        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
 
                     // adding colors to other same numbers of the actually put number
                     var id: Int
@@ -320,7 +337,7 @@ class GameActivity : AppCompatActivity() {
                         mistakes++
                         val miss: TextView = findViewById(R.id.mistakes)
                         miss.text = "$mistakes/3"
-                        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake))
+                        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake)) // TODO bardziej czerwony?
                         if (mistakes == 3) {
                             isGameOver = true
                             isWinner = false
@@ -445,16 +462,6 @@ class GameActivity : AppCompatActivity() {
             timerTextView.text = TimeFormatter.getTimeStringFromDouble(time)
         }
     }
-
-//    private fun getTimeStringFromDouble(time: Double): String {
-//        val resultInt = time.roundToInt()
-//        val hours = resultInt % 86400 / 3600
-//        val minutes = resultInt % 86400 % 3600 / 60
-//        val seconds = resultInt % 86400 % 3600 % 60
-//        return makeTimeString(hours, minutes, seconds)
-//    }
-//
-//    private fun makeTimeString(hours: Int, minutes: Int, seconds: Int): String = String.format("%02d:%02d:%02d", hours, minutes, seconds)
 
 
     // creating new game

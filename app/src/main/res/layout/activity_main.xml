@@ -10,7 +10,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#D4EAE9"
+        android:background="?attr/custom9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -80,7 +80,7 @@
             android:background="@drawable/background_btn"
             android:text="@string/new_game"
             android:textColor="?attr/custom2"
-            app:backgroundTint="?attr/custom1"
+            app:backgroundTint="?attr/custom18"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -141,12 +141,13 @@
                 <ImageView
                     android:id="@+id/imageButton3"
                     style="@style/home_menu_imageview"
-                    android:src="@drawable/ic_stats"
+                    android:src="@drawable/ic_stats_state"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/textView6"
                     style="@style/home_menu_textview"
+                    android:textColor="?attr/custom22"
                     android:text="@string/statistics"
                      />
             </LinearLayout>

@@ -1,13 +1,36 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <attr name="custom1" format="reference|color"/>
+    <attr name="custom2" format="reference|color"/>
+    <attr name="custom3" format="reference|color"/>
+    <attr name="custom4" format="reference|color"/>
+    <attr name="custom5" format="reference|color"/>
+    <attr name="custom6" format="reference|color"/>
+    <attr name="custom7" format="reference|color"/>
+    <attr name="custom8" format="reference|color"/>
+    <attr name="custom9" format="reference|color"/>
+    <attr name="custom10" format="reference|color"/>
+    <attr name="custom11" format="reference|color"/>
+    <attr name="custom12" format="reference|color"/>
+    <attr name="custom13" format="reference|color"/>
+    <attr name="custom14" format="reference|color"/>
+    <attr name="custom15" format="reference|color"/>
+    <attr name="custom16" format="reference|color"/>
+    <attr name="custom17" format="reference|color"/>
+    <attr name="custom18" format="reference|color"/>
+    <attr name="custom19" format="reference|color"/>
+    <attr name="custom20" format="reference|color"/>
+    <attr name="custom21" format="reference|color"/>
+    <attr name="custom22" format="reference|color"/>
+    <attr name="custom23" format="reference|color"/>
+
     <!-- Base application theme. -->
 <!--    <style name="Theme.Sudoku" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
     <style name="Theme.Sudoku" parent="Theme.AppCompat.Light.NoActionBar">
 
 <!--        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>-->
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/boardBack</item>
+        <item name="colorPrimaryVariant">@color/blackBack</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -17,7 +40,29 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 <!--        <item name="colorT"></item>-->
-        <item name="custom1">@color/brown</item>
+        <item name="custom1">@color/blackBack</item>
+        <item name="custom2">@color/newBlueBack</item>
+        <item name="custom3">@color/boardBack</item>
+        <item name="custom4">@color/pointedBack</item>
+        <item name="custom5">@color/greylyBack</item>
+        <item name="custom6">@color/greyBack</item>
+        <item name="custom7">@color/grey</item>
+        <item name="custom8">@color/miniBoardBack</item>
+        <item name="custom9">@color/blackBack</item>
+        <item name="custom10">@color/mistake</item>
+        <item name="custom11">@color/greyBack</item>
+        <item name="custom12">@color/yellow</item>
+        <item name="custom13">@color/same</item>
+        <item name="custom14">@color/greyly</item>
+        <item name="custom15">@color/boardBack</item>
+        <item name="custom16">@color/brown</item>
+        <item name="custom17">@color/newWhite</item>
+        <item name="custom18">@color/boardBack</item>
+        <item name="custom19">@color/darkerBlue</item>
+        <item name="custom20">@color/darkerBlue</item>
+        <item name="custom21">@color/black</item>
+        <item name="custom22">@color/iconGrey</item>
+        <item name="custom23">@color/darkerBlue</item>
 
     </style>
 <!--    <style name="color">-->

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.PlaceholderFragment"
+    android:background="?attr/custom1"
     >
 
 
@@ -73,7 +74,7 @@
                         android:id="@+id/imageView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_achievements"
+                        android:src="@drawable/ic_win"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,7 +104,7 @@
                         android:id="@+id/imageView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_percent"
+                        android:src="@drawable/ic_percent_game"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -315,10 +316,11 @@
                 android:id="@+id/deleteStats"
                 style="@style/stats_textview"
                 android:layout_gravity="center"
+                android:padding="5dp"
                 android:clickable="true"
                 android:text="@string/reset_stats"
                 android:focusable="true"
-                android:textColor="@color/darkBlue"
+                android:textColor="?attr/custom23"
                 android:layout_marginBottom="10dp"
                 />
 

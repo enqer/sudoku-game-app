@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-
+    <color name="newBlueBack">#268bf3</color>
     <color name="newBlue">#2e85ec</color>
     <color name="newWhite">#fbfcff</color>
     <color name="littleBlue">#e3ebf5</color>
@@ -27,4 +27,17 @@
     <color name="brown">#421406</color>
     <color name="darkerBlue">#1976D2</color>
     <color name="achivments">#000000</color>
+    <color name="blackBack">#161618</color>
+    <color name="greylyBack">#b2c1cd</color>
+    <color name="bluelyBack">#6b90c3</color>
+    <color name="greyBack">#98979d</color>
+    <color name="pointedBack">#013a7d</color>
+    <color name="boardBack">#25242c</color>
+    <color name="numBack">#848d9a</color>
+    <color name="skyBack">#6b8fc5</color>
+    <color name="icBack">#3e8ce5</color>
+    <color name="miniBoardBack">#1a1a1c</color>
+    <color name="iconGrey">#868d9d</color>
+
+
 </resources>

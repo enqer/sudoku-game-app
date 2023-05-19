@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity"
     android:background="?attr/custom1"
-    android:layout_margin="5dp">
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,7 +72,7 @@
                 android:id="@+id/difficultyBtn"
                 style="@style/game_stats_textview"
                 android:textStyle="bold"
-                android:textColor="?attr/custom5"
+                android:textColor="?attr/custom6"
                 android:text="Łatwa" />
         </LinearLayout>
 
@@ -91,7 +91,7 @@
                 android:id="@+id/mistakes"
                 style="@style/game_stats_textview"
                 android:textStyle="bold"
-                android:textColor="?attr/custom5"
+                android:textColor="?attr/custom6"
                 android:text="0/3" />
         </LinearLayout>
 
@@ -110,7 +110,7 @@
                 android:id="@+id/points"
                 style="@style/game_stats_textview"
                 android:textStyle="bold"
-                android:textColor="?attr/custom5"
+                android:textColor="?attr/custom6"
                 android:text="0" />
         </LinearLayout>
 
@@ -129,7 +129,7 @@
                 android:id="@+id/timer"
                 style="@style/game_stats_textview"
                 android:textStyle="bold"
-                android:textColor="?attr/custom5"
+                android:textColor="?attr/custom6"
                 android:text="00:00:00" />
         </LinearLayout>
 
