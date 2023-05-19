@@ -50,7 +50,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/background_back_game"
             android:text="@string/back_to_game"
-            android:textColor="?attr/custom1"
+            android:textColor="@color/newWhite"
             android:textStyle="bold"
             android:clickable="true"
             android:focusable="true"
@@ -63,11 +63,13 @@
             <TextView
                 android:id="@+id/textView28"
                 style="@style/home_backGame_text"
+                android:textColor="@color/newWhite"
                 android:text="@string/back_to_game"/>
 
             <TextView
                 android:id="@+id/infoBackGame"
                 style="@style/home_backGame_text"
+
                 android:textSize="14sp"
             />
         </LinearLayout>
