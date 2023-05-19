@@ -61,6 +61,7 @@ class GameActivity : AppCompatActivity() {
     private lateinit var  serviceIntent: Intent
     private var time = 0.0
     private var isNightMode = false
+    private var isNewGame = true
 
 
     @SuppressLint("ResourceType")
@@ -102,17 +103,21 @@ class GameActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 sharedPrefsEdit.putBoolean("NightMode",false)
                 sharedPrefsEdit.apply()
+//                saveTheData()
+//                recreate()
 
             }else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 sharedPrefsEdit.putBoolean("NightMode",true)
                 sharedPrefsEdit.apply()
+//                saveTheData()
+//                recreate()
             }
         }
 
         // passing data between activities
         val intent = intent
-        var isNewGame = intent.getBooleanExtra("createNewGame", true)
+        isNewGame = intent.getBooleanExtra("createNewGame", true)
 //        val isNewGame = appSettingPref.getBoolean("createNewGame", true)
 
 
@@ -526,7 +531,8 @@ class GameActivity : AppCompatActivity() {
         time = sp.getLong("time", 0).toDouble()
         timerStarted = sp.getBoolean("timeStarted", false)
 
-        startStopTimer()
+//        startStopTimer()
+        startTimer()
         Log.d("timer", timerStarted.toString())
 
         Log.i("recreated", "dwa")
@@ -596,6 +602,25 @@ class GameActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
+    // recreate app and time after reopen from background
+//    override fun onResume() {
+//        super.onResume()
+////        if (!isNewGame)
+////            recreatePreviousGame()
+////        Log.d("onResume", "works")
+////        if (!timerStarted){
+////            startTimer()
+////        }
+////        recreatePreviousGame()
+////        recreate()
+//        Log.d("onResume", "works")
+//    }
+    override fun onRestart() {
+        super.onRestart()
+        recreatePreviousGame()
+        Log.d("onRestart", "works")
+    }
+
     // Saving data from board
     private fun saveTheData(){
         stopTimer()
@@ -617,7 +642,6 @@ class GameActivity : AppCompatActivity() {
         val json: String = gson.toJson(sudoku)
         spe.putString("sudoku", json)
         spe.apply()
-        //TODO OnRestore time not working
         // TODO zapisywanie stanów notatek przy zmianie dark mode
     }
 }
