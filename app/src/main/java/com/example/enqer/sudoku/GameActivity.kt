@@ -16,7 +16,6 @@ import com.example.enqer.sudoku.databinding.ActivityMainBinding
 import com.example.enqer.sudoku.interfaces.TimeFormatter
 import com.example.enqer.sudoku.sqlite.SQLiteManager
 import com.google.gson.Gson
-import kotlin.math.roundToInt
 
 
 class GameActivity : AppCompatActivity() {
@@ -130,7 +129,6 @@ class GameActivity : AppCompatActivity() {
         }
 
 
-
         // Back to Home button
         val backToHomeBtn: ImageButton = findViewById(R.id.backToHome)
         backToHomeBtn.setOnClickListener{
@@ -140,7 +138,6 @@ class GameActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // TODO time crashing??
 
         // clearing the field
         val clear: LinearLayout = findViewById(R.id.clear)
@@ -179,13 +176,6 @@ class GameActivity : AppCompatActivity() {
         hint.setOnClickListener {
             if (isPointedBtnInit && hints == 1 && sudoku.mat[x][y] != sudoku.fullMat[x][y]) {
                 pointedBtn.text = sudoku.fullMat[x][y].toString()
-                // changing border
-                //pointedBtn.setBackgroundResource(R.drawable.border_marked_hint)
-//                if (isNightMode)
-//                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
-//                else
-//                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
-//                pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.yellow))
                 pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
                 sudoku.mat[x][y] = sudoku.fullMat[x][y]
 
@@ -351,7 +341,8 @@ class GameActivity : AppCompatActivity() {
                         mistakes++
                         val miss: TextView = findViewById(R.id.mistakes)
                         miss.text = "$mistakes/3"
-                        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake)) // TODO bardziej czerwony?
+                        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake))
+                        sudoku.mat[x][y] = pointedBtn.text.toString().toInt()
                         if (mistakes == 3) {
                             isGameOver = true
                             isWinner = false
@@ -376,7 +367,16 @@ class GameActivity : AppCompatActivity() {
                 btn = findViewById(id)
                 if (sudoku.mat[k][j-1].toString() == "0"){
                     btn.text = ""
-                }else{
+                }else if (sudoku.mat[k][j-1].toString() in "123456789" && sudoku.mat[k][j-1] != sudoku.fullMat[k][j-1]){
+                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.mistake))
+                    btn.text = sudoku.mat[k][j-1].toString()
+
+                }
+                else{
+                    if (isNightMode)
+                        btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
+                    else
+                        btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
                     btn.text= sudoku.mat[k][j-1].toString()
                     countNumbers[sudoku.mat[k][j-1]-1]++
                     if (countNumbers[sudoku.mat[k][j-1]-1] == 9){
@@ -639,6 +639,7 @@ class GameActivity : AppCompatActivity() {
         spe.putLong("time", time.toLong())
         spe.putBoolean("timeStarted", timerStarted)
         val gson = Gson()
+
         val json: String = gson.toJson(sudoku)
         spe.putString("sudoku", json)
         spe.apply()
