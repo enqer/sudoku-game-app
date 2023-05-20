@@ -179,6 +179,10 @@ class GameActivity : AppCompatActivity() {
                 pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
                 sudoku.mat[x][y] = sudoku.fullMat[x][y]
 
+                if (isNightMode)
+                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
+                else
+                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
                 //changing img of hint
                 val hintImg: ImageView = findViewById(R.id.hintImg)
                 hintImg.setImageResource(R.drawable.ic_light_mode2)
@@ -264,6 +268,7 @@ class GameActivity : AppCompatActivity() {
                 val notes = Array<String>(9){" "}
                 var index = 0
 //                   val pointedText = pointedBtn.text.toString()
+
                 for (i in "123456789"){
                     if (i.toString() in pointedBtn.text.toString()){
                         notes[index++] = i.toString()
@@ -286,16 +291,23 @@ class GameActivity : AppCompatActivity() {
 //                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
                 pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
                 var notesBtn = ""
+                var numString = ""
                 // print the note in the field
                 for ((counter, i) in notes.withIndex()){
+                    if (i != " ")
+                        numString += i
                     notesBtn += "$i "
                     if (counter == 2 || counter == 5){
                         notesBtn += "\n"
+
                     }
                 }
+                numString += "0"
                 pointedBtn.text = notesBtn
+                sudoku.mat[x][y] = numString.toInt()
 //               }
             } else {
+                pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
                 if (sudoku.fullMat[x][y] == btnNumber.text.toString().toInt() && sudoku.fullMat[x][y] != sudoku.mat[x][y]) {
                     pointedBtn.text = btnNumber.text
                     points += (1..9).random() * iteratorPoints
@@ -365,6 +377,11 @@ class GameActivity : AppCompatActivity() {
             for (j in 1..9) {
                 id = resources.getIdentifier("$i$j", "id", packageName)
                 btn = findViewById(id)
+                if (isNightMode)
+                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
+                else
+                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+                btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22F)
                 if (sudoku.mat[k][j-1].toString() == "0"){
                     btn.text = ""
                 }else if (sudoku.mat[k][j-1].toString() in "123456789" && sudoku.mat[k][j-1] != sudoku.fullMat[k][j-1]){
@@ -372,11 +389,22 @@ class GameActivity : AppCompatActivity() {
                     btn.text = sudoku.mat[k][j-1].toString()
 
                 }
+                else if ("0" in sudoku.mat[k][j-1].toString()){
+                    btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
+                    var notes = ""
+
+                    for (i in "123456789"){
+                        notes += if (i in sudoku.mat[k][j-1].toString()){
+                            "$i "
+                        } else
+                            " "
+                        if (i == '2' || i == '5'){
+                            notes += "\n"
+                        }
+                    }
+                    btn.text = notes
+                }
                 else{
-                    if (isNightMode)
-                        btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
-                    else
-                        btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
                     btn.text= sudoku.mat[k][j-1].toString()
                     countNumbers[sudoku.mat[k][j-1]-1]++
                     if (countNumbers[sudoku.mat[k][j-1]-1] == 9){
@@ -567,6 +595,26 @@ class GameActivity : AppCompatActivity() {
 
         val hint: LinearLayout = findViewById(R.id.hint)
         val hintImg: ImageView = findViewById(R.id.hintImg)
+        for (i in 1..9){
+            val imgNotes: ImageView = findViewById(R.id.imgNotes)
+            val id = resources.getIdentifier("num$i", "id", packageName)
+            val btn: Button = findViewById(id)
+            if (isNotesMode) {
+                imgNotes.setImageResource(R.drawable.ic_pencil_mode)
+                if (isNightMode)
+                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.numBack))
+                else
+                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.numBack))
+            }
+            else{
+                imgNotes.setImageResource(R.drawable.ic_pencil)
+                if (isNightMode)
+                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
+                else
+                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.granat))
+            }
+        }
+
 
         if (hints == 1){
             hintImg.setImageResource(R.drawable.ic_light_mode1)
