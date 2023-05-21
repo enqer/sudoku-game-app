@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/imageLogo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_marginTop="150dp"
             android:src="@drawable/ic_sudoku"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
             android:text="Sudoku"
             android:textColor="#f000"
             android:fontFamily="@font/wixmadeforybold"
-            android:textSize="32sp"
+            android:textSize="40sp"
 
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,6 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

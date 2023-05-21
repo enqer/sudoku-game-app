@@ -53,7 +53,7 @@
         <item name="custom6">@color/granat</item>
         <item name="custom7">@color/grey</item>
         <item name="custom8">@color/border</item>
-        <item name="custom9">@color/backgroundC</item>
+        <item name="custom9">#FAFAFA</item>
         <item name="custom10">@color/mistake</item>
         <item name="custom11">@color/littleBlack</item>
         <item name="custom12">@color/yellow</item>
