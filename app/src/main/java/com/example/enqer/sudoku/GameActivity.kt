@@ -19,23 +19,25 @@ import com.google.gson.Gson
 
 
 class GameActivity : AppCompatActivity() {
-    companion object{
+//    companion object{
 
 //        var isNewGame = true
 
         @SuppressLint("StaticFieldLeak")
         lateinit var pointedBtn: Button // the button which is selected
+        lateinit var prevNotesBtn: Button // changing text color of notes
         // coords of pointedBtn
         var x: Int = 0;
         var y: Int = 0;
-        val isPointedBtnInit get() = this::pointedBtn.isInitialized
-        const val coords = "abcdefghi" // coords of board (from top to bottom)
+        private val isPointedBtnInit get() = this::pointedBtn.isInitialized
+    private val isPrevNotesBtnInit get() = this::prevNotesBtn.isInitialized
+        private val coords = "abcdefghi" // coords of board (from top to bottom)
         @SuppressLint("StaticFieldLeak")
         lateinit var timerTextView: TextView
 
         // Sudoku object and every data from board
         lateinit var sudoku: Sudoku
-        const val sizeOfSudoku: Int = 9
+        private val sizeOfSudoku: Int = 9
         lateinit var difficulty: String
         var missingNumbers: Int = 40
         var mistakes: Int = 0
@@ -50,7 +52,7 @@ class GameActivity : AppCompatActivity() {
         var isGameOver = false
         var timeTEST = 0
 
-    }
+//    }
     private lateinit var sqLiteManager: SQLiteManager
     private var isWinner = false
 
@@ -204,13 +206,16 @@ class GameActivity : AppCompatActivity() {
 
     // selecting the fields to set a colors
     fun selectField(view: View) {
+
             pointedBtn = findViewById(view.id);
             val tag: String = pointedBtn.tag.toString()
             x = coords.indexOf(tag[0])
             y = tag[1].toString().toInt() - 1
             var id: Int
             var btn: Button
-
+        if (isPrevNotesBtnInit && isNightMode)
+            prevNotesBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
+        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
             // cleaning the board
             for (i in coords) {
                 for (j in 1..9) {
@@ -284,9 +289,10 @@ class GameActivity : AppCompatActivity() {
                     notes[addToNotes.toInt()-1] = addToNotes
                 }
 //               }
+                prevNotesBtn = pointedBtn
                 // notes has a different styles
-//                if (isNightMode)
-                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
+//               if (!isNightMode)
+                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
 //                else
 //                    pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
                 pointedBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9F)
@@ -601,9 +607,9 @@ class GameActivity : AppCompatActivity() {
             val btn: Button = findViewById(id)
             if (isNotesMode) {
                 imgNotes.setImageResource(R.drawable.ic_pencil_mode)
-                if (isNightMode)
-                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.numBack))
-                else
+//                if (isNightMode)
+//                    btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.numBack))
+//                else
                     btn.setTextColor(ContextCompat.getColor(applicationContext, R.color.numBack))
             }
             else{
