@@ -5,13 +5,15 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.view.animation.LinearInterpolator
 import android.widget.Button
-import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -63,6 +65,18 @@ class MainActivity : AppCompatActivity() {
 //            sharedPrefsEdit.putBoolean("createNewGame", createNewGame)
             startActivity(intent)
         }
+
+
+        // rotate logo
+        val imgLogo: ImageView = findViewById(R.id.imageLogo)
+        val runnable: Runnable = object : Runnable {
+            override fun run() {
+                imgLogo.animate().rotationBy(360f).withEndAction(this).setDuration(3000)
+                    .setInterpolator(LinearInterpolator()).start()
+            }
+        }
+        imgLogo.animate().rotationBy(360f).withEndAction(runnable).setDuration(3000)
+            .setInterpolator(LinearInterpolator()).start()
 
 
         // button home onclick changing activity

@@ -692,6 +692,7 @@ class GameActivity : AppCompatActivity() {
         spe.putString("sudoku", json)
         spe.apply()
         // TODO zapisywanie stanów notatek przy zmianie dark mode
+        // TODO OBRACAJące się logo w home page
     }
 }
 
