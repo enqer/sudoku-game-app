@@ -25,6 +25,8 @@
     <attr name="custom24" format="reference|color"/>
     <attr name="custom25" format="reference|color"/>
     <attr name="custom26" format="reference|color"/>
+    <attr name="custom27" format="reference|color"/>
+    <attr name="custom28" format="reference|color"/>
 
     <!-- Base application theme. -->
 <!--    <style name="Theme.Sudoku" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
@@ -69,6 +71,8 @@
         <item name="custom24">@color/boardBack</item>
         <item name="custom25">@color/greyBack</item>
         <item name="custom26">@color/boardBack</item>
+        <item name="custom27">@color/iconGrey</item>
+        <item name="custom28">@color/darkerBlue</item>
 
     </style>
 <!--    <style name="color">-->
@@ -79,4 +83,5 @@
 <!--        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>-->
 <!--        <item name="android:windowExitAnimation">@android:anim/fade_out</item>-->
 <!--    </style>-->
+
 </resources>

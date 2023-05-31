@@ -32,7 +32,7 @@ class GameActivity : AppCompatActivity() {
         private val isPointedBtnInit get() = this::pointedBtn.isInitialized
     private val isPrevNotesBtnInit get() = this::prevNotesBtn.isInitialized
         private val coords = "abcdefghi" // coords of board (from top to bottom)
-        @SuppressLint("StaticFieldLeak")
+//        @SuppressLint("StaticFieldLeak")
         lateinit var timerTextView: TextView
 
         // Sudoku object and every data from board
@@ -215,7 +215,10 @@ class GameActivity : AppCompatActivity() {
             var btn: Button
         if (isPrevNotesBtnInit && isNightMode)
             prevNotesBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.greyBack))
-        pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
+        if (isNotesMode && isNightMode)
+            pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
+        else
+            pointedBtn.setTextColor(ContextCompat.getColor(applicationContext, R.color.littleBlack))
             // cleaning the board
             for (i in coords) {
                 for (j in 1..9) {
@@ -697,8 +700,6 @@ class GameActivity : AppCompatActivity() {
         val json: String = gson.toJson(sudoku)
         spe.putString("sudoku", json)
         spe.apply()
-        // TODO zapisywanie stanów notatek przy zmianie dark mode
-        // TODO OBRACAJące się logo w home page
     }
 }
 

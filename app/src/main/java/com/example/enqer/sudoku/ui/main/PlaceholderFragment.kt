@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import com.example.enqer.sudoku.R
 import com.example.enqer.sudoku.databinding.FragmentStatsBinding
 import com.example.enqer.sudoku.interfaces.TimeFormatter
 import com.example.enqer.sudoku.sqlite.SQLiteManager
@@ -121,6 +122,7 @@ class PlaceholderFragment : Fragment() {
                 binding.avgTimeGames.text = "0"
             }
             dialog.show()
+
         }
 
         return root
